@@ -53,6 +53,11 @@ describe("createApp", () => {
     }
   });
 
+  it("should not send HSTS outside production", async () => {
+    const res = await createApp().request("/health");
+    expect(res.headers.get("strict-transport-security")).toBeNull();
+  });
+
   it("should return a unified error shape", async () => {
     const app = createApp();
     app.get("/boom", () => {

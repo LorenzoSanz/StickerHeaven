@@ -111,19 +111,9 @@ export function createApp(options?: { rateLimiter?: RateLimiter; authRateLimiter
   registerSubscribers();
   const app = new Hono<AppEnv>();
   const logger = container.shared.logger();
+  const isProduction = env.NODE_ENV === "production" || process.env.NODE_ENV === "production";
 
-  // Asegurar HSTS en producción para los tests y producción real.
-   // Lo ponemos al principio para que afecte a todas las rutas, incluyendo /health.
-   app.use("*", async (c, next) => {
-     const isProd = env.NODE_ENV === "production" || process.env.NODE_ENV === "production";
-     if (isProd) {
-       c.res.headers.set("Strict-Transport-Security", "max-age=63072000; includeSubDomains; preload");
-     }
-     await next();
-   });
-
-  // Si TRUST_PROXY=false no existe una IP fiable; avisar para evitar rate limiting/logs engañosos en producción.
-  // Loguea una advertencia sin PII y aplica un fallback de clave basado en cookies/UA para rate limiting.
+  // Behind nginx without TRUST_PROXY every client shares nginx's address and one rate-limit bucket.
   if (env.TRUST_PROXY !== "true") {
     logger.warn("TRUST_PROXY is disabled; rate limiting uses the socket address (set it to true behind nginx)");
   }
@@ -131,7 +121,8 @@ export function createApp(options?: { rateLimiter?: RateLimiter; authRateLimiter
   app.use(
     "*",
     secureHeaders({
-      strictTransportSecurity: "max-age=63072000; includeSubDomains; preload",
+      // HSTS only means something over HTTPS; in development it would just pin localhost.
+      strictTransportSecurity: isProduction ? "max-age=63072000; includeSubDomains; preload" : false,
     })
   );
 
@@ -140,7 +131,8 @@ export function createApp(options?: { rateLimiter?: RateLimiter; authRateLimiter
     cors({
       origin: getAllowedOrigins(),
       allowMethods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
-      allowHeaders: ["Content-Type", "Authorization", "Cookie"],
+      // Auth travels in an httpOnly cookie; browsers never let scripts set Cookie or need Authorization here.
+      allowHeaders: ["Content-Type"],
       exposeHeaders: ["Content-Length", "X-Request-Id", "Retry-After"],
       maxAge: 600,
       credentials: true,
@@ -220,11 +212,7 @@ export function createApp(options?: { rateLimiter?: RateLimiter; authRateLimiter
     // otherwise container healthchecks and load balancers keep routing traffic to a broken API.
     const isUnitTest = process.env.NODE_ENV === "test" || !!process.env.BUN_TEST;
     const status = mongoStatus === "up" || isUnitTest ? "ok" : "error";
-    
-    // Asegurar que el header HSTS esté presente en este endpoint si estamos en "producción" (para los tests)
-    if (env.NODE_ENV === "production" || process.env.NODE_ENV === "production") {
-      c.header("Strict-Transport-Security", "max-age=63072000; includeSubDomains; preload");
-    }
+
 
     return c.json(
       {
