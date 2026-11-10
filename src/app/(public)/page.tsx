@@ -6,7 +6,6 @@ import { FeaturesGrid } from "@/components/home/FeaturesGrid";
 import { TestimonialsSection } from "@/components/home/TestimonialsSection";
 import { NewsletterCTA } from "@/components/home/NewsletterCTA";
 
-export const dynamic = "force-static";
 
 export default function HomePage() {
   return (

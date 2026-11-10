@@ -1,5 +1,5 @@
 /**
- * NOTES: Mantener alineadas reglas de CSP/rewrites y allowlist de imágenes remotas (Cloudinary) para `next/image`.
+ * The Content-Security-Policy is set per request in src/proxy.ts, because it needs a fresh nonce.
  */
 import type { NextConfig } from 'next';
 import { getApiUrlForRewrites } from './src/config/nextConfigEnv';
@@ -42,22 +42,7 @@ const nextConfig: NextConfig = {
 
   async headers() {
     const isProd = process.env.NODE_ENV === "production";
-    const isDev = process.env.NODE_ENV === "development";
-    const csp = [
-      "default-src 'self'",
-      "base-uri 'self'",
-      "object-src 'none'",
-      "frame-ancestors 'none'",
-      "form-action 'self'",
-      "img-src 'self' data: https:",
-      `script-src 'self' 'unsafe-inline'${isDev ? " 'unsafe-eval'" : ""} https://js.stripe.com`,
-      "style-src 'self' 'unsafe-inline'",
-      "connect-src 'self' https:",
-      "frame-src https://js.stripe.com",
-    ].join("; ");
-
     const headers = [
-      { key: "Content-Security-Policy", value: csp },
       { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
       { key: "X-Content-Type-Options", value: "nosniff" },
       { key: "X-Frame-Options", value: "DENY" },

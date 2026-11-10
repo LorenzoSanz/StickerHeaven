@@ -1,5 +1,6 @@
 import "@/styles/globals.css";
 import type { Metadata } from "next";
+import { connection } from "next/server";
 import { env } from "@/config/env";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
@@ -39,11 +40,13 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  // The CSP nonce changes on every request, so pages must render per request, never at build time.
+  await connection();
   return (
     <html lang="es">
       <body className="flex flex-col min-h-screen text-foreground bg-background antialiased selection:bg-primary selection:text-white">
