@@ -67,6 +67,19 @@ export class StripePaymentGateway implements PaymentGateway {
     }
   }
 
+  async getClientSecret(paymentIntentId: string): Promise<Result<string, DomainError>> {
+    try {
+      const paymentIntent = await this.stripe.paymentIntents.retrieve(paymentIntentId);
+      if (!paymentIntent.client_secret) {
+        return Result.fail(new DomainError("Stripe returned no client secret"));
+      }
+      return Result.ok(paymentIntent.client_secret);
+    } catch (error: unknown) {
+      const errorMessage = error instanceof Error ? error.message : "Unknown error";
+      return Result.fail(new DomainError(`Stripe Retrieve Error: ${errorMessage}`));
+    }
+  }
+
   async cancelPaymentIntent(id: string): Promise<Result<void, DomainError>> {
     try {
       await this.stripe.paymentIntents.cancel(id);

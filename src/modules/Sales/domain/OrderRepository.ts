@@ -33,6 +33,11 @@ export interface OrderRepository {
   findPendingPaymentCreatedBefore(cutoff: Date, limit: number): Promise<Result<Order[], DomainError>>;
 
   /**
+   * The customer's orders still waiting for payment, created at or after the given date.
+   */
+  findPendingPaymentForCustomer(customerId: CustomerId, createdAfter: Date): Promise<Result<Order[], DomainError>>;
+
+  /**
    * Elimina un pedido (typically for administrative use or cleanup).
    */
   delete(id: OrderId): Promise<Result<void, DomainError>>;

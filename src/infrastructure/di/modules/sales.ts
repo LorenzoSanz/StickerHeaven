@@ -50,7 +50,7 @@ export function createSalesModule(deps: {
     listOrders: createLazySingleton(() => new ListOrders(getSalesQueryService())),
     getOrderById: createLazySingleton(() => new GetOrderById(getSalesQueryService())),
     confirmPayment: createLazySingleton(() => new ConfirmPayment(getOrderRepository(), deps.logger())),
-    checkout: createLazySingleton(() => new Checkout(getSalesCartAdapter(), createOrder())),
+    checkout: createLazySingleton(() => new Checkout(getSalesCartAdapter(), createOrder(), getOrderRepository(), getPaymentGateway())),
     releaseUnpaidOrders: createLazySingleton(() =>
       new ReleaseUnpaidOrders(getOrderRepository(), getPaymentGateway(), getSalesCatalogAdapter(), deps.logger())
     ),
