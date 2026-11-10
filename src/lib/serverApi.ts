@@ -3,11 +3,12 @@ if (typeof window !== "undefined") {
   throw new Error("src/lib/serverApi.ts is server-only");
 }
 
-import { cookies } from "next/headers";
+import { cookies, headers as incomingHeaders } from "next/headers";
 import { publicEnv } from "@/config/publicEnv";
 import { getApiUrlForRewrites } from "@/config/nextConfigEnv";
 import { readErrorMessage } from "@/lib/readErrorMessage";
 import { toCookieHeader } from "@/lib/toCookieHeader";
+import { forwardClientIp } from "@/lib/forwardClientIp";
 
 export class HttpError extends Error {
   status: number;
@@ -53,6 +54,9 @@ export async function serverApiRequest(path: string, init?: ServerApiRequestInit
 
   const headers = new Headers(requestInit.headers);
   if (includeCookies) {
+    // Calls made on behalf of a visitor carry their address; anonymous ones (sitemap) need not,
+    // and reading request headers there would turn statically generated routes dynamic.
+    forwardClientIp(await incomingHeaders(), headers);
     const cookieStore = await cookies();
     const cookieHeaderValue = toCookieHeader(cookieStore.getAll());
     if (cookieHeaderValue) headers.set("cookie", cookieHeaderValue);
