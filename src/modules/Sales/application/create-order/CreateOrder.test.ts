@@ -32,6 +32,7 @@ class MockOrderRepository implements OrderRepository {
   findById = mock(async (id: OrderId) => Result.ok<Order | null, DomainError>(null));
   findByCustomerId = mock(async (id: CustomerId) => Result.ok<Order[], DomainError>([]));
   findByPaymentIntentId = mock(async (id: PaymentIntentId) => Result.ok<Order | null, DomainError>(null));
+  findPendingPaymentCreatedBefore = mock(async (cutoff: Date, limit: number) => Result.ok<Order[], DomainError>([]));
   delete = mock(async (id: OrderId) => Result.ok<void, DomainError>());
 }
 

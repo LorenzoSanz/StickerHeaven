@@ -9,6 +9,27 @@ import { env } from "@/config/env";
 
 const logger = container.shared.logger();
 
+// Stock is reserved at checkout; an order not paid within this window gives it back.
+const UNPAID_ORDER_MAX_AGE_MS = 30 * 60 * 1000;
+const UNPAID_ORDER_SWEEP_INTERVAL_MS = 5 * 60 * 1000;
+
+function startUnpaidOrderSweep(): () => void {
+  const releaseUnpaidOrders = container.sales.useCases.releaseUnpaidOrders();
+  let running = false;
+  const timer = setInterval(async () => {
+    if (running) return;
+    running = true;
+    try {
+      const result = await releaseUnpaidOrders.execute(UNPAID_ORDER_MAX_AGE_MS);
+      if (result.isFailure) logger.error("Unpaid order sweep failed", { error: result.error?.message });
+    } finally {
+      running = false;
+    }
+  }, UNPAID_ORDER_SWEEP_INTERVAL_MS);
+  timer.unref?.();
+  return () => clearInterval(timer);
+}
+
 // Conecta a MongoDB y levanta el servidor Hono
 async function main() {
   try {
@@ -36,8 +57,10 @@ async function main() {
 
   const server = serve({ fetch: app.fetch, port });
   logger.info(`API server listening on http://localhost:${port}`);
+  const stopUnpaidOrderSweep = startUnpaidOrderSweep();
 
   const shutdown = async () => {
+    stopUnpaidOrderSweep();
     server.close();
     await disconnectMongo(logger);
   };

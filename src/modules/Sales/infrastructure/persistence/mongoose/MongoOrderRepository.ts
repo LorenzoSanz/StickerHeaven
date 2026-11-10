@@ -73,6 +73,18 @@ export class MongoOrderRepository implements OrderRepository {
     }
   }
 
+  async findPendingPaymentCreatedBefore(cutoff: Date, limit: number): Promise<Result<Order[], DomainError>> {
+    try {
+      const docs = await OrderModel.find({ status: "PENDING_PAYMENT", createdAt: { $lt: cutoff } })
+        .sort({ createdAt: 1 })
+        .limit(limit)
+        .lean<IOrderDocument[]>();
+      return Result.ok(docs.map((doc) => OrderMapper.toDomain(doc)));
+    } catch (error) {
+      return Result.fail(new DomainError(`Failed to find unpaid orders: ${error}`));
+    }
+  }
+
   async delete(id: OrderId): Promise<Result<void, DomainError>> {
     try {
       await OrderModel.findByIdAndDelete(id.value);

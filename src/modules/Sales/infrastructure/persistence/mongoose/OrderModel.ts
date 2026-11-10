@@ -48,4 +48,7 @@ const OrderSchema = new Schema<IOrderDocument>({
   updatedAt: { type: Date, required: true, default: Date.now },
 });
 
+// Serves the unpaid-order sweep: status equality first, then the createdAt range.
+OrderSchema.index({ status: 1, createdAt: 1 });
+
 export const OrderModel = mongoose.model<IOrderDocument>("Order", OrderSchema);

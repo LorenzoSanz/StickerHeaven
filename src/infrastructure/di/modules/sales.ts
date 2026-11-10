@@ -17,6 +17,7 @@ import { ListOrders } from "@/modules/Sales/application/list-orders/ListOrders";
 import { GetOrderById } from "@/modules/Sales/application/get-order/GetOrderById";
 import { ConfirmPayment } from "@/modules/Sales/application/confirm-payment/ConfirmPayment";
 import { Checkout } from "@/modules/Sales/application/checkout/Checkout";
+import { ReleaseUnpaidOrders } from "@/modules/Sales/application/release-unpaid-orders/ReleaseUnpaidOrders";
 import { OrderAccessPolicy } from "@/modules/Sales/application/policies/OrderAccessPolicy";
 import { OrderReadAccessPolicy } from "@/modules/Sales/application/policies/OrderReadAccessPolicy";
 import { OrderPaidSubscriber } from "@/modules/Sales/infrastructure/subscribers/OrderPaidSubscriber";
@@ -54,6 +55,9 @@ export function createSalesModule(deps: {
     getOrderById: createLazySingleton(() => new GetOrderById(getSalesQueryService(), getOrderReadAccessPolicy())),
     confirmPayment: createLazySingleton(() => new ConfirmPayment(getOrderRepository(), deps.logger())),
     checkout: createLazySingleton(() => new Checkout(getSalesCartAdapter(), createOrder())),
+    releaseUnpaidOrders: createLazySingleton(() =>
+      new ReleaseUnpaidOrders(getOrderRepository(), getPaymentGateway(), getSalesCatalogAdapter(), deps.logger())
+    ),
   };
 
   const queries = {

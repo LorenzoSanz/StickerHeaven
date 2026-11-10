@@ -28,6 +28,11 @@ export interface OrderRepository {
   findByPaymentIntentId(paymentIntentId: PaymentIntentId): Promise<Result<Order | null, DomainError>>;
 
   /**
+   * Orders still waiting for payment that were created before the cutoff, oldest first.
+   */
+  findPendingPaymentCreatedBefore(cutoff: Date, limit: number): Promise<Result<Order[], DomainError>>;
+
+  /**
    * Elimina un pedido (typically for administrative use or cleanup).
    */
   delete(id: OrderId): Promise<Result<void, DomainError>>;
