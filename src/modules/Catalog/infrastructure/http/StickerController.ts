@@ -191,6 +191,9 @@ export class StickerController {
   async update(c: Context): Promise<Response> {
     try {
       const id = c.req.param("id");
+      if (!id) {
+        return c.json({ error: "Falta el id" }, HttpStatus.BAD_REQUEST);
+      }
       const ownerId = c.get("userId") as string;
 
       if (!ownerId) {
@@ -286,6 +289,9 @@ export class StickerController {
   async getById(c: Context): Promise<Response> {
     try {
       const id = c.req.param("id");
+      if (!id) {
+        return c.json({ error: "Falta el id" }, HttpStatus.BAD_REQUEST);
+      }
       const result = await this.getStickerById.execute(id);
 
       if (result.isFailure) {
@@ -305,6 +311,9 @@ export class StickerController {
   async delete(c: Context): Promise<Response> {
     try {
       const id = c.req.param("id");
+      if (!id) {
+        return c.json({ error: "Falta el id" }, HttpStatus.BAD_REQUEST);
+      }
       const requesterId = c.get("userId") as string;
 
       if (!requesterId) {

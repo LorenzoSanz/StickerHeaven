@@ -122,6 +122,9 @@ export class CartController {
   async updateItem(c: Context): Promise<Response> {
     try {
       const stickerId = c.req.param("id");
+      if (!stickerId) {
+        return c.json({ error: "Falta el id" }, HttpStatus.BAD_REQUEST);
+      }
       const body = await c.req.json() as { quantity: number };
       const userId = c.get("userId") ?? null;
       const anonymousId = getCookie(c, cookieConfig.cart.name) ?? null;
@@ -159,6 +162,9 @@ export class CartController {
   async removeItem(c: Context): Promise<Response> {
     try {
       const stickerId = c.req.param("id");
+      if (!stickerId) {
+        return c.json({ error: "Falta el id" }, HttpStatus.BAD_REQUEST);
+      }
       const userId = c.get("userId") ?? null;
       const anonymousId = getCookie(c, cookieConfig.cart.name) ?? null;
 
