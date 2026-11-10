@@ -1,7 +1,7 @@
-import { CartQueryService } from "../../application/queries/CartQueryService";
-import { CartDTO, CartItemDTO } from "../../application/get/CartDTO";
+import { CartQueryService } from "@/modules/Cart/application/queries/CartQueryService";
+import { CartDTO, CartItemDTO } from "@/modules/Cart/application/get/CartDTO";
 import { CartModel, ICartDocument } from "../persistence/mongoose/CartModel";
-import { CatalogGateway } from "../../application/CatalogGateway";
+import { CatalogGateway } from "@/modules/Cart/application/CatalogGateway";
 import { Result } from "@/shared/domain/Result";
 import { DomainError } from "@/shared/domain/DomainError";
 import { env } from "@/config/env";

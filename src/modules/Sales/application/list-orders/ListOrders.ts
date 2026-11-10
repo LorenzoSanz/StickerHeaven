@@ -1,4 +1,4 @@
-import { CustomerId } from "../../domain/CustomerId";
+import { CustomerId } from "@/modules/Sales/domain/CustomerId";
 import { Result } from "@/shared/domain/Result";
 import { DomainError } from "@/shared/domain/DomainError";
 import { OrderDTO } from "../OrderDTO";

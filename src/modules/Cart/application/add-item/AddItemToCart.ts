@@ -1,13 +1,13 @@
-import { CartRepository } from "../../domain/CartRepository";
-import { Cart } from "../../domain/Cart";
-import { CartId } from "../../domain/CartId";
+import { CartRepository } from "@/modules/Cart/domain/CartRepository";
+import { Cart } from "@/modules/Cart/domain/Cart";
+import { CartId } from "@/modules/Cart/domain/CartId";
 import { StickerId } from "@/shared/domain/StickerId";
-import { OwnerId } from "../../domain/OwnerId";
-import { Result } from "../../../../shared/domain/Result";
-import { DomainError } from "../../../../shared/domain/DomainError";
+import { OwnerId } from "@/modules/Cart/domain/OwnerId";
+import { Result } from "@/shared/domain/Result";
+import { DomainError } from "@/shared/domain/DomainError";
 import { CatalogGateway } from "../CatalogGateway";
-import { AnonymousCartId } from "../../domain/AnonymousCartId";
-import { Quantity } from "../../../../shared/domain/Quantity";
+import { AnonymousCartId } from "@/modules/Cart/domain/AnonymousCartId";
+import { Quantity } from "@/shared/domain/Quantity";
 import { AddItemToCartDTO } from "./AddItemToCartDTO";
 
 export class AddItemToCart {

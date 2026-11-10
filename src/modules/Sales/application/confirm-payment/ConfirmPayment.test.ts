@@ -1,14 +1,14 @@
 import { describe, it, expect, mock, beforeEach } from "bun:test";
 import { ConfirmPayment } from "./ConfirmPayment";
-import { OrderRepository } from "../../domain/OrderRepository";
-import { Order } from "../../domain/Order";
-import { OrderId } from "../../domain/OrderId";
-import { CustomerId } from "../../domain/CustomerId";
-import { PaymentIntentId } from "../../domain/PaymentIntentId";
-import { Result } from "../../../../shared/domain/Result";
-import { DomainError } from "../../../../shared/domain/DomainError";
-import { OrderStatus } from "../../domain/OrderStatus";
-import { Money } from "../../../../shared/domain/Money";
+import { OrderRepository } from "@/modules/Sales/domain/OrderRepository";
+import { Order } from "@/modules/Sales/domain/Order";
+import { OrderId } from "@/modules/Sales/domain/OrderId";
+import { CustomerId } from "@/modules/Sales/domain/CustomerId";
+import { PaymentIntentId } from "@/modules/Sales/domain/PaymentIntentId";
+import { Result } from "@/shared/domain/Result";
+import { DomainError } from "@/shared/domain/DomainError";
+import { OrderStatus } from "@/modules/Sales/domain/OrderStatus";
+import { Money } from "@/shared/domain/Money";
 
 class MockOrderRepository implements OrderRepository {
   save = mock(async (order: Order) => Result.ok<void, DomainError>());

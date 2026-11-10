@@ -1,8 +1,8 @@
 import { UserContactQueryService } from "@/shared/contracts/UserContactQueryService";
 import { Result } from "@/shared/domain/Result";
 import { DomainError } from "@/shared/domain/DomainError";
-import { UserRepository } from "../../domain/UserRepository";
-import { UserId } from "../../domain/UserId";
+import { UserRepository } from "@/modules/Identity/domain/UserRepository";
+import { UserId } from "@/modules/Identity/domain/UserId";
 
 export class IdentityUserContactQueryService implements UserContactQueryService {
   constructor(private readonly userRepository: UserRepository) {}

@@ -1,9 +1,9 @@
-import { Entity } from "../../../shared/domain/Entity";
-import { Result } from "../../../shared/domain/Result";
-import { DomainError } from "../../../shared/domain/DomainError";
+import { Entity } from "@/shared/domain/Entity";
+import { Result } from "@/shared/domain/Result";
+import { DomainError } from "@/shared/domain/DomainError";
 import { StickerName } from "./StickerName";
 import { StickerDescription } from "./StickerDescription";
-import { Money } from "../../../shared/domain/Money";
+import { Money } from "@/shared/domain/Money";
 import { StickerUrl } from "./StickerUrl";
 import { StickerTag } from "./StickerTag";
 import { OwnerId } from "./OwnerId";

@@ -1,11 +1,11 @@
-import { StickerRepository } from "../../domain/StickerRepository";
-import { Result } from "../../../../shared/domain/Result";
-import { DomainError } from "../../../../shared/domain/DomainError";
-import { StickerNotFoundError } from "../../domain/Errors";
-import { StickerStock } from "../../domain/StickerStock";
+import { StickerRepository } from "@/modules/Catalog/domain/StickerRepository";
+import { Result } from "@/shared/domain/Result";
+import { DomainError } from "@/shared/domain/DomainError";
+import { StickerNotFoundError } from "@/modules/Catalog/domain/Errors";
+import { StickerStock } from "@/modules/Catalog/domain/StickerStock";
 import { StickerId } from "@/shared/domain/StickerId";
 
-import { Quantity } from "../../../../shared/domain/Quantity";
+import { Quantity } from "@/shared/domain/Quantity";
 import { ReduceStickerStockDTO } from "./ReduceStickerStockDTO";
 
 export class ReduceStickerStock {

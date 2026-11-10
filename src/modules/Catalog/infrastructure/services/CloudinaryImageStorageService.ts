@@ -1,6 +1,6 @@
 
 import { v2 as cloudinary } from "cloudinary";
-import { IImageStorageService } from "../../domain/gateways/IImageStorageService";
+import { IImageStorageService } from "@/modules/Catalog/domain/gateways/IImageStorageService";
 import { Result } from "@/shared/domain/Result";
 import { DomainError } from "@/shared/domain/DomainError";
 import { env } from "@/config/env";

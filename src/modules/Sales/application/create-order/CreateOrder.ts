@@ -1,20 +1,20 @@
 import { OrderRepository } from "@/modules/Sales/domain/OrderRepository";
 import { CatalogGateway, ProductInfo } from "../gateways/CatalogGateway";
-import { PaymentGateway } from "../../domain/gateways/PaymentGateway";
-import { CartGateway } from "../../domain/gateways/CartGateway";
+import { PaymentGateway } from "@/modules/Sales/domain/gateways/PaymentGateway";
+import { CartGateway } from "@/modules/Sales/domain/gateways/CartGateway";
 import { CreateOrderDTO } from "./CreateOrderDTO";
 import { Result } from "@/shared/domain/Result";
 import { DomainError } from "@/shared/domain/DomainError";
-import { Order } from "../../domain/Order";
-import { OrderItem } from "../../domain/OrderItem";
-import { CustomerId } from "../../domain/CustomerId";
+import { Order } from "@/modules/Sales/domain/Order";
+import { OrderItem } from "@/modules/Sales/domain/OrderItem";
+import { CustomerId } from "@/modules/Sales/domain/CustomerId";
 import { Money } from "@/shared/domain/Money";
 
 import { StickerId } from "@/shared/domain/StickerId";
 import { ILogger } from "@/shared/domain/ILogger";
-import { PaymentIntentId } from "../../domain/PaymentIntentId";
+import { PaymentIntentId } from "@/modules/Sales/domain/PaymentIntentId";
 import { Quantity } from "@/shared/domain/Quantity";
-import { InsufficientStockError, ProductNotFoundError, UserIdRequiredToCreateOrderError } from "../../domain/Errors";
+import { InsufficientStockError, ProductNotFoundError, UserIdRequiredToCreateOrderError } from "@/modules/Sales/domain/Errors";
 
 export class CreateOrder {
   constructor(

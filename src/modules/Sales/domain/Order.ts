@@ -1,9 +1,9 @@
-import { AggregateRoot } from "../../../shared/domain/AggregateRoot";
-import { Result } from "../../../shared/domain/Result";
-import { DomainError } from "../../../shared/domain/DomainError";
+import { AggregateRoot } from "@/shared/domain/AggregateRoot";
+import { Result } from "@/shared/domain/Result";
+import { DomainError } from "@/shared/domain/DomainError";
 import { OrderStatus } from "./OrderStatus";
 import { OrderItem } from "./OrderItem";
-import { Money } from "../../../shared/domain/Money";
+import { Money } from "@/shared/domain/Money";
 import { CustomerId } from "./CustomerId";
 import { OrderId } from "./OrderId";
 import { PaymentIntentId } from "./PaymentIntentId";

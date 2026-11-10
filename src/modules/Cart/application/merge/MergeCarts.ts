@@ -1,9 +1,9 @@
-import { CartRepository } from "../../domain/CartRepository";
+import { CartRepository } from "@/modules/Cart/domain/CartRepository";
 import { MergeCartsDTO } from "./MergeCartsDTO";
 import { Result } from "@/shared/domain/Result";
 import { DomainError } from "@/shared/domain/DomainError";
-import { OwnerId } from "../../domain/OwnerId";
-import { AnonymousCartId } from "../../domain/AnonymousCartId";
+import { OwnerId } from "@/modules/Cart/domain/OwnerId";
+import { AnonymousCartId } from "@/modules/Cart/domain/AnonymousCartId";
 
 export class MergeCarts {
   constructor(private cartRepository: CartRepository) {}

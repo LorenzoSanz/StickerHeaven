@@ -3,16 +3,16 @@
 import { describe, it, expect, beforeEach } from "bun:test";
 import { RegisterUser } from "./RegisterUser";
 import { RegisterUserDTO } from "./RegisterUserDTO";
-import { UserRepository } from "../../domain/UserRepository";
-import { User } from "../../domain/User";
-import { Email } from "../../domain/Email";
-import { IPasswordHasher } from "../../domain/IPasswordHasher";
-import { Password } from "../../domain/Password";
-import { HashedPassword } from "../../domain/HashedPassword";
+import { UserRepository } from "@/modules/Identity/domain/UserRepository";
+import { User } from "@/modules/Identity/domain/User";
+import { Email } from "@/modules/Identity/domain/Email";
+import { IPasswordHasher } from "@/modules/Identity/domain/IPasswordHasher";
+import { Password } from "@/modules/Identity/domain/Password";
+import { HashedPassword } from "@/modules/Identity/domain/HashedPassword";
 import { Result } from "@/shared/domain/Result";
 import { DomainError } from "@/shared/domain/DomainError";
-import { UserName } from "../../domain/UserName";
-import { UserId } from "../../domain/UserId";
+import { UserName } from "@/modules/Identity/domain/UserName";
+import { UserId } from "@/modules/Identity/domain/UserId";
 
 // Mock Hasher for deterministic testing
 class MockPasswordHasher implements IPasswordHasher {

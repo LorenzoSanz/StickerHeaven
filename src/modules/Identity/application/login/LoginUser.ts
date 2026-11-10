@@ -1,15 +1,15 @@
 
-import { UserRepository } from "../../domain/UserRepository";
-import { IPasswordHasher } from "../../domain/IPasswordHasher";
-import { SessionRepository } from "../../domain/SessionRepository";
-import { Session } from "../../domain/Session";
+import { UserRepository } from "@/modules/Identity/domain/UserRepository";
+import { IPasswordHasher } from "@/modules/Identity/domain/IPasswordHasher";
+import { SessionRepository } from "@/modules/Identity/domain/SessionRepository";
+import { Session } from "@/modules/Identity/domain/Session";
 import { LoginUserDTO } from "./LoginUserDTO";
 import { LoginOutputDTO } from "./LoginOutputDTO";
-import { Result } from "../../../../shared/domain/Result";
-import { DomainError } from "../../../../shared/domain/DomainError";
-import { Email } from "../../domain/Email";
-import { Password } from "../../domain/Password";
-import { HashedPassword } from "../../domain/HashedPassword";
+import { Result } from "@/shared/domain/Result";
+import { DomainError } from "@/shared/domain/DomainError";
+import { Email } from "@/modules/Identity/domain/Email";
+import { Password } from "@/modules/Identity/domain/Password";
+import { HashedPassword } from "@/modules/Identity/domain/HashedPassword";
 import { OnLoginSuccess } from "../interfaces/OnLoginSuccess";
 
 export class InvalidCredentialsError extends DomainError {

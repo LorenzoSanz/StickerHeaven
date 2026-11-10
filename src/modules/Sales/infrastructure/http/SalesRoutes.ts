@@ -2,7 +2,7 @@ import { Hono, MiddlewareHandler } from "hono";
 import { zValidator } from "@hono/zod-validator";
 import { SalesController } from "./SalesController";
 import { StripeWebhookController } from "./StripeWebhookController";
-import { CreateOrderSchema } from "../../application/create-order/CreateOrderDTO";
+import { CreateOrderSchema } from "@/modules/Sales/application/create-order/CreateOrderDTO";
 import { z } from "zod";
 import { requireAuth } from "@/shared/infrastructure/http/requireAuth";
 

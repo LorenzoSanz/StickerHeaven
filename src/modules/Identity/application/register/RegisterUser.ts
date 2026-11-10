@@ -1,15 +1,15 @@
 
-import { UserRepository } from "../../domain/UserRepository";
+import { UserRepository } from "@/modules/Identity/domain/UserRepository";
 import { RegisterUserDTO } from "./RegisterUserDTO";
-import { Result } from "../../../../shared/domain/Result";
-import { DomainError } from "../../../../shared/domain/DomainError";
-import { Email } from "../../domain/Email";
-import { User } from "../../domain/User";
-import { IPasswordHasher } from "../../domain/IPasswordHasher";
-import { Password } from "../../domain/Password";
-import { UserName } from "../../domain/UserName";
-import { HashedPassword } from "../../domain/HashedPassword";
-import { UserRole } from "../../domain/UserRole";
+import { Result } from "@/shared/domain/Result";
+import { DomainError } from "@/shared/domain/DomainError";
+import { Email } from "@/modules/Identity/domain/Email";
+import { User } from "@/modules/Identity/domain/User";
+import { IPasswordHasher } from "@/modules/Identity/domain/IPasswordHasher";
+import { Password } from "@/modules/Identity/domain/Password";
+import { UserName } from "@/modules/Identity/domain/UserName";
+import { HashedPassword } from "@/modules/Identity/domain/HashedPassword";
+import { UserRole } from "@/modules/Identity/domain/UserRole";
 
 // Deliberately vague and without echoing the email back: the response should not confirm
 // which addresses have an account more than strictly necessary.

@@ -1,12 +1,12 @@
 import { describe, it, expect, beforeEach } from "bun:test";
 import { LogoutUser } from "./LogoutUser";
-import { Session } from "../../domain/Session";
-import { UserId } from "../../domain/UserId";
-import { SessionId } from "../../domain/SessionId";
-import { SessionRepository } from "../../domain/SessionRepository";
+import { Session } from "@/modules/Identity/domain/Session";
+import { UserId } from "@/modules/Identity/domain/UserId";
+import { SessionId } from "@/modules/Identity/domain/SessionId";
+import { SessionRepository } from "@/modules/Identity/domain/SessionRepository";
 import { Result } from "@/shared/domain/Result";
 import { DomainError } from "@/shared/domain/DomainError";
-import { User } from "../../domain/User";
+import { User } from "@/modules/Identity/domain/User";
 
 describe("LogoutUser", () => {
   let logoutUser: LogoutUser;

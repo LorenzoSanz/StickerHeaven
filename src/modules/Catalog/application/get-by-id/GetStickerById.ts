@@ -1,8 +1,8 @@
 import { CatalogQueryService } from "../queries/CatalogQueryService";
 import { GetStickerByIdDTO } from "./GetStickerByIdDTO";
-import { Result } from "../../../../shared/domain/Result";
-import { DomainError } from "../../../../shared/domain/DomainError";
-import { StickerNotFoundError } from "../../domain/Errors";
+import { Result } from "@/shared/domain/Result";
+import { DomainError } from "@/shared/domain/DomainError";
+import { StickerNotFoundError } from "@/modules/Catalog/domain/Errors";
 
 export class GetStickerById {
   constructor(private queryService: CatalogQueryService) {}

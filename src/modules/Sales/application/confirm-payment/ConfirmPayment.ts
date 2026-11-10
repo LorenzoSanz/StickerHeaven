@@ -1,9 +1,9 @@
 import { Result } from "@/shared/domain/Result";
 import { DomainError } from "@/shared/domain/DomainError";
-import { OrderRepository } from "../../domain/OrderRepository";
+import { OrderRepository } from "@/modules/Sales/domain/OrderRepository";
 import { ILogger } from "@/shared/domain/ILogger";
-import { PaymentIntentId } from "../../domain/PaymentIntentId";
-import { OrderStatus } from "../../domain/OrderStatus";
+import { PaymentIntentId } from "@/modules/Sales/domain/PaymentIntentId";
+import { OrderStatus } from "@/modules/Sales/domain/OrderStatus";
 
 export interface ConfirmPaymentDTO {
   paymentIntentId: string;

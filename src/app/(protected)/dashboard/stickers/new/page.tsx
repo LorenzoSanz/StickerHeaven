@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { CreateStickerForm } from "./CreateStickerForm";
-import { DashboardShell } from "../../_components/DashboardShell";
+import { DashboardShell } from "@/app/(protected)/dashboard/_components/DashboardShell";
 import { Card } from "@/components/ui/Card";
 
 export default function NewStickerPage() {

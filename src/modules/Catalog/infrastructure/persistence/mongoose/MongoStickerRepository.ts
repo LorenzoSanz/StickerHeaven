@@ -1,5 +1,5 @@
-import { StickerRepository } from "../../../domain/StickerRepository";
-import { Sticker } from "../../../domain/Sticker";
+import { StickerRepository } from "@/modules/Catalog/domain/StickerRepository";
+import { Sticker } from "@/modules/Catalog/domain/Sticker";
 import { StickerModel, IStickerDocument } from "./StickerModel";
 import { StickerMapper } from "./StickerMapper";
 import { StickerId } from "@/shared/domain/StickerId";

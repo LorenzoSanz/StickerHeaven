@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { cancelOrder } from "../../actions";
+import { cancelOrder } from "@/app/(protected)/dashboard/actions";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/Button";
 import { useNotifications } from "@/components/notifications/NotificationsProvider";

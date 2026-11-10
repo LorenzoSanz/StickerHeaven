@@ -2,8 +2,8 @@ import { describe, it, expect, mock, beforeEach } from "bun:test";
 import { GetCart } from "./GetCart";
 import { CartQueryService } from "../queries/CartQueryService";
 import { CartDTO } from "./CartDTO";
-import { Result } from "../../../../shared/domain/Result";
-import { DomainError } from "../../../../shared/domain/DomainError";
+import { Result } from "@/shared/domain/Result";
+import { DomainError } from "@/shared/domain/DomainError";
 
 class MockCartQueryService implements CartQueryService {
   getCart = mock(async (userId: string | null, anonymousId: string | null) =>

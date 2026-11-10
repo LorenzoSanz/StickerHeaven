@@ -1,7 +1,7 @@
 import { Sticker } from "./Sticker";
 import { StickerId } from "@/shared/domain/StickerId";
-import { Result } from "../../../shared/domain/Result";
-import { DomainError } from "../../../shared/domain/DomainError";
+import { Result } from "@/shared/domain/Result";
+import { DomainError } from "@/shared/domain/DomainError";
 
 export interface StickerRepository {
   /**

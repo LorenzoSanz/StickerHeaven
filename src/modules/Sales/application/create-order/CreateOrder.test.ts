@@ -2,19 +2,19 @@ import { CreateOrder } from "./CreateOrder";
 import { OrderRepository } from "@/modules/Sales/domain/OrderRepository";
 import { CatalogGateway, ProductInfo } from "../gateways/CatalogGateway";
 import { CreateOrderDTO } from "./CreateOrderDTO";
-import { Result } from "../../../../shared/domain/Result";
-import { DomainError } from "../../../../shared/domain/DomainError";
+import { Result } from "@/shared/domain/Result";
+import { DomainError } from "@/shared/domain/DomainError";
 import { describe, it, expect, mock, beforeEach } from "bun:test";
-import { Order } from "../../domain/Order";
-import { CustomerId } from "../../domain/CustomerId";
+import { Order } from "@/modules/Sales/domain/Order";
+import { CustomerId } from "@/modules/Sales/domain/CustomerId";
 
-import { OrderId } from "../../domain/OrderId";
+import { OrderId } from "@/modules/Sales/domain/OrderId";
 
-import { PaymentGateway, CreatePaymentIntentResult } from "../../domain/gateways/PaymentGateway";
+import { PaymentGateway, CreatePaymentIntentResult } from "@/modules/Sales/domain/gateways/PaymentGateway";
 import { Money } from "@/shared/domain/Money";
 import { StickerId } from "@/shared/domain/StickerId";
-import { PaymentIntentId } from "../../domain/PaymentIntentId";
-import { CartGateway, CartItemDTO, CartSnapshotDTO } from "../../domain/gateways/CartGateway";
+import { PaymentIntentId } from "@/modules/Sales/domain/PaymentIntentId";
+import { CartGateway, CartItemDTO, CartSnapshotDTO } from "@/modules/Sales/domain/gateways/CartGateway";
 
 class MockPaymentGateway implements PaymentGateway {
   createPaymentIntent = mock(async (amount: Money, metadata: Record<string, string>) =>

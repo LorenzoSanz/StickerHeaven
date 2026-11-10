@@ -1,8 +1,8 @@
-import { CartGateway, CartItemDTO } from "../../domain/gateways/CartGateway";
+import { CartGateway, CartItemDTO } from "@/modules/Sales/domain/gateways/CartGateway";
 import { CreateOrder } from "../create-order/CreateOrder";
 import { Result } from "@/shared/domain/Result";
 import { DomainError } from "@/shared/domain/DomainError";
-import { CartEmptyError } from "../../domain/Errors";
+import { CartEmptyError } from "@/modules/Sales/domain/Errors";
 
 type CheckoutValue = { id: string; clientSecret: string };
 type CheckoutResult = Result<CheckoutValue, DomainError>;

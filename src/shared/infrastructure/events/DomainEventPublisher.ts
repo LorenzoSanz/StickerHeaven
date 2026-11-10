@@ -1,5 +1,5 @@
-import { DomainEvent } from "../../domain/DomainEvent";
-import { ILogger } from "../../domain/ILogger";
+import { DomainEvent } from "@/shared/domain/DomainEvent";
+import { ILogger } from "@/shared/domain/ILogger";
 import { NullLogger } from "../logger/NullLogger";
 
 export interface DomainEventSubscriber {

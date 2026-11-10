@@ -1,10 +1,10 @@
 import { Result } from "@/shared/domain/Result";
 import { DomainError } from "@/shared/domain/DomainError";
-import { CustomerId } from "../../domain/CustomerId";
-import { OrderId } from "../../domain/OrderId";
+import { CustomerId } from "@/modules/Sales/domain/CustomerId";
+import { OrderId } from "@/modules/Sales/domain/OrderId";
 import { OrderDTO } from "../OrderDTO";
 import { SalesQueryService } from "../queries/SalesQueryService";
-import { OrderNotFoundError, UnauthorizedOrderAccessError } from "../../domain/Errors";
+import { OrderNotFoundError, UnauthorizedOrderAccessError } from "@/modules/Sales/domain/Errors";
 
 export class GetOrderById {
   constructor(

@@ -1,9 +1,9 @@
-import { SalesQueryService } from "../../application/queries/SalesQueryService";
-import { OrderDTO } from "../../application/OrderDTO";
+import { SalesQueryService } from "@/modules/Sales/application/queries/SalesQueryService";
+import { OrderDTO } from "@/modules/Sales/application/OrderDTO";
 import { OrderModel, IOrderDocument } from "../persistence/mongoose/OrderModel";
 import { Result } from "@/shared/domain/Result";
 import { DomainError } from "@/shared/domain/DomainError";
-import { OrderStatus } from "../../domain/OrderStatus";
+import { OrderStatus } from "@/modules/Sales/domain/OrderStatus";
 
 export class MongoSalesQueryService implements SalesQueryService {
   async getOrderById(orderId: string): Promise<Result<OrderDTO | null, DomainError>> {

@@ -1,7 +1,7 @@
 
-import { Entity } from "../../../shared/domain/Entity";
-import { Result } from "../../../shared/domain/Result";
-import { DomainError } from "../../../shared/domain/DomainError";
+import { Entity } from "@/shared/domain/Entity";
+import { Result } from "@/shared/domain/Result";
+import { DomainError } from "@/shared/domain/DomainError";
 import { UserId } from "./UserId";
 import { SessionId } from "./SessionId";
 

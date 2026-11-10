@@ -1,9 +1,9 @@
 import { Context } from "hono";
-import { Checkout } from "../../application/checkout/Checkout";
-import { CancelOrder } from "../../application/cancel-order/CancelOrder";
-import { CreateOrder } from "../../application/create-order/CreateOrder";
-import { ListOrders } from "../../application/list-orders/ListOrders";
-import { GetOrderById } from "../../application/get-order/GetOrderById";
+import { Checkout } from "@/modules/Sales/application/checkout/Checkout";
+import { CancelOrder } from "@/modules/Sales/application/cancel-order/CancelOrder";
+import { CreateOrder } from "@/modules/Sales/application/create-order/CreateOrder";
+import { ListOrders } from "@/modules/Sales/application/list-orders/ListOrders";
+import { GetOrderById } from "@/modules/Sales/application/get-order/GetOrderById";
 import { HttpStatus } from "@/shared/infrastructure/http/HttpStatus";
 import { ILogger } from "@/shared/domain/ILogger";
 import { DomainError } from "@/shared/domain/DomainError";
@@ -16,7 +16,7 @@ import {
   OrderNotFoundError,
   ProductNotFoundError,
   UnauthorizedOrderAccessError,
-} from "../../domain/Errors";
+} from "@/modules/Sales/domain/Errors";
 
 export class SalesController {
   constructor(

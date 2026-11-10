@@ -1,11 +1,11 @@
 
-import { User } from "../../../domain/User";
-import { Email } from "../../../domain/Email";
-import { UserName } from "../../../domain/UserName";
-import { HashedPassword } from "../../../domain/HashedPassword";
-import { UserRole } from "../../../domain/UserRole";
+import { User } from "@/modules/Identity/domain/User";
+import { Email } from "@/modules/Identity/domain/Email";
+import { UserName } from "@/modules/Identity/domain/UserName";
+import { HashedPassword } from "@/modules/Identity/domain/HashedPassword";
+import { UserRole } from "@/modules/Identity/domain/UserRole";
 import { UserDocument } from "./UserModel";
-import { UserId } from "../../../domain/UserId";
+import { UserId } from "@/modules/Identity/domain/UserId";
 
 export class UserMapper {
   /**

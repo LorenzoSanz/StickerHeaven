@@ -1,10 +1,10 @@
-import { UserRepository } from "../../domain/UserRepository";
+import { UserRepository } from "@/modules/Identity/domain/UserRepository";
 import { UpdateUserProfileDTO } from "./UpdateUserProfileDTO";
 import { Result } from "@/shared/domain/Result";
 import { DomainError } from "@/shared/domain/DomainError";
-import { UserId } from "../../domain/UserId";
-import { Email } from "../../domain/Email";
-import { UserName } from "../../domain/UserName";
+import { UserId } from "@/modules/Identity/domain/UserId";
+import { Email } from "@/modules/Identity/domain/Email";
+import { UserName } from "@/modules/Identity/domain/UserName";
 
 export class UpdateUserProfile {
   constructor(

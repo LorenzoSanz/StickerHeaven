@@ -2,15 +2,15 @@
 
 import { describe, it, expect, mock, beforeEach } from "bun:test";
 import { LoginUser, InvalidCredentialsError } from "./LoginUser";
-import { UserRepository } from "../../domain/UserRepository";
-import { IPasswordHasher } from "../../domain/IPasswordHasher";
-import { SessionRepository } from "../../domain/SessionRepository";
-import { User } from "../../domain/User";
-import { Session } from "../../domain/Session";
-import { Email } from "../../domain/Email";
-import { HashedPassword } from "../../domain/HashedPassword";
-import { UserName } from "../../domain/UserName";
-import { UserRole } from "../../domain/UserRole";
+import { UserRepository } from "@/modules/Identity/domain/UserRepository";
+import { IPasswordHasher } from "@/modules/Identity/domain/IPasswordHasher";
+import { SessionRepository } from "@/modules/Identity/domain/SessionRepository";
+import { User } from "@/modules/Identity/domain/User";
+import { Session } from "@/modules/Identity/domain/Session";
+import { Email } from "@/modules/Identity/domain/Email";
+import { HashedPassword } from "@/modules/Identity/domain/HashedPassword";
+import { UserName } from "@/modules/Identity/domain/UserName";
+import { UserRole } from "@/modules/Identity/domain/UserRole";
 
 import { Result } from "@/shared/domain/Result";
 import { DomainError } from "@/shared/domain/DomainError";

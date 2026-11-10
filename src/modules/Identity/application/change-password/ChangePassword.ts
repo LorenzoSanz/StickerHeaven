@@ -1,11 +1,11 @@
-import { UserRepository } from "../../domain/UserRepository";
-import { IPasswordHasher } from "../../domain/IPasswordHasher";
+import { UserRepository } from "@/modules/Identity/domain/UserRepository";
+import { IPasswordHasher } from "@/modules/Identity/domain/IPasswordHasher";
 import { ChangePasswordDTO } from "./ChangePasswordDTO";
 import { Result } from "@/shared/domain/Result";
 import { DomainError } from "@/shared/domain/DomainError";
-import { UserId } from "../../domain/UserId";
-import { Password } from "../../domain/Password";
-import { SessionRepository } from "../../domain/SessionRepository";
+import { UserId } from "@/modules/Identity/domain/UserId";
+import { Password } from "@/modules/Identity/domain/Password";
+import { SessionRepository } from "@/modules/Identity/domain/SessionRepository";
 
 export class ChangePassword {
   constructor(

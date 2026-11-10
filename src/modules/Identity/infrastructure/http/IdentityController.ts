@@ -2,23 +2,23 @@
 import { Context } from "hono";
 import { setCookie, deleteCookie, getCookie } from "hono/cookie";
 import { setSessionCookie, deleteSessionCookie } from "@/config/sessionCookie";
-import { RegisterUser, UserAlreadyExistsError } from "../../application/register/RegisterUser";
-import { LoginUser, InvalidCredentialsError } from "../../application/login/LoginUser";
-import { LogoutUser } from "../../application/logout/LogoutUser";
-import { UpdateUserProfile } from "../../application/update-profile/UpdateUserProfile";
-import { ChangePassword } from "../../application/change-password/ChangePassword";
-import { RegisterUserDTO } from "../../application/register/RegisterUserDTO";
-import { LoginUserDTO } from "../../application/login/LoginUserDTO";
-import { UpdateUserProfileDTO } from "../../application/update-profile/UpdateUserProfileDTO";
-import { ChangePasswordDTO } from "../../application/change-password/ChangePasswordDTO";
-import { SessionId } from "../../domain/SessionId";
-import { UserId } from "../../domain/UserId";
+import { RegisterUser, UserAlreadyExistsError } from "@/modules/Identity/application/register/RegisterUser";
+import { LoginUser, InvalidCredentialsError } from "@/modules/Identity/application/login/LoginUser";
+import { LogoutUser } from "@/modules/Identity/application/logout/LogoutUser";
+import { UpdateUserProfile } from "@/modules/Identity/application/update-profile/UpdateUserProfile";
+import { ChangePassword } from "@/modules/Identity/application/change-password/ChangePassword";
+import { RegisterUserDTO } from "@/modules/Identity/application/register/RegisterUserDTO";
+import { LoginUserDTO } from "@/modules/Identity/application/login/LoginUserDTO";
+import { UpdateUserProfileDTO } from "@/modules/Identity/application/update-profile/UpdateUserProfileDTO";
+import { ChangePasswordDTO } from "@/modules/Identity/application/change-password/ChangePasswordDTO";
+import { SessionId } from "@/modules/Identity/domain/SessionId";
+import { UserId } from "@/modules/Identity/domain/UserId";
 import { env } from "@/config/env";
-import { OnLoginSuccess } from "../../application/interfaces/OnLoginSuccess";
+import { OnLoginSuccess } from "@/modules/Identity/application/interfaces/OnLoginSuccess";
 import { HttpStatus } from "@/shared/infrastructure/http/HttpStatus";
 import { cookieConfig } from "@/config/cookieConfig";
 import { ILogger } from "@/shared/domain/ILogger";
-import { SessionQueryService } from "../../application/queries/SessionQueryService";
+import { SessionQueryService } from "@/modules/Identity/application/queries/SessionQueryService";
 
 export class IdentityController {
   constructor(

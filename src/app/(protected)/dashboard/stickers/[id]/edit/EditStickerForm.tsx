@@ -7,7 +7,7 @@ import { updateSticker } from "./actions";
 import type { StickerDTO } from "@/modules/Catalog/public";
 import { Input } from "@/components/ui/Input";
 import { Select } from "@/components/ui/Select";
-import { TagSelector } from "../../_components/TagSelector";
+import { TagSelector } from "@/app/(protected)/dashboard/stickers/_components/TagSelector";
 import { Button } from "@/components/ui/Button";
 import { Alert } from "@/components/ui/Alert";
 import { cn } from "@/lib/utils";

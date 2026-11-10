@@ -1,4 +1,4 @@
-import { WishlistClient } from "../../(public)/wishlist/WishlistClient";
+import { WishlistClient } from "@/app/(public)/wishlist/WishlistClient";
 import { serverApiFetch } from "@/lib/serverApi";
 
 export const dynamic = "force-dynamic";

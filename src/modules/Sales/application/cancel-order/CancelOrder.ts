@@ -1,14 +1,14 @@
-import { OrderRepository } from "../../domain/OrderRepository";
-import { PaymentGateway } from "../../domain/gateways/PaymentGateway";
+import { OrderRepository } from "@/modules/Sales/domain/OrderRepository";
+import { PaymentGateway } from "@/modules/Sales/domain/gateways/PaymentGateway";
 import { CatalogGateway } from "../gateways/CatalogGateway";
 import { CancelOrderDTO } from "./CancelOrderDTO";
 import { Result } from "@/shared/domain/Result";
 import { DomainError } from "@/shared/domain/DomainError";
-import { OrderId } from "../../domain/OrderId";
-import { OrderStatus } from "../../domain/OrderStatus";
+import { OrderId } from "@/modules/Sales/domain/OrderId";
+import { OrderStatus } from "@/modules/Sales/domain/OrderStatus";
 import { ILogger } from "@/shared/domain/ILogger";
-import { CustomerId } from "../../domain/CustomerId";
-import { OrderAlreadyCancelledError, OrderNotCancellableError, OrderNotFoundError, UnauthorizedOrderAccessError } from "../../domain/Errors";
+import { CustomerId } from "@/modules/Sales/domain/CustomerId";
+import { OrderAlreadyCancelledError, OrderNotCancellableError, OrderNotFoundError, UnauthorizedOrderAccessError } from "@/modules/Sales/domain/Errors";
 
 export class CancelOrder {
   constructor(

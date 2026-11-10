@@ -1,13 +1,13 @@
-import { Sticker } from "../../../domain/Sticker";
-import { StickerName } from "../../../domain/StickerName";
-import { StickerDescription } from "../../../domain/StickerDescription";
+import { Sticker } from "@/modules/Catalog/domain/Sticker";
+import { StickerName } from "@/modules/Catalog/domain/StickerName";
+import { StickerDescription } from "@/modules/Catalog/domain/StickerDescription";
 import { Money } from "@/shared/domain/Money";
-import { StickerUrl } from "../../../domain/StickerUrl";
-import { StickerStock } from "../../../domain/StickerStock";
+import { StickerUrl } from "@/modules/Catalog/domain/StickerUrl";
+import { StickerStock } from "@/modules/Catalog/domain/StickerStock";
 import { IStickerDocument } from "./StickerModel";
 
-import { StickerTag } from "../../../domain/StickerTag";
-import { OwnerId } from "../../../domain/OwnerId";
+import { StickerTag } from "@/modules/Catalog/domain/StickerTag";
+import { OwnerId } from "@/modules/Catalog/domain/OwnerId";
 import { StickerId } from "@/shared/domain/StickerId";
 
 export class StickerMapper {

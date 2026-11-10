@@ -1,7 +1,7 @@
 import { CatalogQueryService } from "../queries/CatalogQueryService";
 import { ListStickersDTO } from "./ListStickersDTO";
-import { Result } from "../../../../shared/domain/Result";
-import { DomainError } from "../../../../shared/domain/DomainError";
+import { Result } from "@/shared/domain/Result";
+import { DomainError } from "@/shared/domain/DomainError";
 
 export interface ListStickersRequestDTO {
   ownerId?: string; // Se mantiene por compatibilidad, aunque no se usa en el listado simple

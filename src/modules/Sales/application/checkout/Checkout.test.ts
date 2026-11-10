@@ -1,6 +1,6 @@
 import { describe, expect, it, mock } from "bun:test";
 import { Checkout } from "./Checkout";
-import type { CartGateway, CartItemDTO, CartSnapshotDTO } from "../../domain/gateways/CartGateway";
+import type { CartGateway, CartItemDTO, CartSnapshotDTO } from "@/modules/Sales/domain/gateways/CartGateway";
 import type { CreateOrder } from "../create-order/CreateOrder";
 import { Result } from "@/shared/domain/Result";
 import { DomainError } from "@/shared/domain/DomainError";

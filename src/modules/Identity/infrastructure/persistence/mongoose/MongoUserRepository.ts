@@ -1,9 +1,9 @@
 
-import { UserRepository } from "../../../domain/UserRepository";
-import { User } from "../../../domain/User";
-import { UserId } from "../../../domain/UserId";
-import { Email } from "../../../domain/Email";
-import { UserName } from "../../../domain/UserName";
+import { UserRepository } from "@/modules/Identity/domain/UserRepository";
+import { User } from "@/modules/Identity/domain/User";
+import { UserId } from "@/modules/Identity/domain/UserId";
+import { Email } from "@/modules/Identity/domain/Email";
+import { UserName } from "@/modules/Identity/domain/UserName";
 import { UserModel, UserDocument } from "./UserModel";
 import { UserMapper } from "./UserMapper";
 import { Result } from "@/shared/domain/Result";

@@ -1,12 +1,12 @@
-import { AggregateRoot } from "../../../shared/domain/AggregateRoot";
-import { Result } from "../../../shared/domain/Result";
+import { AggregateRoot } from "@/shared/domain/AggregateRoot";
+import { Result } from "@/shared/domain/Result";
 import { CartId } from "./CartId";
 import { CartItem } from "./CartItem";
 import { StickerId } from "@/shared/domain/StickerId";
 import { OwnerId } from "./OwnerId";
 import { InvalidCartItemQuantityError, CartItemNotFoundError } from "./Errors";
 import { AnonymousCartId } from "./AnonymousCartId";
-import { Quantity } from "../../../shared/domain/Quantity";
+import { Quantity } from "@/shared/domain/Quantity";
 
 interface CartProps {
   userId: OwnerId | null;

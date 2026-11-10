@@ -1,8 +1,8 @@
-import { ValueObject } from "../../../shared/domain/ValueObject";
-import { Result } from "../../../shared/domain/Result";
+import { ValueObject } from "@/shared/domain/ValueObject";
+import { Result } from "@/shared/domain/Result";
 import { InvalidCartItemQuantityError } from "./Errors";
 import { StickerId } from "@/shared/domain/StickerId";
-import { Quantity } from "../../../shared/domain/Quantity";
+import { Quantity } from "@/shared/domain/Quantity";
 
 export interface CartItemProps {
   stickerId: StickerId;

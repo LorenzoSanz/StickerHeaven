@@ -1,8 +1,8 @@
-import { OrderRepository } from "../../domain/OrderRepository";
-import { PaymentGateway } from "../../domain/gateways/PaymentGateway";
+import { OrderRepository } from "@/modules/Sales/domain/OrderRepository";
+import { PaymentGateway } from "@/modules/Sales/domain/gateways/PaymentGateway";
 import { CatalogGateway } from "../gateways/CatalogGateway";
-import { Order } from "../../domain/Order";
-import { PaymentIntentId } from "../../domain/PaymentIntentId";
+import { Order } from "@/modules/Sales/domain/Order";
+import { PaymentIntentId } from "@/modules/Sales/domain/PaymentIntentId";
 import { Result } from "@/shared/domain/Result";
 import { DomainError } from "@/shared/domain/DomainError";
 import { ILogger } from "@/shared/domain/ILogger";

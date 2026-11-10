@@ -1,7 +1,7 @@
-import { CatalogQueryService } from "../../application/queries/CatalogQueryService";
-import { ListStickersDTO, StickerDTO } from "../../application/list/ListStickersDTO";
-import { GetStickerByIdDTO } from "../../application/get-by-id/GetStickerByIdDTO";
-import { SearchStickersQuery, PaginatedStickersDTO } from "../../application/queries/SearchStickersQuery";
+import { CatalogQueryService } from "@/modules/Catalog/application/queries/CatalogQueryService";
+import { ListStickersDTO, StickerDTO } from "@/modules/Catalog/application/list/ListStickersDTO";
+import { GetStickerByIdDTO } from "@/modules/Catalog/application/get-by-id/GetStickerByIdDTO";
+import { SearchStickersQuery, PaginatedStickersDTO } from "@/modules/Catalog/application/queries/SearchStickersQuery";
 import { StickerModel, IStickerDocument } from "../persistence/mongoose/StickerModel";
 import { Result } from "@/shared/domain/Result";
 import { DomainError } from "@/shared/domain/DomainError";

@@ -1,7 +1,7 @@
-import { DomainEvent } from "../../../../shared/domain/DomainEvent";
+import { DomainEvent } from "@/shared/domain/DomainEvent";
 import { OrderId } from "../OrderId";
 import { CustomerId } from "../CustomerId";
-import { Money } from "../../../../shared/domain/Money";
+import { Money } from "@/shared/domain/Money";
 
 export class OrderPaidEvent implements DomainEvent {
   public occurredOn: Date;

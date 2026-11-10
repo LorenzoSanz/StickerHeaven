@@ -1,9 +1,9 @@
-import { StickerRepository } from "../../domain/StickerRepository";
-import { Result } from "../../../../shared/domain/Result";
-import { DomainError } from "../../../../shared/domain/DomainError";
-import { StickerNotFoundError, StickerOwnershipError } from "../../domain/Errors";
+import { StickerRepository } from "@/modules/Catalog/domain/StickerRepository";
+import { Result } from "@/shared/domain/Result";
+import { DomainError } from "@/shared/domain/DomainError";
+import { StickerNotFoundError, StickerOwnershipError } from "@/modules/Catalog/domain/Errors";
 
-import { OwnerId } from "../../domain/OwnerId";
+import { OwnerId } from "@/modules/Catalog/domain/OwnerId";
 import { StickerId } from "@/shared/domain/StickerId";
 import { DeleteStickerDTO } from "./DeleteStickerDTO";
 

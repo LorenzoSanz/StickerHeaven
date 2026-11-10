@@ -1,8 +1,8 @@
 
-import { Session, SessionProps } from "../../../domain/Session";
+import { Session, SessionProps } from "@/modules/Identity/domain/Session";
 import { SessionDocument } from "./SessionModel";
-import { SessionId } from "../../../domain/SessionId";
-import { UserId } from "../../../domain/UserId";
+import { SessionId } from "@/modules/Identity/domain/SessionId";
+import { UserId } from "@/modules/Identity/domain/UserId";
 
 export class SessionMapper {
   static toDomain(raw: SessionDocument): Session {

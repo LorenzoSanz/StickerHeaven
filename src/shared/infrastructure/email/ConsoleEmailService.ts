@@ -1,6 +1,6 @@
-import { IEmailService } from "../../domain/IEmailService";
-import { Result } from "../../domain/Result";
-import { ILogger } from "../../domain/ILogger";
+import { IEmailService } from "@/shared/domain/IEmailService";
+import { Result } from "@/shared/domain/Result";
+import { ILogger } from "@/shared/domain/ILogger";
 
 export class ConsoleEmailService implements IEmailService {
   constructor(private logger: ILogger) {}

@@ -1,15 +1,15 @@
-import { StickerRepository } from "../../domain/StickerRepository";
+import { StickerRepository } from "@/modules/Catalog/domain/StickerRepository";
 import { UpdateStickerDTO } from "./UpdateStickerDTO";
 import { Result } from "@/shared/domain/Result";
 import { DomainError } from "@/shared/domain/DomainError";
 import { StickerId } from "@/shared/domain/StickerId";
-import { StickerName } from "../../domain/StickerName";
-import { StickerDescription } from "../../domain/StickerDescription";
+import { StickerName } from "@/modules/Catalog/domain/StickerName";
+import { StickerDescription } from "@/modules/Catalog/domain/StickerDescription";
 import { Money } from "@/shared/domain/Money";
-import { StickerUrl } from "../../domain/StickerUrl";
-import { StickerStock } from "../../domain/StickerStock";
-import { StickerNotFoundError, StickerOwnershipError } from "../../domain/Errors";
-import { OwnerId } from "../../domain/OwnerId";
+import { StickerUrl } from "@/modules/Catalog/domain/StickerUrl";
+import { StickerStock } from "@/modules/Catalog/domain/StickerStock";
+import { StickerNotFoundError, StickerOwnershipError } from "@/modules/Catalog/domain/Errors";
+import { OwnerId } from "@/modules/Catalog/domain/OwnerId";
 
 export class UpdateSticker {
   constructor(

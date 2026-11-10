@@ -1,8 +1,8 @@
 
 import * as argon2 from "argon2";
-import { IPasswordHasher } from "../../domain/IPasswordHasher";
-import { Password } from "../../domain/Password";
-import { HashedPassword } from "../../domain/HashedPassword";
+import { IPasswordHasher } from "@/modules/Identity/domain/IPasswordHasher";
+import { Password } from "@/modules/Identity/domain/Password";
+import { HashedPassword } from "@/modules/Identity/domain/HashedPassword";
 
 export class Argon2PasswordHasher implements IPasswordHasher {
   async hash(password: Password): Promise<HashedPassword> {

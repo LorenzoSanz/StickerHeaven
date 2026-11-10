@@ -1,6 +1,6 @@
 import { Session } from "./Session";
-import { Result } from "../../../shared/domain/Result";
-import { DomainError } from "../../../shared/domain/DomainError";
+import { Result } from "@/shared/domain/Result";
+import { DomainError } from "@/shared/domain/DomainError";
 
 import { User } from "./User";
 

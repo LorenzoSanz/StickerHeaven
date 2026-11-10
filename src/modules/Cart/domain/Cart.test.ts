@@ -2,7 +2,7 @@ import { describe, it, expect } from "bun:test";
 import { Cart } from "./Cart";
 import { CartId } from "./CartId";
 import { StickerId } from "@/shared/domain/StickerId";
-import { Quantity } from "../../../shared/domain/Quantity";
+import { Quantity } from "@/shared/domain/Quantity";
 
 const qty = (n: number) => Quantity.create(n).getValue();
 

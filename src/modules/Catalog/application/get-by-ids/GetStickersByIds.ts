@@ -1,7 +1,7 @@
-import { StickerRepository } from "../../domain/StickerRepository";
+import { StickerRepository } from "@/modules/Catalog/domain/StickerRepository";
 import { StickerDTO } from "../list/ListStickersDTO";
-import { Result } from "../../../../shared/domain/Result";
-import { DomainError } from "../../../../shared/domain/DomainError";
+import { Result } from "@/shared/domain/Result";
+import { DomainError } from "@/shared/domain/DomainError";
 import { StickerId } from "@/shared/domain/StickerId";
 
 export class GetStickersByIds {

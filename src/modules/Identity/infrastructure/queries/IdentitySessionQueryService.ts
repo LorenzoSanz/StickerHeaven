@@ -1,5 +1,5 @@
-import { SessionQueryService, SessionUserDTO } from "../../application/queries/SessionQueryService";
-import { SessionRepository } from "../../domain/SessionRepository";
+import { SessionQueryService, SessionUserDTO } from "@/modules/Identity/application/queries/SessionQueryService";
+import { SessionRepository } from "@/modules/Identity/domain/SessionRepository";
 
 export class IdentitySessionQueryService implements SessionQueryService {
   constructor(

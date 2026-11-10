@@ -1,13 +1,13 @@
 import { describe, it, expect, beforeEach } from "bun:test";
 import { GetStickersByIds } from "./GetStickersByIds";
 import { FakeStickerRepository } from "../testing/FakeStickerRepository";
-import { Sticker } from "../../domain/Sticker";
-import { StickerName } from "../../domain/StickerName";
-import { StickerDescription } from "../../domain/StickerDescription";
-import { Money } from "../../../../shared/domain/Money";
-import { StickerStock } from "../../domain/StickerStock";
-import { StickerUrl } from "../../domain/StickerUrl";
-import { OwnerId } from "../../domain/OwnerId";
+import { Sticker } from "@/modules/Catalog/domain/Sticker";
+import { StickerName } from "@/modules/Catalog/domain/StickerName";
+import { StickerDescription } from "@/modules/Catalog/domain/StickerDescription";
+import { Money } from "@/shared/domain/Money";
+import { StickerStock } from "@/modules/Catalog/domain/StickerStock";
+import { StickerUrl } from "@/modules/Catalog/domain/StickerUrl";
+import { OwnerId } from "@/modules/Catalog/domain/OwnerId";
 
 describe("GetStickersByIds", () => {
   let getStickersByIds: GetStickersByIds;

@@ -1,11 +1,11 @@
 import { describe, it, expect } from "bun:test";
 import { Order } from "./Order";
 import { OrderItem } from "./OrderItem";
-import { Money } from "../../../shared/domain/Money";
+import { Money } from "@/shared/domain/Money";
 import { CustomerId } from "./CustomerId";
 import { OrderId } from "./OrderId";
 import { StickerId } from "@/shared/domain/StickerId";
-import { Quantity } from "../../../shared/domain/Quantity";
+import { Quantity } from "@/shared/domain/Quantity";
 import { OrderStatus } from "./OrderStatus";
 
 const qty = (n: number) => Quantity.create(n).getValue();

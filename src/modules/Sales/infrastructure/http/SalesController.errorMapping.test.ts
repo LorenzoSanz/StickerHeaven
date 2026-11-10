@@ -7,7 +7,7 @@ import {
   InsufficientStockError,
   ProductNotFoundError,
   UnauthorizedOrderAccessError,
-} from "../../domain/Errors";
+} from "@/modules/Sales/domain/Errors";
 
 describe("SalesController error mapping", () => {
   let SalesController: typeof import("./SalesController").SalesController;

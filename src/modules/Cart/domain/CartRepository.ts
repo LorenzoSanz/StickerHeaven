@@ -1,6 +1,6 @@
 import { Cart } from "./Cart";
-import { Result } from "../../../shared/domain/Result";
-import { DomainError } from "../../../shared/domain/DomainError";
+import { Result } from "@/shared/domain/Result";
+import { DomainError } from "@/shared/domain/DomainError";
 import { CartId } from "./CartId";
 import { OwnerId } from "./OwnerId";
 import { AnonymousCartId } from "./AnonymousCartId";

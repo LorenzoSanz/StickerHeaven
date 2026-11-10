@@ -1,6 +1,6 @@
-import { ValueObject } from "../../../shared/domain/ValueObject";
-import { Result } from "../../../shared/domain/Result";
-import { DomainError } from "../../../shared/domain/DomainError";
+import { ValueObject } from "@/shared/domain/ValueObject";
+import { Result } from "@/shared/domain/Result";
+import { DomainError } from "@/shared/domain/DomainError";
 
 export type OrderStatusType = "PENDING_PAYMENT" | "PAID" | "PAYMENT_FAILED" | "CANCELLED" | "SHIPPED" | "DELIVERED";
 

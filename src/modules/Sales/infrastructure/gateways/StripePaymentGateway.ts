@@ -1,5 +1,5 @@
 import Stripe from "stripe";
-import { PaymentGateway, CreatePaymentIntentResult } from "../../domain/gateways/PaymentGateway";
+import { PaymentGateway, CreatePaymentIntentResult } from "@/modules/Sales/domain/gateways/PaymentGateway";
 import { Money } from "@/shared/domain/Money";
 import { Result } from "@/shared/domain/Result";
 import { DomainError } from "@/shared/domain/DomainError";

@@ -1,11 +1,11 @@
-import { CartRepository } from "../../domain/CartRepository";
+import { CartRepository } from "@/modules/Cart/domain/CartRepository";
 import { UpdateCartItemQuantityDTO } from "./UpdateCartItemQuantityDTO";
 import { Result } from "@/shared/domain/Result";
 import { DomainError } from "@/shared/domain/DomainError";
 import { StickerId } from "@/shared/domain/StickerId";
 import { Quantity } from "@/shared/domain/Quantity";
-import { OwnerId } from "../../domain/OwnerId";
-import { AnonymousCartId } from "../../domain/AnonymousCartId";
+import { OwnerId } from "@/modules/Cart/domain/OwnerId";
+import { AnonymousCartId } from "@/modules/Cart/domain/AnonymousCartId";
 
 export class UpdateCartItemQuantity {
   constructor(private cartRepository: CartRepository) {}

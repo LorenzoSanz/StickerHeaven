@@ -1,9 +1,9 @@
 import { describe, it, expect, mock, beforeEach, beforeAll } from "bun:test";
 import { Context } from "hono";
-import { Session } from "../../domain/Session";
-import { User } from "../../domain/User";
-import { UserId } from "../../domain/UserId";
-import { SessionRepository } from "../../domain/SessionRepository";
+import { Session } from "@/modules/Identity/domain/Session";
+import { User } from "@/modules/Identity/domain/User";
+import { UserId } from "@/modules/Identity/domain/UserId";
+import { SessionRepository } from "@/modules/Identity/domain/SessionRepository";
 
 import { Result } from "@/shared/domain/Result";
 import { DomainError } from "@/shared/domain/DomainError";

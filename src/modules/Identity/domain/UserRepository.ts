@@ -1,7 +1,7 @@
 
 import { User } from "./User";
-import { Result } from "../../../shared/domain/Result";
-import { DomainError } from "../../../shared/domain/DomainError";
+import { Result } from "@/shared/domain/Result";
+import { DomainError } from "@/shared/domain/DomainError";
 import { UserId } from "./UserId";
 import { Email } from "./Email";
 import { UserName } from "./UserName";

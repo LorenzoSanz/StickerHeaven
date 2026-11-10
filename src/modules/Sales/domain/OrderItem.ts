@@ -1,8 +1,8 @@
-import { ValueObject } from "../../../shared/domain/ValueObject";
-import { Result } from "../../../shared/domain/Result";
-import { DomainError } from "../../../shared/domain/DomainError";
-import { Money } from "../../../shared/domain/Money";
-import { Quantity } from "../../../shared/domain/Quantity";
+import { ValueObject } from "@/shared/domain/ValueObject";
+import { Result } from "@/shared/domain/Result";
+import { DomainError } from "@/shared/domain/DomainError";
+import { Money } from "@/shared/domain/Money";
+import { Quantity } from "@/shared/domain/Quantity";
 
 import { StickerId } from "@/shared/domain/StickerId";
 

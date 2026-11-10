@@ -2,8 +2,8 @@ import { Order } from "./Order";
 import { CustomerId } from "./CustomerId";
 import { OrderId } from "./OrderId";
 import { PaymentIntentId } from "./PaymentIntentId";
-import { Result } from "../../../shared/domain/Result";
-import { DomainError } from "../../../shared/domain/DomainError";
+import { Result } from "@/shared/domain/Result";
+import { DomainError } from "@/shared/domain/DomainError";
 
 export interface OrderRepository {
   /**

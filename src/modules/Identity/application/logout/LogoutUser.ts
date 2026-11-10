@@ -1,8 +1,8 @@
 
-import { SessionRepository } from "../../domain/SessionRepository";
-import { Result } from "../../../../shared/domain/Result";
-import { DomainError } from "../../../../shared/domain/DomainError";
-import { SessionId } from "../../domain/SessionId";
+import { SessionRepository } from "@/modules/Identity/domain/SessionRepository";
+import { Result } from "@/shared/domain/Result";
+import { DomainError } from "@/shared/domain/DomainError";
+import { SessionId } from "@/modules/Identity/domain/SessionId";
 
 export class LogoutUser {
   constructor(private readonly sessionRepository: SessionRepository) {}

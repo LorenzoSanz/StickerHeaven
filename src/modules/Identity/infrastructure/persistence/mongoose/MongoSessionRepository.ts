@@ -1,12 +1,12 @@
 
-import { SessionRepository } from "../../../domain/SessionRepository";
-import { Session } from "../../../domain/Session";
+import { SessionRepository } from "@/modules/Identity/domain/SessionRepository";
+import { Session } from "@/modules/Identity/domain/Session";
 import { SessionModel, SessionDocument } from "./SessionModel";
 import { SessionMapper } from "./SessionMapper";
 import { Result } from "@/shared/domain/Result";
 import { DomainError } from "@/shared/domain/DomainError";
 
-import { User } from "../../../domain/User";
+import { User } from "@/modules/Identity/domain/User";
 import { UserModel, UserDocument } from "./UserModel";
 import { UserMapper } from "./UserMapper";
 

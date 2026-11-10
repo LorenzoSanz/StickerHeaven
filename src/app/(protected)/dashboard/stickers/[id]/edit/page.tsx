@@ -1,9 +1,9 @@
 import Link from "next/link";
 import { notFound, redirect } from "next/navigation";
-import { getCurrentUser } from "../../../actions";
-import { getStickerByIdAction } from "../../../../../(public)/stickers/_actions/get-sticker-by-id";
+import { getCurrentUser } from "@/app/(protected)/dashboard/actions";
+import { getStickerByIdAction } from "@/app/(public)/stickers/_actions/get-sticker-by-id";
 import { EditStickerForm } from "./EditStickerForm";
-import { DashboardShell } from "../../../_components/DashboardShell";
+import { DashboardShell } from "@/app/(protected)/dashboard/_components/DashboardShell";
 import { Card } from "@/components/ui/Card";
 
 export default async function EditStickerPage({ params }: { params: Promise<{ id: string }> }) {

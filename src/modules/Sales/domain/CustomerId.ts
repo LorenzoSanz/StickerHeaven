@@ -1,6 +1,6 @@
-import { ValueObject } from "../../../shared/domain/ValueObject";
-import { Result } from "../../../shared/domain/Result";
-import { DomainError } from "../../../shared/domain/DomainError";
+import { ValueObject } from "@/shared/domain/ValueObject";
+import { Result } from "@/shared/domain/Result";
+import { DomainError } from "@/shared/domain/DomainError";
 
 export interface CustomerIdProps {
   value: string;

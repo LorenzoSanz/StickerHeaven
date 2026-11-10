@@ -1,6 +1,6 @@
 import { CartQueryService } from "../queries/CartQueryService";
-import { Result } from "../../../../shared/domain/Result";
-import { DomainError } from "../../../../shared/domain/DomainError";
+import { Result } from "@/shared/domain/Result";
+import { DomainError } from "@/shared/domain/DomainError";
 import { CartDTO } from "./CartDTO";
 
 export class GetCart {

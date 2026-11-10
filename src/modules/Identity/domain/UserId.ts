@@ -1,6 +1,6 @@
-import { ValueObject } from "../../../shared/domain/ValueObject";
-import { Result } from "../../../shared/domain/Result";
-import { DomainError } from "../../../shared/domain/DomainError";
+import { ValueObject } from "@/shared/domain/ValueObject";
+import { Result } from "@/shared/domain/Result";
+import { DomainError } from "@/shared/domain/DomainError";
 import { v4 as uuidv4, validate as validateUuid } from "uuid";
 
 export interface UserIdProps {

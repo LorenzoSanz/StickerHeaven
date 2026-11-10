@@ -2,7 +2,7 @@
 import { Context, Next } from "hono";
 import { createMiddleware } from "hono/factory";
 import { getCookie, deleteCookie } from "hono/cookie";
-import { SessionRepository } from "../../domain/SessionRepository";
+import { SessionRepository } from "@/modules/Identity/domain/SessionRepository";
 import { ILogger } from "@/shared/domain/ILogger";
 import { cookieConfig } from "@/config/cookieConfig";
 

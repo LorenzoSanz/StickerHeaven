@@ -1,14 +1,14 @@
-import { getOrderDetails } from "../../actions";
-import type { OrderApiDTO } from "../../actions";
+import { getOrderDetails } from "@/app/(protected)/dashboard/actions";
+import type { OrderApiDTO } from "@/app/(protected)/dashboard/actions";
 import { formatCurrency, formatDateISO } from "@/lib/utils";
 import Link from "next/link";
 import { CancelOrderButton } from "./CancelOrderButton";
 import Image from "next/image";
-import { DashboardShell } from "../../_components/DashboardShell";
+import { DashboardShell } from "@/app/(protected)/dashboard/_components/DashboardShell";
 import { Card } from "@/components/ui/Card";
 import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
-import { getOrderStatusMeta } from "../../_components/orderStatusMeta";
+import { getOrderStatusMeta } from "@/app/(protected)/dashboard/_components/orderStatusMeta";
 
 export default async function OrderDetailsPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;

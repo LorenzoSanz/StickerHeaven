@@ -1,4 +1,4 @@
-import { DomainError } from "../../../shared/domain/DomainError";
+import { DomainError } from "@/shared/domain/DomainError";
 
 export class StickerNotFoundError extends DomainError {
   constructor(id: string) {

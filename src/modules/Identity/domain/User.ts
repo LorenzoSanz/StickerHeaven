@@ -1,7 +1,7 @@
 
-import { Entity } from "../../../shared/domain/Entity";
-import { Result } from "../../../shared/domain/Result";
-import { DomainError } from "../../../shared/domain/DomainError";
+import { Entity } from "@/shared/domain/Entity";
+import { Result } from "@/shared/domain/Result";
+import { DomainError } from "@/shared/domain/DomainError";
 import { Email } from "./Email";
 import { UserName } from "./UserName";
 import { HashedPassword } from "./HashedPassword";

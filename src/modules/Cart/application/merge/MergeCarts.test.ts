@@ -1,13 +1,13 @@
 import { describe, it, expect, mock, beforeEach } from "bun:test";
 import { MergeCarts } from "./MergeCarts";
-import { CartRepository } from "../../domain/CartRepository";
-import { Cart } from "../../domain/Cart";
-import { CartId } from "../../domain/CartId";
-import { OwnerId } from "../../domain/OwnerId";
+import { CartRepository } from "@/modules/Cart/domain/CartRepository";
+import { Cart } from "@/modules/Cart/domain/Cart";
+import { CartId } from "@/modules/Cart/domain/CartId";
+import { OwnerId } from "@/modules/Cart/domain/OwnerId";
 import { StickerId } from "@/shared/domain/StickerId";
-import { Result } from "../../../../shared/domain/Result";
-import { DomainError } from "../../../../shared/domain/DomainError";
-import { AnonymousCartId } from "../../domain/AnonymousCartId";
+import { Result } from "@/shared/domain/Result";
+import { DomainError } from "@/shared/domain/DomainError";
+import { AnonymousCartId } from "@/modules/Cart/domain/AnonymousCartId";
 import { Quantity } from "@/shared/domain/Quantity";
 
 describe("MergeCarts Use Case", () => {

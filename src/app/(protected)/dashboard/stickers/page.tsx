@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { getCurrentUser } from "../actions";
-import { getStickersAction } from "../../../(public)/stickers/_actions/get-stickers";
+import { getStickersAction } from "@/app/(public)/stickers/_actions/get-stickers";
 import { DeleteStickerButton } from "./DeleteStickerButton";
 import { formatCurrency } from "@/lib/utils";
 import { DashboardShell } from "../_components/DashboardShell";

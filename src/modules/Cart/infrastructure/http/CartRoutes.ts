@@ -2,7 +2,7 @@
 import { Hono, MiddlewareHandler } from "hono";
 import { zValidator } from "@hono/zod-validator";
 import { CartController } from "./CartController";
-import { AddItemToCartSchema } from "../../application/add-item/AddItemToCartDTO";
+import { AddItemToCartSchema } from "@/modules/Cart/application/add-item/AddItemToCartDTO";
 import { z } from "zod";
 
 const ItemIdParamSchema = z.object({

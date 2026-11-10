@@ -4,7 +4,7 @@ import { Sticker } from "./Sticker";
 import { OwnerId } from "./OwnerId";
 import { StickerName } from "./StickerName";
 import { StickerDescription } from "./StickerDescription";
-import { Money } from "../../../shared/domain/Money";
+import { Money } from "@/shared/domain/Money";
 import { StickerStock } from "./StickerStock";
 import { StickerUrl } from "./StickerUrl";
 import { StickerId } from "@/shared/domain/StickerId";

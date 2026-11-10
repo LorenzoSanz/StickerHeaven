@@ -1,12 +1,12 @@
 import { describe, expect, it } from "bun:test";
 import { Hono } from "hono";
 import { StickerController } from "./StickerController";
-import type { CatalogQueryService } from "../../application/queries/CatalogQueryService";
-import type { SearchStickersQuery, PaginatedStickersDTO } from "../../application/queries/SearchStickersQuery";
+import type { CatalogQueryService } from "@/modules/Catalog/application/queries/CatalogQueryService";
+import type { SearchStickersQuery, PaginatedStickersDTO } from "@/modules/Catalog/application/queries/SearchStickersQuery";
 import { Result } from "@/shared/domain/Result";
 import { DomainError } from "@/shared/domain/DomainError";
-import type { ListStickersDTO } from "../../application/list/ListStickersDTO";
-import type { GetStickerByIdDTO } from "../../application/get-by-id/GetStickerByIdDTO";
+import type { ListStickersDTO } from "@/modules/Catalog/application/list/ListStickersDTO";
+import type { GetStickerByIdDTO } from "@/modules/Catalog/application/get-by-id/GetStickerByIdDTO";
 
 const seed = [
   {

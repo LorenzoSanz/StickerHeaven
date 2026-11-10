@@ -1,13 +1,13 @@
 import { describe, it, expect, mock, beforeEach } from "bun:test";
 import { AddItemToCart } from "./AddItemToCart";
-import { CartRepository } from "../../domain/CartRepository";
+import { CartRepository } from "@/modules/Cart/domain/CartRepository";
 import { CatalogGateway, ProductInfo } from "../CatalogGateway";
-import { Cart } from "../../domain/Cart";
-import { OwnerId } from "../../domain/OwnerId";
-import { CartId } from "../../domain/CartId";
-import { Result } from "../../../../shared/domain/Result";
-import { DomainError } from "../../../../shared/domain/DomainError";
-import { AnonymousCartId } from "../../domain/AnonymousCartId";
+import { Cart } from "@/modules/Cart/domain/Cart";
+import { OwnerId } from "@/modules/Cart/domain/OwnerId";
+import { CartId } from "@/modules/Cart/domain/CartId";
+import { Result } from "@/shared/domain/Result";
+import { DomainError } from "@/shared/domain/DomainError";
+import { AnonymousCartId } from "@/modules/Cart/domain/AnonymousCartId";
 
 class MockCartRepository implements CartRepository {
   save = mock(async (cart: Cart) => Result.ok<void, DomainError>());

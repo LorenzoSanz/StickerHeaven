@@ -1,13 +1,13 @@
 import { Context } from "hono";
-import { GetCart } from "../../application/get/GetCart";
-import { AddItemToCart } from "../../application/add-item/AddItemToCart";
-import { UpdateCartItemQuantity } from "../../application/update-item/UpdateCartItemQuantity";
-import { RemoveItemFromCart } from "../../application/remove-item/RemoveItemFromCart";
-import { ClearCart } from "../../application/clear-cart/ClearCart";
+import { GetCart } from "@/modules/Cart/application/get/GetCart";
+import { AddItemToCart } from "@/modules/Cart/application/add-item/AddItemToCart";
+import { UpdateCartItemQuantity } from "@/modules/Cart/application/update-item/UpdateCartItemQuantity";
+import { RemoveItemFromCart } from "@/modules/Cart/application/remove-item/RemoveItemFromCart";
+import { ClearCart } from "@/modules/Cart/application/clear-cart/ClearCart";
 import { ILogger } from "@/shared/domain/ILogger";
 import { getCookie, setCookie } from "hono/cookie";
 import { HttpStatus } from "@/shared/infrastructure/http/HttpStatus";
-import { CartItemNotFoundError } from "../../domain/Errors";
+import { CartItemNotFoundError } from "@/modules/Cart/domain/Errors";
 import { cookieConfig } from "@/config/cookieConfig";
 
 export class CartController {

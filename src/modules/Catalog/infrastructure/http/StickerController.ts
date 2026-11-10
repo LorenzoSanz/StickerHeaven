@@ -1,14 +1,14 @@
 import { Context } from "hono";
-import { CreateStickerWithImage } from "../../application/create-with-image/CreateStickerWithImage";
-import { ListStickers } from "../../application/list/ListStickers";
-import { GetStickerById } from "../../application/get-by-id/GetStickerById";
-import { DeleteSticker } from "../../application/delete/DeleteSticker";
-import { StickerNotFoundError, StickerOwnershipError } from "../../domain/Errors";
+import { CreateStickerWithImage } from "@/modules/Catalog/application/create-with-image/CreateStickerWithImage";
+import { ListStickers } from "@/modules/Catalog/application/list/ListStickers";
+import { GetStickerById } from "@/modules/Catalog/application/get-by-id/GetStickerById";
+import { DeleteSticker } from "@/modules/Catalog/application/delete/DeleteSticker";
+import { StickerNotFoundError, StickerOwnershipError } from "@/modules/Catalog/domain/Errors";
 import { ILogger } from "@/shared/domain/ILogger";
-import { CatalogQueryService } from "../../application/queries/CatalogQueryService";
-import { UpdateSticker } from "../../application/update/UpdateSticker";
-import { UpdateStickerDTO, UpdateStickerSchema } from "../../application/update/UpdateStickerDTO";
-import { UpdateStickerWithImage } from "../../application/update-with-image/UpdateStickerWithImage";
+import { CatalogQueryService } from "@/modules/Catalog/application/queries/CatalogQueryService";
+import { UpdateSticker } from "@/modules/Catalog/application/update/UpdateSticker";
+import { UpdateStickerDTO, UpdateStickerSchema } from "@/modules/Catalog/application/update/UpdateStickerDTO";
+import { UpdateStickerWithImage } from "@/modules/Catalog/application/update-with-image/UpdateStickerWithImage";
 import { HttpStatus } from "@/shared/infrastructure/http/HttpStatus";
 
 const MAX_PAGE_SIZE = 50;
