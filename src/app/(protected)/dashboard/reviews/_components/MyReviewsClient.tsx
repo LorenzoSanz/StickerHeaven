@@ -89,6 +89,9 @@ export function MyReviewsClient({ userId, userEmail }: { userId: string; userEma
         collected.push({ stickerId, review });
       }
     }
+    // Reviews live in localStorage, which only exists after hydration, so they
+    // have to be loaded in an effect rather than during render.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setRows(collected);
     setHydrated(true);
   }, [userEmail, userId]);
