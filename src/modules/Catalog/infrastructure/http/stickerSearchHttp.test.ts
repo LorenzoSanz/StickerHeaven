@@ -91,4 +91,30 @@ describe("GET /api/stickers/search (query parsing)", () => {
     const ids = (json.data as Array<{ id: string }>).map((x) => x.id).sort();
     expect(ids).toEqual(["sticker-20", "sticker-21"]);
   });
+
+  it("clamps page size and page to a safe range", async () => {
+    const app = createTestApp((q) => {
+      expect(q.limit).toBe(50);
+      expect(q.page).toBe(1);
+    });
+    const res = await app.request("/api/stickers/search?limit=1000000&page=-5");
+    expect(res.status).toBe(200);
+  });
+
+  it("falls back to defaults for non-numeric pagination", async () => {
+    const app = createTestApp((q) => {
+      expect(q.limit).toBe(20);
+      expect(q.page).toBe(1);
+    });
+    const res = await app.request("/api/stickers/search?limit=abc&page=xyz");
+    expect(res.status).toBe(200);
+  });
+
+  it("trims and caps the search text", async () => {
+    const app = createTestApp((q) => {
+      expect(q.search).toBe("a".repeat(100));
+    });
+    const res = await app.request(`/api/stickers/search?search=%20${"a".repeat(500)}%20`);
+    expect(res.status).toBe(200);
+  });
 });

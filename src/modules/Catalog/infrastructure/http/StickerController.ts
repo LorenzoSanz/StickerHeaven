@@ -11,6 +11,18 @@ import { UpdateStickerDTO, UpdateStickerSchema } from "../../application/update/
 import { UpdateStickerWithImage } from "../../application/update-with-image/UpdateStickerWithImage";
 import { HttpStatus } from "@/shared/infrastructure/http/HttpStatus";
 
+const MAX_PAGE_SIZE = 50;
+const MAX_PAGE = 1000;
+const MAX_SEARCH_LENGTH = 100;
+
+// Query strings are untrusted: a missing, non-numeric or huge value falls back to a safe range
+// instead of reaching the database as NaN or as a request for the whole collection.
+function parseBoundedInt(raw: string | undefined, fallback: number, min: number, max: number): number {
+  const n = Number.parseInt(raw ?? "", 10);
+  if (!Number.isFinite(n)) return fallback;
+  return Math.min(Math.max(n, min), max);
+}
+
 export class StickerController {
   constructor(
     private createStickerWithImage: CreateStickerWithImage,
@@ -95,9 +107,9 @@ export class StickerController {
       };
       
       const searchParams = {
-        page: query.page ? parseInt(query.page) : 1,
-        limit: query.limit ? parseInt(query.limit) : 20,
-        search: query.search,
+        page: parseBoundedInt(query.page, 1, 1, MAX_PAGE),
+        limit: parseBoundedInt(query.limit, 20, 1, MAX_PAGE_SIZE),
+        search: query.search?.trim().slice(0, MAX_SEARCH_LENGTH) || undefined,
         minPrice: parseOptionalFiniteNumber(query.minPrice),
         maxPrice: parseOptionalFiniteNumber(query.maxPrice),
         tags: parseTags(query.tags),
