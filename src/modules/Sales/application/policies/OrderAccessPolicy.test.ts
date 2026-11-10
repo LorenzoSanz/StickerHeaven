@@ -3,7 +3,7 @@ import { OrderAccessPolicy } from "./OrderAccessPolicy";
 import { CustomerId } from "@/modules/Sales/domain/CustomerId";
 import { Order } from "@/modules/Sales/domain/Order";
 import { OrderItem } from "@/modules/Sales/domain/OrderItem";
-import { StickerId } from "@/modules/Sales/domain/StickerId";
+import { StickerId } from "@/shared/domain/StickerId";
 import { Quantity } from "@/shared/domain/Quantity";
 import { Money } from "@/shared/domain/Money";
 
@@ -11,7 +11,7 @@ describe("OrderAccessPolicy", () => {
   it("should allow the owner", () => {
     const owner = CustomerId.create("c1").getValue();
     const item = OrderItem.create(
-      StickerId.create("s1").getValue(),
+      StickerId.create(crypto.randomUUID()).getValue(),
       "Sticker",
       "http://img",
       Quantity.create(1).getValue(),
@@ -29,7 +29,7 @@ describe("OrderAccessPolicy", () => {
     const owner = CustomerId.create("c1").getValue();
     const other = CustomerId.create("c2").getValue();
     const item = OrderItem.create(
-      StickerId.create("s1").getValue(),
+      StickerId.create(crypto.randomUUID()).getValue(),
       "Sticker",
       "http://img",
       Quantity.create(1).getValue(),

@@ -4,7 +4,7 @@ import { DomainError } from "../../../shared/domain/DomainError";
 import { Money } from "../../../shared/domain/Money";
 import { Quantity } from "../../../shared/domain/Quantity";
 
-import { StickerId } from "./StickerId";
+import { StickerId } from "@/shared/domain/StickerId";
 
 export interface OrderItemProps {
   stickerId: StickerId;

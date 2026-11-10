@@ -10,7 +10,7 @@ import { StickerDescription } from "@/modules/Catalog/domain/StickerDescription"
 import { StickerStock } from "@/modules/Catalog/domain/StickerStock";
 import { StickerUrl } from "@/modules/Catalog/domain/StickerUrl";
 import { Money } from "@/shared/domain/Money";
-import type { StickerId } from "@/modules/Catalog/domain/StickerId";
+import type { StickerId } from "@/shared/domain/StickerId";
 import { UpdateStickerWithImage } from "./UpdateStickerWithImage";
 import { StickerOwnershipPolicy } from "../policies/StickerOwnershipPolicy";
 

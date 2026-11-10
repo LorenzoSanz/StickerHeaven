@@ -2,7 +2,7 @@ import { StickerRepository } from "../../domain/StickerRepository";
 import { StickerDTO } from "../list/ListStickersDTO";
 import { Result } from "../../../../shared/domain/Result";
 import { DomainError } from "../../../../shared/domain/DomainError";
-import { StickerId } from "../../domain/StickerId";
+import { StickerId } from "@/shared/domain/StickerId";
 
 export class GetStickersByIds {
   constructor(private stickerRepository: StickerRepository) {}

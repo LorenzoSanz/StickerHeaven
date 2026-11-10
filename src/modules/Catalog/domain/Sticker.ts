@@ -8,7 +8,7 @@ import { StickerUrl } from "./StickerUrl";
 import { StickerTag } from "./StickerTag";
 import { OwnerId } from "./OwnerId";
 import { StickerStock } from "./StickerStock";
-import { StickerId } from "./StickerId";
+import { StickerId } from "@/shared/domain/StickerId";
 
 export interface StickerProps {
   ownerId: OwnerId; // Reference to Identity User ID

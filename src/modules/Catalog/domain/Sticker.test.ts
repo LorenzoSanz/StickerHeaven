@@ -7,7 +7,7 @@ import { StickerDescription } from "./StickerDescription";
 import { Money } from "../../../shared/domain/Money";
 import { StickerStock } from "./StickerStock";
 import { StickerUrl } from "./StickerUrl";
-import { StickerId } from "./StickerId";
+import { StickerId } from "@/shared/domain/StickerId";
 
 describe("Sticker Aggregate", () => {
   const validOwnerId = OwnerId.create(crypto.randomUUID()).getValue();

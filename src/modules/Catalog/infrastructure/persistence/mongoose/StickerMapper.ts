@@ -8,7 +8,7 @@ import { IStickerDocument } from "./StickerModel";
 
 import { StickerTag } from "../../../domain/StickerTag";
 import { OwnerId } from "../../../domain/OwnerId";
-import { StickerId } from "../../../domain/StickerId";
+import { StickerId } from "@/shared/domain/StickerId";
 
 export class StickerMapper {
   public static toDomain(raw: IStickerDocument): Sticker {

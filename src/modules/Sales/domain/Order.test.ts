@@ -4,7 +4,7 @@ import { OrderItem } from "./OrderItem";
 import { Money } from "../../../shared/domain/Money";
 import { CustomerId } from "./CustomerId";
 import { OrderId } from "./OrderId";
-import { StickerId } from "./StickerId";
+import { StickerId } from "@/shared/domain/StickerId";
 import { Quantity } from "../../../shared/domain/Quantity";
 import { OrderStatus } from "./OrderStatus";
 
@@ -15,8 +15,8 @@ describe("Order Aggregate", () => {
   const tenEuros = Money.create(10, "EUR").getValue();
   const twentyEuros = Money.create(20, "EUR").getValue();
   
-  const item1 = OrderItem.create(StickerId.create("sticker-1").getValue(), "Sticker 1", "http://img/1", qty(2), tenEuros).getValue();
-  const item2 = OrderItem.create(StickerId.create("sticker-2").getValue(), "Sticker 2", "http://img/2", qty(1), twentyEuros).getValue();
+  const item1 = OrderItem.create(StickerId.create(crypto.randomUUID()).getValue(), "Sticker 1", "http://img/1", qty(2), tenEuros).getValue();
+  const item2 = OrderItem.create(StickerId.create(crypto.randomUUID()).getValue(), "Sticker 2", "http://img/2", qty(1), twentyEuros).getValue();
 
   it("should create a valid Order", () => {
     const orderResult = Order.create(userId, [item1, item2]);
@@ -40,7 +40,7 @@ describe("Order Aggregate", () => {
 
   it("should fail to create order with mixed currencies", () => {
     const tenUsd = Money.create(10, "USD").getValue();
-    const itemUsd = OrderItem.create(StickerId.create("sticker-3").getValue(), "Sticker USD", "http://img/3", qty(1), tenUsd).getValue();
+    const itemUsd = OrderItem.create(StickerId.create(crypto.randomUUID()).getValue(), "Sticker USD", "http://img/3", qty(1), tenUsd).getValue();
     
     const orderResult = Order.create(userId, [item1, itemUsd]);
     expect(orderResult.isFailure).toBe(true);

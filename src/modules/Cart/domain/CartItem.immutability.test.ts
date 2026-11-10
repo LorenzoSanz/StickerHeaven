@@ -1,11 +1,11 @@
 import { describe, expect, it } from "bun:test";
 import { CartItem } from "./CartItem";
-import { StickerId } from "./StickerId";
+import { StickerId } from "@/shared/domain/StickerId";
 import { Quantity } from "@/shared/domain/Quantity";
 
 describe("CartItem immutability", () => {
   it("does not expose a mutable Date reference", () => {
-    const stickerId = StickerId.create("s1").getValue();
+    const stickerId = StickerId.create(crypto.randomUUID()).getValue();
     const quantity = Quantity.create(1).getValue();
     const initial = new Date("2020-01-01T00:00:00.000Z");
 

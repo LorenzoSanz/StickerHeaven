@@ -3,7 +3,7 @@ import { describe, it, expect, beforeEach } from "bun:test";
 import { CreateSticker } from "./CreateSticker";
 import { FakeStickerRepository } from "../testing/FakeStickerRepository";
 import { CreateStickerDTO } from "./CreateStickerDTO";
-import { StickerId } from "../../domain/StickerId";
+import { StickerId } from "@/shared/domain/StickerId";
 
 describe("CreateSticker", () => {
   let createSticker: CreateSticker;

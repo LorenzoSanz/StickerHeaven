@@ -3,6 +3,8 @@ import { CreateOrder } from "./CreateOrder";
 import { Result } from "@/shared/domain/Result";
 import { Money } from "@/shared/domain/Money";
 
+const STICKER_ID = "5b2f8c1e-9d4a-4e6b-8f3a-2c7d1e9b0a64";
+
 describe("CreateOrder (cart clearing)", () => {
   it("should not clear cart during order creation", async () => {
     let clearCartCalled = false;
@@ -12,7 +14,7 @@ describe("CreateOrder (cart clearing)", () => {
       {
         getProductsInfo: async () =>
           Result.ok([
-            { id: "sticker_1", name: "S", imageUrl: "x", price: 10, currency: "USD", stock: 10 },
+            { id: STICKER_ID, name: "S", imageUrl: "x", price: 10, currency: "USD", stock: 10 },
           ]),
         reduceStock: async () => Result.ok(),
         restoreStock: async () => Result.ok(),
@@ -34,7 +36,7 @@ describe("CreateOrder (cart clearing)", () => {
 
     const res = await useCase.execute({
       userId: "user_123",
-      items: [{ stickerId: "sticker_1", quantity: 1 }],
+      items: [{ stickerId: STICKER_ID, quantity: 1 }],
     });
 
     expect(res.isSuccess).toBe(true);

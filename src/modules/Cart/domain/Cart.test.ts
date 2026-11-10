@@ -1,17 +1,17 @@
 import { describe, it, expect } from "bun:test";
 import { Cart } from "./Cart";
 import { CartId } from "./CartId";
-import { StickerId } from "./StickerId";
+import { StickerId } from "@/shared/domain/StickerId";
 import { Quantity } from "../../../shared/domain/Quantity";
 
 const qty = (n: number) => Quantity.create(n).getValue();
 
 describe("Cart Aggregate", () => {
   const cartId = CartId.create("cart-123").getValue();
-  const sticker1 = StickerId.create("sticker-1").getValue();
-  const stickerCommon = StickerId.create("sticker-common").getValue();
-  const stickerA = StickerId.create("sticker-A-only").getValue();
-  const stickerB = StickerId.create("sticker-B-only").getValue();
+  const sticker1 = StickerId.create(crypto.randomUUID()).getValue();
+  const stickerCommon = StickerId.create(crypto.randomUUID()).getValue();
+  const stickerA = StickerId.create(crypto.randomUUID()).getValue();
+  const stickerB = StickerId.create(crypto.randomUUID()).getValue();
 
   it("should create an empty cart with version 0", () => {
     const cart = Cart.create(cartId);

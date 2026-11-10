@@ -3,7 +3,7 @@ import type { IImageStorageService } from "@/modules/Catalog/domain/gateways/IIm
 import type { UpdateStickerDTO } from "../update/UpdateStickerDTO";
 import { Result } from "@/shared/domain/Result";
 import { DomainError } from "@/shared/domain/DomainError";
-import { StickerId } from "../../domain/StickerId";
+import { StickerId } from "@/shared/domain/StickerId";
 import { StickerName } from "../../domain/StickerName";
 import { StickerDescription } from "../../domain/StickerDescription";
 import { Money } from "@/shared/domain/Money";

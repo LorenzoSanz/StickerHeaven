@@ -2,7 +2,7 @@ import { StickerRepository } from "../../../domain/StickerRepository";
 import { Sticker } from "../../../domain/Sticker";
 import { StickerModel, IStickerDocument } from "./StickerModel";
 import { StickerMapper } from "./StickerMapper";
-import { StickerId } from "@/modules/Catalog/domain/StickerId";
+import { StickerId } from "@/shared/domain/StickerId";
 import { OwnerId } from "@/modules/Catalog/domain/OwnerId";
 import { Result } from "@/shared/domain/Result";
 import { DomainError } from "@/shared/domain/DomainError";

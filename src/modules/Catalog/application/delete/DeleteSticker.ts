@@ -4,7 +4,7 @@ import { DomainError } from "../../../../shared/domain/DomainError";
 import { StickerNotFoundError } from "../../domain/Errors";
 
 import { OwnerId } from "../../domain/OwnerId";
-import { StickerId } from "../../domain/StickerId";
+import { StickerId } from "@/shared/domain/StickerId";
 import { DeleteStickerDTO } from "./DeleteStickerDTO";
 import { StickerOwnershipPolicy } from "../policies/StickerOwnershipPolicy";
 

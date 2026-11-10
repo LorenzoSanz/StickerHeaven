@@ -9,7 +9,7 @@ import { OrderItem } from "../../domain/OrderItem";
 import { OrderStatus } from "../../domain/OrderStatus";
 import { CustomerId } from "../../domain/CustomerId";
 import { PaymentIntentId } from "../../domain/PaymentIntentId";
-import { StickerId } from "../../domain/StickerId";
+import { StickerId } from "@/shared/domain/StickerId";
 import { Money } from "@/shared/domain/Money";
 import { Quantity } from "@/shared/domain/Quantity";
 import { Result } from "@/shared/domain/Result";

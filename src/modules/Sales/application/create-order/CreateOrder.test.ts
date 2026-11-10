@@ -12,7 +12,7 @@ import { OrderId } from "../../domain/OrderId";
 
 import { PaymentGateway, CreatePaymentIntentResult } from "../../domain/gateways/PaymentGateway";
 import { Money } from "@/shared/domain/Money";
-import { StickerId } from "../../domain/StickerId";
+import { StickerId } from "@/shared/domain/StickerId";
 import { PaymentIntentId } from "../../domain/PaymentIntentId";
 import { CartGateway, CartItemDTO, CartSnapshotDTO } from "../../domain/gateways/CartGateway";
 

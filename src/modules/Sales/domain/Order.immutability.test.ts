@@ -4,7 +4,7 @@ import { OrderId } from "./OrderId";
 import { OrderStatus } from "./OrderStatus";
 import { OrderItem } from "./OrderItem";
 import { CustomerId } from "./CustomerId";
-import { StickerId } from "./StickerId";
+import { StickerId } from "@/shared/domain/StickerId";
 import { Money } from "@/shared/domain/Money";
 import { Quantity } from "@/shared/domain/Quantity";
 
@@ -12,7 +12,7 @@ describe("Order immutability", () => {
   it("does not expose mutable Date references", () => {
     const customerId = CustomerId.create("c1").getValue();
     const item = OrderItem.create(
-      StickerId.create("s1").getValue(),
+      StickerId.create(crypto.randomUUID()).getValue(),
       "Sticker",
       "https://example.com/sticker.png",
       Quantity.create(1).getValue(),

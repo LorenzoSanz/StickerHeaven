@@ -2,7 +2,7 @@ import { Order } from "@/modules/Sales/domain/Order";
 import { OrderItem } from "@/modules/Sales/domain/OrderItem";
 import { OrderStatus } from "@/modules/Sales/domain/OrderStatus";
 import { Money } from "@/shared/domain/Money";
-import { StickerId } from "@/modules/Sales/domain/StickerId";
+import { StickerId } from "@/shared/domain/StickerId";
 import { CustomerId } from "@/modules/Sales/domain/CustomerId";
 import { OrderId } from "@/modules/Sales/domain/OrderId";
 import { PaymentIntentId } from "@/modules/Sales/domain/PaymentIntentId";

@@ -1,5 +1,5 @@
 import { Sticker } from "./Sticker";
-import { StickerId } from "./StickerId";
+import { StickerId } from "@/shared/domain/StickerId";
 import { Result } from "../../../shared/domain/Result";
 import { DomainError } from "../../../shared/domain/DomainError";
 

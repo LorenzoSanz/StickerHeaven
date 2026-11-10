@@ -2,7 +2,7 @@ import { CatalogGateway, ProductInfo } from "@/modules/Sales/application/gateway
 import { Result } from "@/shared/domain/Result";
 import { DomainError } from "@/shared/domain/DomainError";
 import { Quantity } from "@/shared/domain/Quantity";
-import { StickerId } from "@/modules/Sales/domain/StickerId";
+import { StickerId } from "@/shared/domain/StickerId";
 import { CatalogReadPort, CatalogStockPort } from "@/shared/contracts/CatalogPorts";
 
 export class SalesCatalogAdapter implements CatalogGateway {

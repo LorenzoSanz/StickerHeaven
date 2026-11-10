@@ -1,7 +1,7 @@
 import { Result } from "../../../../shared/domain/Result";
 import { DomainError } from "../../../../shared/domain/DomainError";
 import type { CatalogProductInfo } from "@/shared/contracts/CatalogPorts";
-import { StickerId } from "../../domain/StickerId";
+import { StickerId } from "@/shared/domain/StickerId";
 
 export type ProductInfo = CatalogProductInfo;
 

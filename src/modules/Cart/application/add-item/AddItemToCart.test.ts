@@ -17,7 +17,7 @@ class MockCartRepository implements CartRepository {
   delete = mock(async (id: CartId) => Result.ok<void, DomainError>());
 }
 
-import { StickerId } from "../../domain/StickerId";
+import { StickerId } from "@/shared/domain/StickerId";
 
 class MockCatalogGateway implements CatalogGateway {
   getProductsInfo = mock(async (ids: StickerId[]) => Result.ok<ProductInfo[], DomainError>([]));

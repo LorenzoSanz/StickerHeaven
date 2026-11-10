@@ -3,7 +3,7 @@ import { Result } from "../../../../shared/domain/Result";
 import { DomainError } from "../../../../shared/domain/DomainError";
 import { StickerNotFoundError } from "../../domain/Errors";
 import { StickerStock } from "../../domain/StickerStock";
-import { StickerId } from "../../domain/StickerId";
+import { StickerId } from "@/shared/domain/StickerId";
 
 import { Quantity } from "../../../../shared/domain/Quantity";
 import { RestoreStickerStockDTO } from "./RestoreStickerStockDTO";

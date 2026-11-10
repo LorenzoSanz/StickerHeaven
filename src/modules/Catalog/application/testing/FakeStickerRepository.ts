@@ -1,6 +1,6 @@
 import { StickerRepository } from "@/modules/Catalog/domain/StickerRepository";
 import { Sticker } from "@/modules/Catalog/domain/Sticker";
-import { StickerId } from "@/modules/Catalog/domain/StickerId";
+import { StickerId } from "@/shared/domain/StickerId";
 import { DomainError } from "@/shared/domain/DomainError";
 import { Result } from "@/shared/domain/Result";
 

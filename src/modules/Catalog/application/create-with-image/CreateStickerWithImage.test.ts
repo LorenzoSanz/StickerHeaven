@@ -5,7 +5,7 @@ import type { StickerRepository } from "@/modules/Catalog/domain/StickerReposito
 import type { IImageStorageService } from "@/modules/Catalog/domain/gateways/IImageStorageService";
 import { CreateStickerWithImage } from "./CreateStickerWithImage";
 import type { Sticker } from "@/modules/Catalog/domain/Sticker";
-import type { StickerId } from "@/modules/Catalog/domain/StickerId";
+import type { StickerId } from "@/shared/domain/StickerId";
 import { StickerOwnerAssignmentPolicy } from "@/modules/Catalog/application/policies/StickerOwnerAssignmentPolicy";
 
 describe("CreateStickerWithImage", () => {

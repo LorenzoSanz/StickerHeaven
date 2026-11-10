@@ -1,7 +1,7 @@
 import { Cart } from "@/modules/Cart/domain/Cart";
 import { CartId } from "@/modules/Cart/domain/CartId";
 import { CartItem } from "@/modules/Cart/domain/CartItem";
-import { StickerId } from "@/modules/Cart/domain/StickerId";
+import { StickerId } from "@/shared/domain/StickerId";
 import { OwnerId } from "@/modules/Cart/domain/OwnerId";
 import { AnonymousCartId } from "@/modules/Cart/domain/AnonymousCartId";
 import { Quantity } from "@/shared/domain/Quantity";

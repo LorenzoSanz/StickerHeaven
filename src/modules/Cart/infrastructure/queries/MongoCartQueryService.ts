@@ -6,7 +6,7 @@ import { Result } from "@/shared/domain/Result";
 import { DomainError } from "@/shared/domain/DomainError";
 import { env } from "@/config/env";
 
-import { StickerId } from "../../domain/StickerId";
+import { StickerId } from "@/shared/domain/StickerId";
 
 export class MongoCartQueryService implements CartQueryService {
   constructor(private catalogGateway: CatalogGateway) {}

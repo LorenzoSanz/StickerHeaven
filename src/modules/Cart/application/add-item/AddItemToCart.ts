@@ -1,7 +1,7 @@
 import { CartRepository } from "../../domain/CartRepository";
 import { Cart } from "../../domain/Cart";
 import { CartId } from "../../domain/CartId";
-import { StickerId } from "../../domain/StickerId";
+import { StickerId } from "@/shared/domain/StickerId";
 import { OwnerId } from "../../domain/OwnerId";
 import { Result } from "../../../../shared/domain/Result";
 import { DomainError } from "../../../../shared/domain/DomainError";

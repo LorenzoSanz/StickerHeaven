@@ -1,7 +1,7 @@
 import { CatalogGateway, ProductInfo } from "@/modules/Cart/application/CatalogGateway";
 import { Result } from "@/shared/domain/Result";
 import { DomainError } from "@/shared/domain/DomainError";
-import { StickerId } from "@/modules/Cart/domain/StickerId";
+import { StickerId } from "@/shared/domain/StickerId";
 import { CatalogReadPort } from "@/shared/contracts/CatalogPorts";
 
 export class CartCatalogAdapter implements CatalogGateway {
