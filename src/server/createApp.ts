@@ -49,6 +49,14 @@ function socketAddress(c: Context): string | undefined {
   }
 }
 
+// The id is echoed in a response header and written to every log line. A client-supplied value
+// is only kept when it looks like an id; anything else (log injection, huge strings) is replaced.
+const REQUEST_ID_PATTERN = /^[A-Za-z0-9_-]{1,64}$/;
+
+export function safeRequestId(incoming: string | undefined): string {
+  return incoming && REQUEST_ID_PATTERN.test(incoming) ? incoming : crypto.randomUUID();
+}
+
 function isUnsafeMethod(method: string): boolean {
   const m = method.toUpperCase();
   return m === "POST" || m === "PUT" || m === "PATCH" || m === "DELETE";
@@ -184,7 +192,7 @@ export function createApp(options?: { rateLimiter?: RateLimiter; authRateLimiter
   });
 
   app.use("*", async (c, next) => {
-    const requestId = c.req.header("x-request-id") || crypto.randomUUID();
+    const requestId = safeRequestId(c.req.header("x-request-id"));
     c.header("x-request-id", requestId);
 
     const start = Date.now();
@@ -276,7 +284,7 @@ export function createApp(options?: { rateLimiter?: RateLimiter; authRateLimiter
   app.route("/api", api);
 
   app.onError((err, c) => {
-    const requestId = c.res.headers.get("x-request-id") || c.req.header("x-request-id");
+    const requestId = c.res.headers.get("x-request-id");
     logger.error("Unhandled error", {
       requestId,
       method: c.req.method,
