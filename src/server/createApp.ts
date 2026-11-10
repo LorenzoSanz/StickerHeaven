@@ -93,7 +93,13 @@ function getAllowedOrigins(): string[] {
   return Array.from(expanded);
 }
 
-export function createApp(options?: { rateLimiter?: RateLimiter; routers?: ApiRouters }) {
+// Credential endpoints get their own, much smaller quota: the global one (100/min) would still
+// allow thousands of password guesses per hour from a single address.
+const AUTH_WINDOW_MS = 15 * 60_000;
+const AUTH_MAX_ATTEMPTS = 10;
+const AUTH_RATE_LIMITED_PATHS = ["/api/auth/login", "/api/auth/register"];
+
+export function createApp(options?: { rateLimiter?: RateLimiter; authRateLimiter?: RateLimiter; routers?: ApiRouters }) {
   registerSubscribers();
   const app = new Hono<AppEnv>();
   const logger = container.shared.logger();
@@ -239,6 +245,21 @@ export function createApp(options?: { rateLimiter?: RateLimiter; routers?: ApiRo
       })
     )
   );
+
+  const authLimiter =
+    options?.authRateLimiter ??
+    (env.REDIS_URL
+      ? new RedisRateLimiter(env.REDIS_URL, AUTH_WINDOW_MS, AUTH_MAX_ATTEMPTS)
+      : new InMemoryRateLimiter(AUTH_WINDOW_MS, AUTH_MAX_ATTEMPTS));
+  const authAttemptLimit = createRateLimitMiddleware(authLimiter, (c) =>
+    `auth:${getRateLimitKey(c.req.raw.headers, {
+      trustProxy: env.TRUST_PROXY === "true",
+      remoteAddress: socketAddress(c),
+    })}`
+  );
+  for (const path of AUTH_RATE_LIMITED_PATHS) {
+    app.post(path, authAttemptLimit);
+  }
 
   const api = new Hono<AppEnv>();
   const authMiddleware = createAuthMiddleware(container.identity.repositories.session(), container.shared.logger());

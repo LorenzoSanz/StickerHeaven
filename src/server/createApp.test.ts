@@ -15,7 +15,9 @@ function createTestRouters() {
   const stickers = new Hono().get("/", (c) => c.json({ ok: true }, 200));
   const orders = new Hono().get("/", (c) => c.json({ error: "No autorizado" }, 401));
   const cart = new Hono().delete("/", (c) => c.json({ ok: true }, 200));
-  const auth = new Hono().post("/logout", (c) => {
+  const auth = new Hono()
+    .post("/login", (c) => c.json({ error: "Email o contraseña incorrectos." }, 401))
+    .post("/logout", (c) => {
     const accept = c.req.header("accept") ?? "";
     if (accept.includes("text/html")) {
       return c.redirect("/", 303);
@@ -61,6 +63,26 @@ describe("createApp", () => {
     expect(last).not.toBeNull();
     expect(last!.status).toBe(429);
     expect(last!.headers.get("retry-after")).toBeTruthy();
+  });
+
+  it("should limit login attempts much more strictly than other routes", async () => {
+    const app = createApp({ routers: createTestRouters() });
+
+    const statuses: number[] = [];
+    for (let i = 0; i < 11; i += 1) {
+      const res = await app.request("/api/auth/login", {
+        method: "POST",
+        headers: { "content-type": "application/json", origin: "http://localhost:3000" },
+        body: JSON.stringify({ email: "a@b.com", password: "wrong-password" }),
+      });
+      statuses.push(res.status);
+    }
+
+    expect(statuses.slice(0, 10).every((s) => s === 401)).toBe(true);
+    expect(statuses[10]).toBe(429);
+
+    const other = await app.request("/api/stickers");
+    expect(other.status).toBe(200);
   });
 
   it("should block cross-site unsafe requests when cookies are present", async () => {
