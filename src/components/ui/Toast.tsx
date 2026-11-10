@@ -19,7 +19,6 @@ export type ToastData = {
   durationMs?: number;
   action?: { label: string; onClick: () => void };
 };
- // Componente individual de toast. Renderiza un toast con estilo y funcionalidad.
 export function Toast({
   toast,
   onDismiss,

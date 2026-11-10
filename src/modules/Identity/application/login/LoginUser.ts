@@ -25,7 +25,6 @@ export class LoginUser {
   ) {}
 
   async execute(dto: LoginUserDTO): Promise<Result<LoginOutputDTO, DomainError>> {
-    // 1) Validar formato de inputs
     const emailResult = Email.create(dto.email);
     if (emailResult.isFailure) {
       return Result.fail(new InvalidCredentialsError());
@@ -39,7 +38,6 @@ export class LoginUser {
     const email = emailResult.value;
     const password = passwordResult.value;
 
-    // 2) Buscar usuario (sin filtrar si falla por repo/ausencia)
     const userResult = await this.userRepository.findByEmail(email);
     if (userResult.isFailure) {
       return Result.fail(new InvalidCredentialsError());
@@ -49,13 +47,11 @@ export class LoginUser {
       return Result.fail(new InvalidCredentialsError());
     }
 
-    // 3) Verificar contraseña
     const match = await this.passwordHasher.compare(password, user.passwordHash);
     if (!match) {
       return Result.fail(new InvalidCredentialsError());
     }
 
-    // 4) Crear y persistir sesión
     const sessionResult = Session.create(user.id);
     if (sessionResult.isFailure) {
         return Result.fail(sessionResult.error!);
@@ -66,7 +62,6 @@ export class LoginUser {
         return Result.fail(saveSessionResult.error!);
     }
 
-    // 5) Respuesta de éxito (DTO)
     return Result.ok({
       sessionId: session.id.value,
       user: {

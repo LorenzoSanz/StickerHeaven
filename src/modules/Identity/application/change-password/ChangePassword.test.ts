@@ -11,7 +11,6 @@ import { UserId } from "../../domain/UserId";
 import { Result } from "@/shared/domain/Result";
 import { DomainError } from "@/shared/domain/DomainError";
 
-// Test suite para validar la lógica de cambio de contraseña.
 describe("ChangePassword Use Case", () => {
   let useCase: ChangePassword;
   let mockRepo: UserRepository;

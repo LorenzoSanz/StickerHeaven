@@ -1,7 +1,6 @@
 import * as React from "react";
 import { cn } from "@/lib/utils";
 
-// Componente para mostrar botones con diferentes variantes y tamaños.
 export type ButtonVariant = "primary" | "secondary" | "outline" | "ghost" | "danger";
 export type ButtonSize = "sm" | "md" | "lg";
 
@@ -13,7 +12,6 @@ export type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
 const base =
   "inline-flex items-center justify-center gap-2 rounded-md font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary disabled:opacity-50 disabled:pointer-events-none";
 
-// Se definen los estilos para cada variante de botón.
 const variants: Record<ButtonVariant, string> = {
   primary: "bg-primary text-white hover:bg-primary-dark",
   secondary: "bg-secondary text-white hover:bg-secondary-dark",
@@ -22,14 +20,12 @@ const variants: Record<ButtonVariant, string> = {
   danger: "border border-red-500/30 bg-red-500/10 text-red-100 hover:bg-red-500/15 hover:border-red-400/40",
 };
 
-// Se definen los estilos para cada tamaño de botón.
 const sizes: Record<ButtonSize, string> = {
   sm: "h-9 px-3 text-sm",
   md: "h-10 px-4 text-sm",
   lg: "h-11 px-6 text-base",
 };
 
-// Componente para mostrar botones con diferentes variantes y tamaños.
 export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(function Button(
   { className, variant = "primary", size = "md", type = "button", ...props },
   ref

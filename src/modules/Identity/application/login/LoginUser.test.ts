@@ -51,7 +51,6 @@ describe("LoginUser Use Case", () => {
   });
 
   it("should login successfully with valid credentials", async () => {
-    // Arrange
     const email = Email.create(validEmailStr).value;
     const user = User.create({
       email: email,
@@ -68,13 +67,11 @@ describe("LoginUser Use Case", () => {
     // Mock Hasher returning true
     mockHasher.compare = mock(() => Promise.resolve(true));
 
-    // Act
     const result = await loginUser.execute({
       email: validEmailStr,
       password: validPasswordStr,
     });
 
-    // Assert
     expect(result.isSuccess).toBe(true);
     expect(result.value.user.email).toBe(validEmailStr);
     expect(result.value.sessionId).toBeDefined();
@@ -84,24 +81,20 @@ describe("LoginUser Use Case", () => {
   });
 
   it("should fail when user does not exist", async () => {
-    // Arrange
     mockRepo.findByEmail = mock(() =>
       Promise.resolve(Result.ok<User | null, DomainError>(null))
     );
 
-    // Act
     const result = await loginUser.execute({
       email: "nonexistent@example.com",
       password: validPasswordStr,
     });
 
-    // Assert
     expect(result.isFailure).toBe(true);
     expect(result.error).toBeInstanceOf(InvalidCredentialsError);
   });
 
   it("should fail when password does not match", async () => {
-    // Arrange
     const email = Email.create(validEmailStr).value;
     const user = User.create({
       email: email,
@@ -117,25 +110,21 @@ describe("LoginUser Use Case", () => {
     // Mock Hasher returning false
     mockHasher.compare = mock(() => Promise.resolve(false));
 
-    // Act
     const result = await loginUser.execute({
       email: validEmailStr,
       password: wrongPasswordStr,
     });
 
-    // Assert
     expect(result.isFailure).toBe(true);
     expect(result.error).toBeInstanceOf(InvalidCredentialsError);
   });
 
   it("should fail with invalid email format", async () => {
-    // Act
     const result = await loginUser.execute({
       email: "invalid-email",
       password: validPasswordStr,
     });
 
-    // Assert
     expect(result.isFailure).toBe(true);
     expect(result.error).toBeInstanceOf(InvalidCredentialsError);
     // Nota: ocultamos deliberadamente el error de validación específico por seguridad en Login

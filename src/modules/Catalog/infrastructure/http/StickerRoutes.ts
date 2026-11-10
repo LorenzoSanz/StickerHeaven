@@ -4,7 +4,6 @@ import { StickerController } from "./StickerController";
 import { z } from "zod";
 import { requireAuth } from "@/shared/infrastructure/http/requireAuth";
 
-// Esquema para validar el parámetro de ID de sticker.
 const StickerIdParamSchema = z.object({
   id: z.string().min(1),
 });

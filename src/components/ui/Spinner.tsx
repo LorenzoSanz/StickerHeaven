@@ -1,8 +1,6 @@
 import * as React from "react";
 import { cn } from "@/lib/utils";
 
-// Componente de spinner animado con opcionalidad de tamaño y etiqueta.
-// Utiliza SVG para una apariencia accesible.
 type SpinnerSize = "sm" | "md" | "lg";
 
 export type SpinnerProps = Omit<React.SVGAttributes<SVGSVGElement>, "children"> & {

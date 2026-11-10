@@ -28,7 +28,6 @@ export class MergeCarts {
     const userId = userIdOrError.getValue();
     const anonymousId = anonymousIdOrError.getValue();
 
-    // 1) Cargar carrito invitado
     const guestCartResult = await this.cartRepository.findByGuestId(anonymousId);
     if (guestCartResult.isFailure) return Result.fail(guestCartResult.error!);
     const guestCart = guestCartResult.getValue();

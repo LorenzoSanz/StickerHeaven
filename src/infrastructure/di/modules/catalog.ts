@@ -19,7 +19,6 @@ import { CatalogReadPort, CatalogStockPort } from "@/shared/contracts/CatalogPor
 import { Quantity } from "@/shared/domain/Quantity";
 import { Result } from "@/shared/domain/Result";
 
-// Proporciona servicios de consulta sobre el catálogo de stickers.
 export function createCatalogModule(deps: { logger: () => ILogger }) {
   const getStickerRepository = createLazySingleton(() => new MongoStickerRepository());
   const getCatalogQueryService = createLazySingleton(() => new MongoCatalogQueryService());
@@ -28,7 +27,6 @@ export function createCatalogModule(deps: { logger: () => ILogger }) {
   const getStickerOwnerAssignmentPolicy = createLazySingleton(() => new StickerOwnerAssignmentPolicy());
   const getStickerOwnershipPolicy = createLazySingleton(() => new StickerOwnershipPolicy());
   
-  // Proporciona servicios de escritura sobre el catálogo de stickers.
   const useCases = {
     listStickers: createLazySingleton(() => new ListStickers(getCatalogQueryService())),
     getStickerById: createLazySingleton(() => new GetStickerById(getCatalogQueryService())),
@@ -46,17 +44,14 @@ export function createCatalogModule(deps: { logger: () => ILogger }) {
     restoreStickerStock: createLazySingleton(() => new RestoreStickerStock(getStickerRepository())),
   };
   
-  // Proporciona servicios de consulta sobre el catálogo de stickers.
   const queries = {
     catalogQueryService: getCatalogQueryService,
   };
 
-  // Proporciona servicios de almacenamiento de imágenes sobre el catálogo de stickers.
   const services = {
     imageStorage: getImageStorageService,
   };
   
-  // Proporciona puertos de entrada/salida para interactuar con el catálogo de stickers.
   const catalogReadPort = createLazySingleton<CatalogReadPort>(() => ({
     getProductInfo: async (id) => {
       const result = await useCases.getStickerById().execute(id);
@@ -88,7 +83,6 @@ export function createCatalogModule(deps: { logger: () => ILogger }) {
     },
   }));
   
-  // Proporciona puertos de entrada/salida para interactuar con el catálogo de stickers.
   const catalogStockPort = createLazySingleton<CatalogStockPort>(() => ({
     reduceStock: async (id, quantity) => {
       const q = Quantity.create(quantity);
@@ -102,13 +96,11 @@ export function createCatalogModule(deps: { logger: () => ILogger }) {
     },
   }));
   
-  // Proporciona puertos de entrada/salida para interactuar con el catálogo de stickers.
   const ports = {
     read: catalogReadPort,
     stock: catalogStockPort,
   };
 
-  // Proporciona puertos de entrada/salida para interactuar con el catálogo de stickers.
   return {
     useCases,
     queries,

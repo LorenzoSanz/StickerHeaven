@@ -5,7 +5,6 @@
 import { NotifyInput } from "@/components/notifications/types";
 
 const STORAGE_KEY = "stickerheaven.flash_toasts.v1";
-// Función para parsear JSON de manera segura, devolviendo null en caso de error.
 function safeJsonParse<T>(raw: string): T | null {
   try {
     return JSON.parse(raw) as T;
@@ -13,7 +12,6 @@ function safeJsonParse<T>(raw: string): T | null {
     return null;
   }
 }
-// Función para persistir un toast en sessionStorage.
 export function flashNotify(input: NotifyInput) {
   if (typeof window === "undefined") return;
   try {
@@ -23,7 +21,6 @@ export function flashNotify(input: NotifyInput) {
     return;
   }
 }
-// Función para consumir y eliminar toasts persistidos en sessionStorage.
 export function consumeFlashNotifies(): NotifyInput[] {
   if (typeof window === "undefined") return [];
   try {

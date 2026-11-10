@@ -6,7 +6,6 @@ import { EditStickerForm } from "./EditStickerForm";
 import { DashboardShell } from "../../../_components/DashboardShell";
 import { Card } from "@/components/ui/Card";
 
-// Página para editar un sticker existente.
 export default async function EditStickerPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
   const user = await getCurrentUser(`/dashboard/stickers/${encodeURIComponent(id)}/edit`);

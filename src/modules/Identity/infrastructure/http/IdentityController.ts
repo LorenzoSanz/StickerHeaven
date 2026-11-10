@@ -132,7 +132,6 @@ export class IdentityController {
 
       this.logger.warn("Login fallido", { error: result.error?.message });
       
-      // Mapear errores de dominio a códigos HTTP
       if (result.error instanceof InvalidCredentialsError) {
         return c.json({ error: result.error.message }, HttpStatus.UNAUTHORIZED);
       }

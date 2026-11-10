@@ -18,7 +18,6 @@ async function main() {
     throw err;
   }
 
-// Configura el rate limiter basado en Redis si está disponible; de lo contrario, usa en memoria.
   let rateLimiter: RateLimiter = new InMemoryRateLimiter(60_000, 150);
   if (env.REDIS_URL) {
     try {
@@ -32,15 +31,12 @@ async function main() {
     }
   }
 
- // Crea la aplicación Hono con routers para autenticación, catálogo, ventas, carrito y marketing. 
- // EL rate limiter se configura en createApp.
   const app = createApp({ rateLimiter });
   const port = Number(env.PORT);
 
   const server = serve({ fetch: app.fetch, port });
   logger.info(`API server listening on http://localhost:${port}`);
 
-  // Configura el shutdown hook para cerrar el servidor y desconectar de MongoDB.
   const shutdown = async () => {
     server.close();
     await disconnectMongo(logger);

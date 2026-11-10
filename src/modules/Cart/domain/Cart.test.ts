@@ -53,7 +53,6 @@ describe("Cart Aggregate", () => {
     // Merge B into A
     cartA.merge(cartB);
 
-    // Assertions
     expect(cartA.items.length).toBe(3);
     
     // Common item: 1 + 2 = 3

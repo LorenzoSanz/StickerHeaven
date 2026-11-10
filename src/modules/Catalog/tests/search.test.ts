@@ -2,7 +2,6 @@ import { describe, it, expect, beforeEach } from "bun:test";
 import { InMemoryCatalogQueryService } from "../application/testing/InMemoryCatalogQueryService";
 import type { GetStickerByIdDTO } from "../application/get-by-id/GetStickerByIdDTO";
 
-// Test suite para validar la lógica de búsqueda en el catálogo.
 describe("Catalog Search (Read Model)", () => {
   let queryService: InMemoryCatalogQueryService;
 

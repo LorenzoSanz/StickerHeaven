@@ -5,7 +5,6 @@ import { Result } from "@/shared/domain/Result";
 import { DomainError } from "@/shared/domain/DomainError";
 import { NullLogger } from "@/shared/infrastructure/logger/NullLogger";
 
-// Función auxiliar para crear una aplicación Hono con un usuario simulado.
 function createAppWithUser(controller: StickerController) {
   const app = new Hono<{ Variables: { userId: string } }>();
   app.use("*", async (c, next) => {

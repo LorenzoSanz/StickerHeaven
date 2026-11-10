@@ -1,6 +1,5 @@
 import type { BadgeVariant } from "@/components/ui/Badge";
 
-// Devuelve metadatos sobre el estado de un pedido.
 export function getOrderStatusMeta(status: string): { label: string; variant: BadgeVariant; step?: number; hint?: string } {
   switch (status) {
     case "PENDING_PAYMENT":

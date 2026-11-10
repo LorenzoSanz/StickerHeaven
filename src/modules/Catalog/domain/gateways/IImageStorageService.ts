@@ -1,7 +1,6 @@
 import { Result } from "@/shared/domain/Result";
 import { DomainError } from "@/shared/domain/DomainError";
 
-// Interfaz para servicios de almacenamiento de imágenes.
 export interface IImageStorageService {
   /**
    * Sube una imagen y devuelve la URL pública.

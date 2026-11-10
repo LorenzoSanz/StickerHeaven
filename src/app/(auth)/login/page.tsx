@@ -2,7 +2,6 @@ import Link from "next/link";
 import { AuthLayout } from "../_components/AuthLayout";
 import { LoginForm } from "./LoginForm";
 
-// Página de inicio de sesión con formulario y enlace a registro.
 export default async function LoginPage() {
   return (
     <AuthLayout

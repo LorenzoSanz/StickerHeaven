@@ -6,7 +6,6 @@ export interface LoggerConfig {
   env: string;
 }
 
-// Exporta la clase de Pino para usarlo en otras partes de la aplicación
 export class PinoLogger implements ILogger {
   private logger: pino.Logger;
 

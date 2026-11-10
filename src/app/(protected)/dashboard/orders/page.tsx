@@ -8,7 +8,6 @@ import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
 import { getOrderStatusMeta } from "../_components/orderStatusMeta";
 
-// Página de listado de pedidos del usuario.
 export default async function OrdersPage() {
   const [user, orders] = await Promise.all([getCurrentUser("/dashboard/orders"), getUserOrders()]);
 

@@ -5,7 +5,6 @@ import { AddToCartButton } from "@/components/cart/AddToCartButton";
 import { FavoriteButton } from "@/components/wishlist/FavoriteButton";
 import { formatCurrency } from "@/lib/utils";
 
-// Interfaz para las propiedades de la tarjeta de sticker.
 interface StickerCardProps {
   sticker: StickerDTO;
   viewerUserId?: string | null;

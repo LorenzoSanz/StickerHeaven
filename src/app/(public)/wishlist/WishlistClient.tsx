@@ -9,7 +9,6 @@ import { FavoriteButton } from "@/components/wishlist/FavoriteButton";
 import { Button } from "@/components/ui/Button";
 import { formatCurrency } from "@/lib/utils";
 
-// Componente cliente para la lista de favs del usuario.
 export function WishlistClient({ userId }: { userId: string }) {
   const { ids, hydrated, clear } = useWishlist({ storageKey: `wishlist_sticker_ids:${userId}` });
   const [items, setItems] = useState<StickerDTO[]>([]);

@@ -1,4 +1,3 @@
-// DTO para la información del usuario en una sesión.
 export interface SessionUserDTO {
   id: string;
   email: string;

@@ -13,7 +13,6 @@ import { ClearCart } from "@/modules/Cart/application/clear-cart/ClearCart";
 import type { CartReadPort, CartWritePort } from "@/shared/contracts/CartPorts";
 import { Result } from "@/shared/domain/Result";
 
-// Configuración del módulo Cart para la inyección de dependencias.
 export function createCartModule(deps: { catalogReadPort: () => CatalogReadPort; logger: () => ILogger }) {
   const getCartCatalogAdapter = createLazySingleton(() => new CartCatalogAdapter(deps.catalogReadPort()));
   const getCartRepository = createLazySingleton(() => new MongoCartRepository());
@@ -29,16 +28,13 @@ export function createCartModule(deps: { catalogReadPort: () => CatalogReadPort;
     clearCart: createLazySingleton(() => new ClearCart(getCartRepository())),
   };
 
-  // Proporciona servicios de consulta sobre el estado del carrito.
   const queries = {
     cartQueryService: getCartQueryService,
   };
-  // Proporciona acceso a la persistencia del carrito.
   const repositories = {
     cart: getCartRepository,
   };
 
-  // Proporciona servicios de lectura sobre el estado del carrito.
   const cartReadPort = createLazySingleton<CartReadPort>(() => ({
     getCartSnapshot: async (userId: string | null, anonymousId: string | null) => {
       const result = await useCases.getCart().execute(userId, anonymousId);
@@ -52,14 +48,12 @@ export function createCartModule(deps: { catalogReadPort: () => CatalogReadPort;
     },
   }));
 
-  // Proporciona servicios de escritura sobre el estado del carrito.
   const cartWritePort = createLazySingleton<CartWritePort>(() => ({
     clearCart: async (userId: string | null, anonymousId: string | null) => {
       return await useCases.clearCart().execute(userId, anonymousId);
     },
   }));
   
-  // Proporciona puertos de entrada/salida para interactuar con el carrito.
   const ports = {
     read: cartReadPort,
     write: cartWritePort,

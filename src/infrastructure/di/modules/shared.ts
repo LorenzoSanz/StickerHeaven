@@ -5,7 +5,6 @@ import { DomainEventPublisher } from "@/shared/infrastructure/events/DomainEvent
 import { ConsoleEmailService } from "@/shared/infrastructure/email/ConsoleEmailService";
 import { SMTPEmailService } from "@/shared/infrastructure/email/SMTPEmailService";
 
-// Proporciona servicios compartidos como logger, eventPublisher y emailService.
 export function createSharedModule() {
   const logger = createLazySingleton(() => new PinoLogger({ env: env.NODE_ENV }));
   const eventPublisher = createLazySingleton(() => DomainEventPublisher.getInstance(logger()));

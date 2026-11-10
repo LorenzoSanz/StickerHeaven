@@ -38,7 +38,6 @@ export class CancelOrder {
     const accessResult = this.orderAccessPolicy.assertOwner(order, customerIdOrError.getValue());
     if (accessResult.isFailure) return Result.fail(accessResult.error!);
 
-    // Validación de estado (reglas de dominio a nivel de aplicación).
     if (order.status.value === OrderStatus.CANCELLED) {
       return Result.fail(new OrderAlreadyCancelledError());
     }

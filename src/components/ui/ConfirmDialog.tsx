@@ -24,7 +24,6 @@ export type ConfirmDialogProps = {
   onCancel: () => void;
 };
 
-// Componente para mostrar un diálogo de confirmación con diferentes variantes y estilos.
 export function ConfirmDialog({
   open,
   variant = "warning",

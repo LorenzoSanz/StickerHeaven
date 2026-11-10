@@ -4,7 +4,6 @@ import { useEffect } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useNotifications } from "@/components/notifications/NotificationsProvider";
 
-// Componente para mostrar toasts basados en query params.
 export function StickersQueryToasts() {
   const { notify } = useNotifications();
   const router = useRouter();

@@ -3,7 +3,6 @@ import ProfileForm from "./ProfileForm";
 import { HttpError, serverApiFetch } from "@/lib/serverApi";
 import { DashboardShell } from "../_components/DashboardShell";
 
-// Página de perfil del usuario con formulario para actualizar nombre y email.
 export default async function ProfilePageWrapper() {
   const user = await getUserOrRedirect();
   return (
@@ -14,7 +13,6 @@ export default async function ProfilePageWrapper() {
     </DashboardShell>
   );
 }
-// Obtiene los datos del usuario autenticado o redirige a login si no está autenticado.
 async function getUserOrRedirect(): Promise<{ name: string; email: string }> {
   try {
     const { user } = await serverApiFetch<{ user: { name: string; email: string } }>("/api/auth/me", {

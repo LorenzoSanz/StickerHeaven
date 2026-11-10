@@ -5,7 +5,6 @@
 import { ConfirmVariant } from "@/components/ui/ConfirmDialog";
 import { ToastVariant } from "@/components/ui/Toast";
 
-// Tipo para entrada de notificación.
 export type NotifyInput = {
   variant: ToastVariant;
   title: string;
@@ -14,7 +13,6 @@ export type NotifyInput = {
   action?: { label: string; onClick: () => void };
 };
 
-// Tipo para entrada de confirmación.
 export type ConfirmInput = {
   variant?: ConfirmVariant;
   title: string;

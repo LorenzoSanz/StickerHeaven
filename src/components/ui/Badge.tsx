@@ -1,10 +1,8 @@
 import * as React from "react";
 import { cn } from "@/lib/utils";
 
-// Componente para mostrar badges con diferentes variantes.
 export type BadgeVariant = "default" | "success" | "warning" | "danger";
 
-// Se definen los estilos para cada variante de badge.
 export function Badge({
   className,
   variant = "default",

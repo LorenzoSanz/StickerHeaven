@@ -10,7 +10,6 @@ import { UserId } from "../../domain/UserId";
 import { Result } from "@/shared/domain/Result";
 import { DomainError } from "@/shared/domain/DomainError";
 
-// Test suite que valida contratos críticos y previene regresiones.
 describe("UpdateUserProfile Use Case", () => {
   let useCase: UpdateUserProfile;
   let mockRepo: UserRepository;

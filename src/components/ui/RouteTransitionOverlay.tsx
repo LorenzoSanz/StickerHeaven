@@ -8,8 +8,6 @@ type Props = {
   title?: string;
   subtitle?: string;
 };
-// Componente para mostrar un overlay de transición de rutas con un mensaje y opcionalmente un subtítulo.
-// Utiliza un efecto para activar y desactivar el overlay después de una duración mínima.
 export function RouteTransitionOverlay({
   routeKey,
   minDurationMs = 1500,

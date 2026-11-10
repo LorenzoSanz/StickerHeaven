@@ -5,8 +5,6 @@ import type { NextConfig } from 'next';
 import { getApiUrlForRewrites } from './src/config/nextConfigEnv';
 
 const nextConfig: NextConfig = {
-  // Activa el modo estricto de React para detectar problemas potenciales en el ciclo de vida
-  // y preparar la aplicación para la concurrencia futura de React.
 
   productionBrowserSourceMaps: false,
   reactStrictMode: true,

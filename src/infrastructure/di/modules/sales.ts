@@ -22,7 +22,6 @@ import { OrderReadAccessPolicy } from "@/modules/Sales/application/policies/Orde
 import { OrderPaidSubscriber } from "@/modules/Sales/infrastructure/subscribers/OrderPaidSubscriber";
 import { ClearCartOnOrderPaidSubscriber } from "@/modules/Sales/infrastructure/subscribers/ClearCartOnOrderPaidSubscriber";
 
-// Proporciona servicios de ventas y controladores HTTP.
 export function createSalesModule(deps: {
   logger: () => ILogger;
   eventPublisher: () => DomainEventPublisher;
@@ -37,18 +36,15 @@ export function createSalesModule(deps: {
   const getPaymentGateway = createLazySingleton(() => new StripePaymentGateway(env.STRIPE_SECRET_KEY));
   const getSalesQueryService = createLazySingleton(() => new MongoSalesQueryService());
 
-  // Proporciona adaptadores para interactuar con el catálogo y el carrito de compras.
   const getSalesCatalogAdapter = createLazySingleton(() => new SalesCatalogAdapter(deps.catalogReadPort(), deps.catalogStockPort()));
   const getSalesCartAdapter = createLazySingleton(() => new SalesCartAdapter(deps.cartWritePort(), deps.cartReadPort()));
   const getOrderAccessPolicy = createLazySingleton(() => new OrderAccessPolicy());
   const getOrderReadAccessPolicy = createLazySingleton(() => new OrderReadAccessPolicy());
 
-  // Proporciona servicios de creación y cancelación de pedidos.
   const createOrder = createLazySingleton(() =>
     new CreateOrder(getOrderRepository(), getSalesCatalogAdapter(), getPaymentGateway(), getSalesCartAdapter(), deps.logger())
   );
 
-  // Proporciona servicios de creación y cancelación de pedidos.
   const useCases = {
     createOrder,
     cancelOrder: createLazySingleton(() =>
@@ -60,12 +56,10 @@ export function createSalesModule(deps: {
     checkout: createLazySingleton(() => new Checkout(getSalesCartAdapter(), createOrder())),
   };
 
-  // Proporciona servicios de consulta sobre pedidos.
   const queries = {
     salesQueryService: getSalesQueryService,
   };
 
-  // Proporciona suscriptores a eventos de dominio.
   const subscribers = {
     orderPaid: createLazySingleton(() =>
       new OrderPaidSubscriber(deps.emailService(), deps.userContactQueryService(), deps.logger())

@@ -10,7 +10,6 @@ import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
 import { getOrderStatusMeta } from "../../_components/orderStatusMeta";
 
-// Página de detalles de un pedido.
 export default async function OrderDetailsPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
   const order = await getOrderDetails(id);

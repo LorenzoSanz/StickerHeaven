@@ -3,7 +3,6 @@ import { Session } from "./Session";
 import { SessionId } from "./SessionId";
 import { UserId } from "./UserId";
 
-// Test suite que valida la inmutabilidad de la entidad Session.
 describe("Session immutability", () => {
   it("does not expose mutable Date references", () => {
     const userId = UserId.random();

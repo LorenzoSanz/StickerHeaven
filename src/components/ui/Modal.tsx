@@ -19,8 +19,6 @@ export type ModalProps = {
   children: React.ReactNode;
 };
 
-// Función para obtener elementos enfocables dentro de un contenedor.
-// Estos elementos pueden recibir foco y ser interactivos.
 function getFocusableElements(container: HTMLElement): HTMLElement[] {
   const selectors = [
     "a[href]",
@@ -35,8 +33,6 @@ function getFocusableElements(container: HTMLElement): HTMLElement[] {
   );
 }
 
-// Componente para mostrar un modal con diferentes tamaños y estilos.
-// Proporciona funcionalidades como cierre por ESC, bloqueo de scroll y gestión de foco.
 export function Modal({
   open,
   onClose,
@@ -51,7 +47,6 @@ export function Modal({
   const [shouldRender, setShouldRender] = useState(open);
   const [isClosing, setIsClosing] = useState(false);
   
-  // Clase de tamaño para el panel modal basada en el tamaño especificado.
   const panelSizeClass = useMemo(() => {
     const sizes: Record<ModalSize, string> = {
       sm: "max-w-md",

@@ -8,7 +8,6 @@ interface PaginationProps {
   baseUrl: string;
 }
 
-// Paginación.
 export function Pagination({ currentPage, totalPages, baseUrl }: PaginationProps) {
   // Generate page numbers to show
   const getPageNumbers = () => {
@@ -31,7 +30,6 @@ export function Pagination({ currentPage, totalPages, baseUrl }: PaginationProps
     return pages;
   };
 
-  // Crea una URL para la página especificada.
   const createPageUrl = (page: number | string) => {
     if (typeof page === 'string') return '#';
     const separator = baseUrl.includes('?') ? '&' : '?';
@@ -39,7 +37,6 @@ export function Pagination({ currentPage, totalPages, baseUrl }: PaginationProps
   };
 
   if (totalPages <= 1) return null;
-  // Renderiza la paginación.
   return (
     <div className="flex justify-center items-center gap-2 mt-12">
       {/* First Page Button */}

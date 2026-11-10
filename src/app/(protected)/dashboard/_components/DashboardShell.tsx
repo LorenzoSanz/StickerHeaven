@@ -3,7 +3,6 @@ import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 
-// Layout para el dashboard con efectos decorativos.
 export function DashboardShell({
   title,
   description,

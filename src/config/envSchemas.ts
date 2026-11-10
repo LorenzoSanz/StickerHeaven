@@ -80,7 +80,6 @@ export const envSchema = z
     SMTP_PASS: optionalTrimmedString,
     REDIS_URL: optionalTrimmedString,
   })
-  // VALIDACIÓN CONDICIONAL: Requiere SMTP_HOST, SMTP_PORT, SMTP_FROM si EMAIL_PROVIDER=smtp.
   .superRefine((val, ctx) => {
     if (val.EMAIL_PROVIDER === "smtp") {
       if (!val.SMTP_HOST) {

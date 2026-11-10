@@ -2,7 +2,6 @@ import * as React from "react";
 import Link from "next/link";
 import { Card, CardContent, CardDescription, CardHeader } from "@/components/ui/Card";
 
-// Layout para autenticación con tarjeta y efectos decorativos.
 export function AuthLayout({
   title,
   description,

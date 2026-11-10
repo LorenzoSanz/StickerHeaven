@@ -1,10 +1,8 @@
 import * as React from "react";
 import { cn } from "@/lib/utils";
 
-// Componente para mostrar alertas con diferentes variantes.
 export type AlertVariant = "info" | "success" | "warning" | "danger";
 
-// Se definen los estilos para cada variante de alerta.
 export function Alert({
   className,
   variant = "info",

@@ -11,13 +11,11 @@ import { Toaster } from "@/components/ui/Toaster";
 import { ConfirmInput, NotifyInput } from "@/components/notifications/types";
 import { consumeFlashNotifies } from "@/components/notifications/flashNotify";
 
-// Tipo para representar una solicitud de confirmación.
 type ConfirmRequest = ConfirmInput & {
   id: string;
   resolve: (value: boolean) => void;
 };
 
-// Tipo para representar la API de notificaciones.
 type NotificationsApi = {
   notify: (input: NotifyInput) => string;
   dismiss: (id: string) => void;
@@ -27,13 +25,11 @@ type NotificationsApi = {
 // Contexto para proporcionar la API de notificaciones.
 const NotificationsContext = createContext<NotificationsApi | null>(null);
 
-// Función para generar un ID único para notificaciones.
 function createId(counterRef: MutableRefObject<number>) {
   counterRef.current += 1;
   return `n_${Date.now()}_${counterRef.current}`;
 }
 
-// Componente proveedor de notificaciones.
 export function NotificationsProvider({ children }: { children: React.ReactNode }) {
   const counterRef = useRef(0);
   const [toasts, setToasts] = useState<ToastData[]>([]);
@@ -59,7 +55,6 @@ export function NotificationsProvider({ children }: { children: React.ReactNode 
     },
     [setToasts]
   );
-  // Función para solicitar confirmación.
   const requestConfirm = useCallback(
     (input: ConfirmInput) => {
       return new Promise<boolean>((resolve) => {
@@ -90,7 +85,6 @@ export function NotificationsProvider({ children }: { children: React.ReactNode 
       notify(item);
     }
   }, [notify]);
-  // Renderiza el proveedor de contexto y componentes UI.
   return (
     <NotificationsContext.Provider value={api}>
       {children}
@@ -118,8 +112,6 @@ export function NotificationsProvider({ children }: { children: React.ReactNode 
     </NotificationsContext.Provider>
   );
 }
- // Hook para consumir la API de notificaciones.
- // Lanza un error si se usa fuera de NotificationsProvider.
 export function useNotifications(): NotificationsApi {
   const ctx = useContext(NotificationsContext);
   if (!ctx) {

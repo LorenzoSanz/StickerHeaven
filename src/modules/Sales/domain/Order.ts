@@ -125,7 +125,6 @@ export class Order extends AggregateRoot<OrderProps, OrderId> {
     return Result.ok(undefined);
   }
 
-  // Helper methods for semantic checks
   public isPaid(): boolean {
     return this.props.status.value === OrderStatus.PAID;
   }

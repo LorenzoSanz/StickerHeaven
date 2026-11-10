@@ -6,7 +6,6 @@ import { DomainError } from "@/shared/domain/DomainError";
 import { UserId } from "../../domain/UserId";
 import { Password } from "../../domain/Password";
 
-// Caso de uso para cambiar la contraseña de un usuario.
 export class ChangePassword {
   constructor(
     private userRepository: UserRepository,

@@ -55,7 +55,6 @@ function writeReviews(stickerId: string, reviews: Review[]) {
   window.localStorage.setItem(storageKey(stickerId), JSON.stringify(reviews));
 }
 
-// Componente funcional para mostrar y gestionar reseñas locales para un sticker específico.
 export function LocalReviews({ stickerId, className }: { stickerId: string; className?: string }) {
   const { notify } = useNotifications();
   const searchParams = useSearchParams();
@@ -85,7 +84,6 @@ export function LocalReviews({ stickerId, className }: { stickerId: string; clas
     return () => window.cancelAnimationFrame(raf);
   }, [stickerId]);
  
-  // Obtiene información del usuario actual.
   useEffect(() => {
     let cancelled = false;
     async function run() {

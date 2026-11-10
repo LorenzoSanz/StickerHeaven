@@ -60,7 +60,6 @@ describe("AuthMiddleware", () => {
 
   it("should set userId in context if valid sessionId cookie is present", async () => {
     const next = mock(() => Promise.resolve());
-    // Crear una sesión válida
     const userIdValue = crypto.randomUUID();
     const userId = UserId.create(userIdValue).getValue();
     const session = Session.create(userId).getValue();

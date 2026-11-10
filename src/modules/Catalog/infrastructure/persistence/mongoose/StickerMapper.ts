@@ -20,7 +20,6 @@ export class StickerMapper {
     const imageUrlOrError = StickerUrl.create(raw.imageUrl);
     const stickerIdResult = StickerId.create(raw._id.toString());
 
-    // Mapear tags (strings) a Value Objects.
     const tags: StickerTag[] = [];
     for (const rawTag of raw.tags) {
       const tagOrError = StickerTag.create(rawTag);

@@ -6,11 +6,6 @@ import { FeaturesGrid } from "@/components/home/FeaturesGrid";
 import { TestimonialsSection } from "@/components/home/TestimonialsSection";
 import { NewsletterCTA } from "@/components/home/NewsletterCTA";
 
-// Página de Next.js para el segmento de navegación principal del usuario.
-// Se fuerza la generación estática para mejorar el rendimiento.
-// Eso implica que la página se renderice en build time y no en runtime y sus setbacks son:
-// - No se puede acceder a datos dinámicos en tiempo de renderización.
-// - No se puede acceder a datos del usuario en tiempo de renderización.
 export const dynamic = "force-static";
 
 export default function HomePage() {

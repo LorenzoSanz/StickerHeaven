@@ -19,14 +19,12 @@ export class AddItemToCart {
   async execute(dto: AddItemToCartDTO): Promise<Result<{ cartId: string; anonymousId: string | null }, DomainError>> {
     const { userId, anonymousId, stickerId, quantity } = dto;
     
-    // 1) Validar cantidad
     const quantityResult = Quantity.create(quantity);
     if (quantityResult.isFailure) {
       return Result.fail(quantityResult.error!);
     }
     const quantityVO = quantityResult.getValue();
 
-    // 2) Validar producto y stock (cross-module vía gateway)
     const stickerIdVO = StickerId.create(stickerId);
     if (stickerIdVO.isFailure) {
       return Result.fail(stickerIdVO.error!);
@@ -64,7 +62,6 @@ export class AddItemToCart {
         cart = cartResult.getValue();
     }
 
-    // 4) Crear carrito si no existe todavía
     if (!cart) {
         const id = CartId.create(crypto.randomUUID()).getValue();
         const ownerId = userId ? OwnerId.create(userId).getValue() : null;
@@ -77,14 +74,12 @@ export class AddItemToCart {
         cart = Cart.create(id, ownerId, anonymousIdVO);
     }
 
-    // 5) Mutar agregado (invariante: quantities válidas)
     const result = cart.addItem(sId, quantityVO);
     
     if (result.isFailure) {
         return Result.fail(result.error!);
     }
 
-    // 6) Persistir (optimistic concurrency control)
     const saveResult = await this.cartRepository.save(cart);
     if (saveResult.isFailure) {
         return Result.fail(saveResult.error!);

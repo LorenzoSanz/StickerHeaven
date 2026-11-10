@@ -1,8 +1,6 @@
 import { describe, it, expect } from "bun:test";
 import { getClientIp } from "./getClientIp";
 
-// Test suite que valida contratos críticos y previene regresiones.
-// No valida la validez de la IP; asume que el encabezado es correcto.
 describe("getClientIp", () => {
   it("should return unknown when TRUST_PROXY is disabled", () => {
     const headers = new Headers({

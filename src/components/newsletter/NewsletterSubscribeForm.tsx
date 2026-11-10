@@ -4,7 +4,6 @@ import { useState } from "react";
 import { useNotifications } from "@/components/notifications/NotificationsProvider";
 import { readErrorMessage } from "@/lib/readErrorMessage";
 
-// Tipo para las propiedades del formulario de suscripción al newsletter.
 type Props = {
   formClassName?: string;
   inputClassName: string;
@@ -13,12 +12,10 @@ type Props = {
   buttonLabel?: string;
 };
 
-// Función para validar si una cadena es un email válido.
 function isValidEmail(email: string) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 }
 
-// Componente funcional para el formulario de suscripción al newsletter.
 export function NewsletterSubscribeForm({
   formClassName,
   inputClassName,
@@ -30,7 +27,6 @@ export function NewsletterSubscribeForm({
   const [email, setEmail] = useState("");
   const [submitting, setSubmitting] = useState(false);
   
-  // Maneja la presentación del formulario.
   return (
     <form
       className={formClassName}

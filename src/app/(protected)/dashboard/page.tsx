@@ -2,7 +2,6 @@ import { getCurrentUser } from "./actions";
 import Link from "next/link";
 import { Package, Sparkles, Star, User } from "lucide-react";
 
-// Página principal del dashboard.
 export default async function DashboardPage() {
   const user = await getCurrentUser("/dashboard");
 

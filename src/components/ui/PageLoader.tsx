@@ -1,7 +1,5 @@
 import { Spinner } from "@/components/ui/Spinner";
 import { cn } from "@/lib/utils";
-// Componente para mostrar un loader de página con un mensaje y opcionalmente un subtítulo.
-// Utiliza un diseño centrado con un spinner animado y efectos de desenfoque.
 export function PageLoader({
   title = "Cargando…",
   subtitle,

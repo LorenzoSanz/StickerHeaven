@@ -28,7 +28,6 @@ export class CreateOrder {
   async execute(dto: CreateOrderDTO): Promise<Result<{ id: string; clientSecret: string }, DomainError>> {
     const orderItems: OrderItem[] = [];
 
-    // 0) Validar identidad del cliente
     if (!dto.userId) {
         return Result.fail(new UserIdRequiredToCreateOrderError());
     }
@@ -38,7 +37,6 @@ export class CreateOrder {
     }
     const customerId = customerIdOrError.getValue();
 
-    // 1) Validar items y obtener info de productos en batch (reduce roundtrips al catálogo)
     const stickerIds: StickerId[] = [];
     for (const item of dto.items) {
       const idOrError = StickerId.create(item.stickerId);
@@ -101,7 +99,6 @@ export class CreateOrder {
       orderItems.push(orderItemOrError.getValue());
     }
 
-    // 2) Crear agregado Order (status inicial: PENDING_PAYMENT)
     const orderOrError = Order.create(customerId, orderItems);
 
     if (orderOrError.isFailure) {
@@ -110,7 +107,6 @@ export class CreateOrder {
 
     const order = orderOrError.getValue();
 
-    // 3) Crear Payment Intent (seguro: amount calculado en backend)
     const paymentIntentResult = await this.paymentGateway.createPaymentIntent(order.totalAmount, {
         orderId: order.id.value,
         userId: customerId.value
@@ -132,10 +128,8 @@ export class CreateOrder {
 
     order.assignPaymentIntent(paymentIntentId);
 
-    // 4) Persistir pedido
     await this.orderRepository.save(order);
 
-    // 5) Reducir stock (con compensación)
     const reduceStockResult = await this.reduceStockSequentially(orderItems);
     
     if (reduceStockResult.isFailure) {

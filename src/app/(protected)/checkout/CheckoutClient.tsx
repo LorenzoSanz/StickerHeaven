@@ -5,7 +5,6 @@ import { stripePromise } from "@/lib/stripe";
 import { CheckoutForm } from "./_components/CheckoutForm";
 import { Alert } from "@/components/ui/Alert";
 
-// Componente cliente para el formulario de pago con Stripe.
 export function CheckoutClient({ clientSecret }: { clientSecret: string }) {
   if (!stripePromise) {
     return (

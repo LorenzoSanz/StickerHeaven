@@ -29,7 +29,6 @@ export function AddToCartButton({
   // Añade un sticker al carrito.
   const { notify } = useNotifications();
   const [isPending, setIsPending] = useState(false);
-  // Maneja el clic en el botón.
   const onClick = async () => {
     if (disabled || isPending) return;
     setIsPending(true);
@@ -53,7 +52,6 @@ export function AddToCartButton({
       setIsPending(false);
     }
   };
-  // Renderiza el botón.
   return (
     <div className="flex flex-col items-stretch">
       <Button

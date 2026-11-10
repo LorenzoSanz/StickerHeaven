@@ -56,7 +56,6 @@ describe("AddItemToCart Use Case", () => {
         quantity: 1
     });
 
-    // Assert
     expect(result.isSuccess).toBe(true);
     expect(mockCartRepo.save).toHaveBeenCalled();
   });
@@ -81,7 +80,6 @@ describe("AddItemToCart Use Case", () => {
         quantity: 2
     });
 
-    // Assert
     expect(result.isSuccess).toBe(true);
     expect(mockCartRepo.save).toHaveBeenCalled();
     expect(existingCart.items.length).toBe(1);

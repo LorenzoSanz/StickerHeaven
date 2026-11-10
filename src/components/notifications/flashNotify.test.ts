@@ -6,7 +6,6 @@ import { describe, expect, test, beforeEach, afterEach } from "bun:test";
 import { flashNotify, consumeFlashNotifies } from "./flashNotify";
 import { NotifyInput } from "./types";
 
-// Crea un stub para sessionStorage para simular el almacenamiento en sesión.
 function createSessionStorageStub() {
   const store = new Map<string, string>();
   return {

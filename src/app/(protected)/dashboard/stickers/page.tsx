@@ -9,7 +9,6 @@ import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
 import { StickersQueryToasts } from "./_components/StickersQueryToasts";
 
-// Página para mostrar y gestionar los stickers del usuario autenticado.
 export default async function MyStickersPage() {
   const user = await getCurrentUser("/dashboard/stickers");
   const result = await getStickersAction({ ownerId: user.id, limit: 50, sortBy: "newest" });

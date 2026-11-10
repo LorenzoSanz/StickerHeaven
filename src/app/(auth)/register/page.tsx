@@ -12,7 +12,6 @@ import { flashNotify } from "@/components/notifications/flashNotify";
 import { useNotifications } from "@/components/notifications/NotificationsProvider";
 import { registerAction } from "./actions";
 
-// Página de registro con formulario y enlace a inicio de sesión.
 export default function RegisterPage() {
   const router = useRouter();
   const notifications = useNotifications();

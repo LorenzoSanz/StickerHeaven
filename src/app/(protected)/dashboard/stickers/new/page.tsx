@@ -3,7 +3,6 @@ import { CreateStickerForm } from "./CreateStickerForm";
 import { DashboardShell } from "../../_components/DashboardShell";
 import { Card } from "@/components/ui/Card";
 
-// Página para crear un nuevo sticker.
 export default function NewStickerPage() {
   return (
     <DashboardShell

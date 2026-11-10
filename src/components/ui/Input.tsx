@@ -3,7 +3,6 @@ import { cn } from "@/lib/utils";
 
 type InputProps = React.InputHTMLAttributes<HTMLInputElement>;
 
-// Componente para mostrar un campo de entrada con diferentes estilos y funcionalidades.
 export const Input = React.forwardRef<HTMLInputElement, InputProps>(function Input({ className, ...props }, ref) {
   return (
     <input

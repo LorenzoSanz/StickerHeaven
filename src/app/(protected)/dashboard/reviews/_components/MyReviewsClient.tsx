@@ -6,7 +6,6 @@ import { useNotifications } from "@/components/notifications/NotificationsProvid
 import { Button } from "@/components/ui/Button";
 import { Spinner } from "@/components/ui/Spinner";
 
-// Representa una reseña de un sticker por parte de un usuario.
 type Review = {
   id: string;
   rating: number;
@@ -67,7 +66,6 @@ function listStickerIdsWithReviews(): string[] {
   return ids;
 }
 
-// Componente para mostrar y gestionar las reseñas de un usuario.
 export function MyReviewsClient({ userId, userEmail }: { userId: string; userEmail: string }) {
   const notifications = useNotifications();
   const router = useRouter();

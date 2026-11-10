@@ -40,7 +40,6 @@ describe("LogoutUser", () => {
   });
 
   it("should delete session successfully", async () => {
-    // Crea manualmente una sesión en el repositorio
     const userId = UserId.create(crypto.randomUUID()).getValue();
     const sessionResult = Session.create(userId);
     const session = sessionResult.getValue();

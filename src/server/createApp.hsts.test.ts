@@ -12,7 +12,6 @@ beforeAll(async () => {
   const mod = await import("./createApp");
   createApp = mod.createApp;
 });
-// Test suite que valida contratos críticos y previene regresiones.
 describe("createApp (HSTS)", () => {
   it("adds Strict-Transport-Security header in production", async () => {
     const app = createApp();

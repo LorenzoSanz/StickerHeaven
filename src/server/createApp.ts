@@ -26,7 +26,6 @@ type AppEnv = {
   };
 };
 
-// Define la estructura de routers para la API, permitiendo agregar o reemplazar módulos.
 type ApiRouters = {
   auth?: Hono;
   stickers?: Hono;
@@ -46,7 +45,6 @@ function isUnsafeMethod(method: string): boolean {
   return m === "POST" || m === "PUT" || m === "PATCH" || m === "DELETE";
 }
 
-// Obtiene la lista de orígenes permitidos para CORS, validando y normalizando URLs.
 function getAllowedOrigins(): string[] {
   const raw =
     env.ALLOWED_ORIGINS && env.ALLOWED_ORIGINS.length
@@ -86,7 +84,6 @@ function getAllowedOrigins(): string[] {
   return Array.from(expanded);
 }
 
-// Crea la aplicación Hono con routers para autenticación, catálogo, ventas, carrito y marketing.
 export function createApp(options?: { rateLimiter?: RateLimiter; routers?: ApiRouters }) {
   registerSubscribers();
   const app = new Hono<AppEnv>();

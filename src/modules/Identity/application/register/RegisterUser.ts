@@ -18,7 +18,6 @@ export class UserAlreadyExistsError extends DomainError {
   }
 }
 
-// DTO para la entrada del registro de usuario.
 export class RegisterUser {
   constructor(
     private readonly userRepository: UserRepository,
@@ -32,7 +31,6 @@ export class RegisterUser {
    * @returns Error de dominio si el email ya está tomado o si la entrada es inválida.
    */
   async execute(dto: RegisterUserDTO): Promise<Result<void, DomainError>> {
-    // 1) Validar entrada (Value Objects)
     const emailResult = Email.create(dto.email);
     if (emailResult.isFailure) {
       return Result.fail(emailResult.error);
@@ -51,7 +49,6 @@ export class RegisterUser {
     }
     const password = passwordResult.value;
 
-    // 2) Regla de negocio: unicidad de email
     const existingUserResult = await this.userRepository.findByEmail(email);
     if (existingUserResult.isFailure) {
         return Result.fail(existingUserResult.error!);
@@ -62,10 +59,8 @@ export class RegisterUser {
       return Result.fail(new UserAlreadyExistsError(dto.email));
     }
 
-    // 3) Hashear password (infra via port)
     const passwordHash = await this.passwordHasher.hash(password);
 
-    // 4) Crear agregado en estado válido
     const userResult = User.create({
       email: email,
       name: name,
@@ -78,7 +73,6 @@ export class RegisterUser {
       return Result.fail(userResult.error);
     }
 
-    // 5) Persistir
     const saveResult = await this.userRepository.save(userResult.value);
     if (saveResult.isFailure) {
         return Result.fail(saveResult.error!);
