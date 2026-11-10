@@ -73,6 +73,10 @@ export class Order extends AggregateRoot<OrderProps, OrderId> {
     return this.props.customerId;
   }
 
+  public isOwnedBy(customerId: CustomerId): boolean {
+    return this.props.customerId.equals(customerId);
+  }
+
   get items(): OrderItem[] {
     return [...this.props.items];
   }

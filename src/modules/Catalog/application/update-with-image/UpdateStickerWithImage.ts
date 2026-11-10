@@ -9,9 +9,8 @@ import { StickerDescription } from "../../domain/StickerDescription";
 import { Money } from "@/shared/domain/Money";
 import { StickerUrl } from "../../domain/StickerUrl";
 import { StickerStock } from "../../domain/StickerStock";
-import { StickerNotFoundError } from "../../domain/Errors";
+import { StickerNotFoundError, StickerOwnershipError } from "../../domain/Errors";
 import { OwnerId } from "../../domain/OwnerId";
-import { StickerOwnershipPolicy } from "../policies/StickerOwnershipPolicy";
 
 export type UpdateStickerWithImageDTO = UpdateStickerDTO & {
   image?: { buffer: Buffer; filename?: string };
@@ -20,8 +19,7 @@ export type UpdateStickerWithImageDTO = UpdateStickerDTO & {
 export class UpdateStickerWithImage {
   constructor(
     private stickerRepository: StickerRepository,
-    private imageStorage: IImageStorageService,
-    private stickerOwnershipPolicy: StickerOwnershipPolicy = new StickerOwnershipPolicy()
+    private imageStorage: IImageStorageService
   ) {}
 
   async execute(dto: UpdateStickerWithImageDTO): Promise<Result<void, DomainError>> {
@@ -36,8 +34,7 @@ export class UpdateStickerWithImage {
 
     const ownerIdOrError = OwnerId.create(dto.ownerId);
     if (ownerIdOrError.isFailure) return Result.fail(ownerIdOrError.error!);
-    const ownershipResult = this.stickerOwnershipPolicy.assertOwner(sticker, ownerIdOrError.getValue());
-    if (ownershipResult.isFailure) return Result.fail(ownershipResult.error!);
+    if (!sticker.isOwnedBy(ownerIdOrError.getValue())) return Result.fail(new StickerOwnershipError());
 
     let name: StickerName | undefined;
     if (dto.name) {

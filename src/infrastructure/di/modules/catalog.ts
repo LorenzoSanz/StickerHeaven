@@ -10,7 +10,6 @@ import { CreateStickerWithImage } from "@/modules/Catalog/application/create-wit
 import { UpdateSticker } from "@/modules/Catalog/application/update/UpdateSticker";
 import { UpdateStickerWithImage } from "@/modules/Catalog/application/update-with-image/UpdateStickerWithImage";
 import { DeleteSticker } from "@/modules/Catalog/application/delete/DeleteSticker";
-import { StickerOwnershipPolicy } from "@/modules/Catalog/application/policies/StickerOwnershipPolicy";
 import { CloudinaryImageStorageService } from "@/modules/Catalog/infrastructure/services/CloudinaryImageStorageService";
 import type { ILogger } from "@/shared/domain/ILogger";
 import { CatalogReadPort, CatalogStockPort } from "@/shared/contracts/CatalogPorts";
@@ -22,7 +21,6 @@ export function createCatalogModule(deps: { logger: () => ILogger }) {
   const getCatalogQueryService = createLazySingleton(() => new MongoCatalogQueryService());
 
   const getImageStorageService = createLazySingleton(() => new CloudinaryImageStorageService(deps.logger()));
-  const getStickerOwnershipPolicy = createLazySingleton(() => new StickerOwnershipPolicy());
   
   const useCases = {
     listStickers: createLazySingleton(() => new ListStickers(getCatalogQueryService())),
@@ -31,11 +29,11 @@ export function createCatalogModule(deps: { logger: () => ILogger }) {
     createStickerWithImage: createLazySingleton(() =>
       new CreateStickerWithImage(getStickerRepository(), getImageStorageService())
     ),
-    updateSticker: createLazySingleton(() => new UpdateSticker(getStickerRepository(), getStickerOwnershipPolicy())),
+    updateSticker: createLazySingleton(() => new UpdateSticker(getStickerRepository())),
     updateStickerWithImage: createLazySingleton(() =>
-      new UpdateStickerWithImage(getStickerRepository(), getImageStorageService(), getStickerOwnershipPolicy())
+      new UpdateStickerWithImage(getStickerRepository(), getImageStorageService())
     ),
-    deleteSticker: createLazySingleton(() => new DeleteSticker(getStickerRepository(), getStickerOwnershipPolicy())),
+    deleteSticker: createLazySingleton(() => new DeleteSticker(getStickerRepository())),
     reduceStickerStock: createLazySingleton(() => new ReduceStickerStock(getStickerRepository())),
     restoreStickerStock: createLazySingleton(() => new RestoreStickerStock(getStickerRepository())),
   };

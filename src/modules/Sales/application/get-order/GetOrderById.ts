@@ -4,13 +4,11 @@ import { CustomerId } from "../../domain/CustomerId";
 import { OrderId } from "../../domain/OrderId";
 import { OrderDTO } from "../OrderDTO";
 import { SalesQueryService } from "../queries/SalesQueryService";
-import { OrderReadAccessPolicy } from "../policies/OrderReadAccessPolicy";
-import { OrderNotFoundError } from "../../domain/Errors";
+import { OrderNotFoundError, UnauthorizedOrderAccessError } from "../../domain/Errors";
 
 export class GetOrderById {
   constructor(
-    private readonly salesQueryService: SalesQueryService,
-    private readonly orderReadAccessPolicy: OrderReadAccessPolicy = new OrderReadAccessPolicy()
+    private readonly salesQueryService: SalesQueryService
   ) {}
 
   async execute(orderIdStr: string, userId: string): Promise<Result<OrderDTO, DomainError>> {
@@ -28,8 +26,7 @@ export class GetOrderById {
 
     const customerIdOrError = CustomerId.create(userId);
     if (customerIdOrError.isFailure) return Result.fail(customerIdOrError.error!);
-    const accessResult = this.orderReadAccessPolicy.assertOwner(order, customerIdOrError.getValue().value);
-    if (accessResult.isFailure) return Result.fail(accessResult.error!);
+    if (order.customerId !== customerIdOrError.getValue().value) return Result.fail(new UnauthorizedOrderAccessError());
 
     return Result.ok(order);
   }

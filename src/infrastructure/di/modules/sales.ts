@@ -18,8 +18,6 @@ import { GetOrderById } from "@/modules/Sales/application/get-order/GetOrderById
 import { ConfirmPayment } from "@/modules/Sales/application/confirm-payment/ConfirmPayment";
 import { Checkout } from "@/modules/Sales/application/checkout/Checkout";
 import { ReleaseUnpaidOrders } from "@/modules/Sales/application/release-unpaid-orders/ReleaseUnpaidOrders";
-import { OrderAccessPolicy } from "@/modules/Sales/application/policies/OrderAccessPolicy";
-import { OrderReadAccessPolicy } from "@/modules/Sales/application/policies/OrderReadAccessPolicy";
 import { OrderPaidSubscriber } from "@/modules/Sales/infrastructure/subscribers/OrderPaidSubscriber";
 import { ClearCartOnOrderPaidSubscriber } from "@/modules/Sales/infrastructure/subscribers/ClearCartOnOrderPaidSubscriber";
 
@@ -39,8 +37,6 @@ export function createSalesModule(deps: {
 
   const getSalesCatalogAdapter = createLazySingleton(() => new SalesCatalogAdapter(deps.catalogReadPort(), deps.catalogStockPort()));
   const getSalesCartAdapter = createLazySingleton(() => new SalesCartAdapter(deps.cartWritePort(), deps.cartReadPort()));
-  const getOrderAccessPolicy = createLazySingleton(() => new OrderAccessPolicy());
-  const getOrderReadAccessPolicy = createLazySingleton(() => new OrderReadAccessPolicy());
 
   const createOrder = createLazySingleton(() =>
     new CreateOrder(getOrderRepository(), getSalesCatalogAdapter(), getPaymentGateway(), getSalesCartAdapter(), deps.logger())
@@ -49,10 +45,10 @@ export function createSalesModule(deps: {
   const useCases = {
     createOrder,
     cancelOrder: createLazySingleton(() =>
-      new CancelOrder(getOrderRepository(), getPaymentGateway(), getSalesCatalogAdapter(), deps.logger(), getOrderAccessPolicy())
+      new CancelOrder(getOrderRepository(), getPaymentGateway(), getSalesCatalogAdapter(), deps.logger())
     ),
     listOrders: createLazySingleton(() => new ListOrders(getSalesQueryService())),
-    getOrderById: createLazySingleton(() => new GetOrderById(getSalesQueryService(), getOrderReadAccessPolicy())),
+    getOrderById: createLazySingleton(() => new GetOrderById(getSalesQueryService())),
     confirmPayment: createLazySingleton(() => new ConfirmPayment(getOrderRepository(), deps.logger())),
     checkout: createLazySingleton(() => new Checkout(getSalesCartAdapter(), createOrder())),
     releaseUnpaidOrders: createLazySingleton(() =>

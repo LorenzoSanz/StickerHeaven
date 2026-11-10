@@ -12,7 +12,6 @@ import { StickerUrl } from "@/modules/Catalog/domain/StickerUrl";
 import { Money } from "@/shared/domain/Money";
 import type { StickerId } from "@/shared/domain/StickerId";
 import { UpdateStickerWithImage } from "./UpdateStickerWithImage";
-import { StickerOwnershipPolicy } from "../policies/StickerOwnershipPolicy";
 
 // Tests que demuestren la lógica de negocio de la actualización de stickers con imágenes.
 describe("UpdateStickerWithImage", () => {
@@ -40,7 +39,7 @@ describe("UpdateStickerWithImage", () => {
     const del = mock(async () => Result.ok<void, DomainError>());
     const imageStorage: IImageStorageService = { upload, delete: del };
 
-    const useCase = new UpdateStickerWithImage(repo, imageStorage, new StickerOwnershipPolicy());
+    const useCase = new UpdateStickerWithImage(repo, imageStorage);
 
     const res = await useCase.execute({
       stickerId: sticker.id.value,
@@ -87,7 +86,7 @@ describe("UpdateStickerWithImage", () => {
       delete: mock(async () => Result.ok<void, DomainError>()),
     };
 
-    const useCase = new UpdateStickerWithImage(repo, imageStorage, new StickerOwnershipPolicy());
+    const useCase = new UpdateStickerWithImage(repo, imageStorage);
 
     const res = await useCase.execute({
       stickerId: sticker.id.value,
@@ -123,7 +122,7 @@ describe("UpdateStickerWithImage", () => {
     const del = mock(async () => Result.ok<void, DomainError>());
     const imageStorage: IImageStorageService = { upload, delete: del };
 
-    const useCase = new UpdateStickerWithImage(repo, imageStorage, new StickerOwnershipPolicy());
+    const useCase = new UpdateStickerWithImage(repo, imageStorage);
 
     const res = await useCase.execute({
       stickerId: sticker.id.value,

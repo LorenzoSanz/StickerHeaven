@@ -8,16 +8,14 @@ import { OrderId } from "../../domain/OrderId";
 import { OrderStatus } from "../../domain/OrderStatus";
 import { ILogger } from "@/shared/domain/ILogger";
 import { CustomerId } from "../../domain/CustomerId";
-import { OrderAccessPolicy } from "../policies/OrderAccessPolicy";
-import { OrderAlreadyCancelledError, OrderNotCancellableError, OrderNotFoundError } from "../../domain/Errors";
+import { OrderAlreadyCancelledError, OrderNotCancellableError, OrderNotFoundError, UnauthorizedOrderAccessError } from "../../domain/Errors";
 
 export class CancelOrder {
   constructor(
     private orderRepository: OrderRepository,
     private paymentGateway: PaymentGateway,
     private catalogGateway: CatalogGateway,
-    private logger: ILogger,
-    private orderAccessPolicy: OrderAccessPolicy = new OrderAccessPolicy()
+    private logger: ILogger
   ) {}
 
   async execute(dto: CancelOrderDTO): Promise<Result<void, DomainError>> {
@@ -35,8 +33,7 @@ export class CancelOrder {
 
     const customerIdOrError = CustomerId.create(dto.userId);
     if (customerIdOrError.isFailure) return Result.fail(customerIdOrError.error!);
-    const accessResult = this.orderAccessPolicy.assertOwner(order, customerIdOrError.getValue());
-    if (accessResult.isFailure) return Result.fail(accessResult.error!);
+    if (!order.isOwnedBy(customerIdOrError.getValue())) return Result.fail(new UnauthorizedOrderAccessError());
 
     if (order.status.value === OrderStatus.CANCELLED) {
       return Result.fail(new OrderAlreadyCancelledError());

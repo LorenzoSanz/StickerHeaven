@@ -1,17 +1,15 @@
 import { StickerRepository } from "../../domain/StickerRepository";
 import { Result } from "../../../../shared/domain/Result";
 import { DomainError } from "../../../../shared/domain/DomainError";
-import { StickerNotFoundError } from "../../domain/Errors";
+import { StickerNotFoundError, StickerOwnershipError } from "../../domain/Errors";
 
 import { OwnerId } from "../../domain/OwnerId";
 import { StickerId } from "@/shared/domain/StickerId";
 import { DeleteStickerDTO } from "./DeleteStickerDTO";
-import { StickerOwnershipPolicy } from "../policies/StickerOwnershipPolicy";
 
 export class DeleteSticker {
   constructor(
-    private stickerRepository: StickerRepository,
-    private stickerOwnershipPolicy: StickerOwnershipPolicy = new StickerOwnershipPolicy()
+    private stickerRepository: StickerRepository
   ) {}
 
   async execute(dto: DeleteStickerDTO): Promise<Result<void, DomainError>> {
@@ -38,8 +36,7 @@ export class DeleteSticker {
        return Result.fail(ownerIdOrError.error!);
     }
 
-    const ownershipResult = this.stickerOwnershipPolicy.assertOwner(sticker, ownerIdOrError.getValue());
-    if (ownershipResult.isFailure) return Result.fail(ownershipResult.error!);
+    if (!sticker.isOwnedBy(ownerIdOrError.getValue())) return Result.fail(new StickerOwnershipError());
 
     const deleteResult = await this.stickerRepository.delete(id);
     if (deleteResult.isFailure) {

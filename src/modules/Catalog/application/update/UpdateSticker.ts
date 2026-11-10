@@ -8,14 +8,12 @@ import { StickerDescription } from "../../domain/StickerDescription";
 import { Money } from "@/shared/domain/Money";
 import { StickerUrl } from "../../domain/StickerUrl";
 import { StickerStock } from "../../domain/StickerStock";
-import { StickerNotFoundError } from "../../domain/Errors";
+import { StickerNotFoundError, StickerOwnershipError } from "../../domain/Errors";
 import { OwnerId } from "../../domain/OwnerId";
-import { StickerOwnershipPolicy } from "../policies/StickerOwnershipPolicy";
 
 export class UpdateSticker {
   constructor(
-    private stickerRepository: StickerRepository,
-    private stickerOwnershipPolicy: StickerOwnershipPolicy = new StickerOwnershipPolicy()
+    private stickerRepository: StickerRepository
   ) {}
 
   async execute(dto: UpdateStickerDTO): Promise<Result<void, DomainError>> {
@@ -35,8 +33,7 @@ export class UpdateSticker {
 
     const ownerIdOrError = OwnerId.create(dto.ownerId);
     if (ownerIdOrError.isFailure) return Result.fail(ownerIdOrError.error!);
-    const ownershipResult = this.stickerOwnershipPolicy.assertOwner(sticker, ownerIdOrError.getValue());
-    if (ownershipResult.isFailure) return Result.fail(ownershipResult.error!);
+    if (!sticker.isOwnedBy(ownerIdOrError.getValue())) return Result.fail(new StickerOwnershipError());
 
     // Prepare Value Objects for Update
     let name: StickerName | undefined;

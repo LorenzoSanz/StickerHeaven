@@ -91,4 +91,13 @@ describe("Order Aggregate", () => {
     expect(cancelResult.isSuccess).toBe(true);
     expect(order.status.value).toBe("CANCELLED");
   });
+
+  it("knows which customer owns it", () => {
+    const owner = CustomerId.create(crypto.randomUUID()).getValue();
+    const other = CustomerId.create(crypto.randomUUID()).getValue();
+    const order = Order.create(owner, [item1]).getValue();
+
+    expect(order.isOwnedBy(owner)).toBe(true);
+    expect(order.isOwnedBy(other)).toBe(false);
+  });
 });
