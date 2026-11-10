@@ -162,7 +162,6 @@ export class StickerController {
 
         const result = await this.createStickerWithImage.execute({
           ownerId,
-          requesterId: ownerId,
           name: String(formData["name"] ?? ""),
           description: String(formData["description"] ?? ""),
           priceAmount: parseFloat(String(formData["priceAmount"] ?? "")),

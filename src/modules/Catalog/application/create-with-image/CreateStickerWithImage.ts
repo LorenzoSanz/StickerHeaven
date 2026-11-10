@@ -10,11 +10,9 @@ import { StickerStock } from "@/modules/Catalog/domain/StickerStock";
 import { StickerUrl } from "@/modules/Catalog/domain/StickerUrl";
 import { StickerTag } from "@/modules/Catalog/domain/StickerTag";
 import { Money } from "@/shared/domain/Money";
-import { StickerOwnerAssignmentPolicy } from "@/modules/Catalog/application/policies/StickerOwnerAssignmentPolicy";
 
 export type CreateStickerWithImageDTO = {
   ownerId: string;
-  requesterId: string;
   name: string;
   description: string;
   priceAmount: number;
@@ -27,22 +25,14 @@ export type CreateStickerWithImageDTO = {
 export class CreateStickerWithImage {
   constructor(
     private stickerRepository: StickerRepository,
-    private imageStorage: IImageStorageService,
-    private stickerOwnerAssignmentPolicy: StickerOwnerAssignmentPolicy = new StickerOwnerAssignmentPolicy()
+    private imageStorage: IImageStorageService
   ) {}
 
   async execute(dto: CreateStickerWithImageDTO): Promise<Result<{ id: string }, DomainError>> {
     const ownerIdOrError = OwnerId.create(dto.ownerId);
     if (ownerIdOrError.isFailure) return Result.fail(ownerIdOrError.error!);
 
-    const requesterIdOrError = OwnerId.create(dto.requesterId);
-    if (requesterIdOrError.isFailure) return Result.fail(requesterIdOrError.error!);
 
-    const ownerPolicyResult = this.stickerOwnerAssignmentPolicy.assertSameOwner(
-      ownerIdOrError.getValue(),
-      requesterIdOrError.getValue()
-    );
-    if (ownerPolicyResult.isFailure) return Result.fail(ownerPolicyResult.error!);
 
     const nameOrError = StickerName.create(dto.name);
     if (nameOrError.isFailure) return Result.fail(nameOrError.error!);

@@ -7,7 +7,6 @@ export const UpdateUserProfileSchema = z.object({
 
 export interface UpdateUserProfileDTO {
   userId: string;
-  requesterId: string;
   email?: string;
   username?: string;
 }

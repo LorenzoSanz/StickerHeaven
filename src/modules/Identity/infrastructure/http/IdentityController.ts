@@ -215,7 +215,6 @@ export class IdentityController {
       const dto: UpdateUserProfileDTO = {
         ...body,
         userId,
-        requesterId: userId
       };
       
       const result = await this.updateUserProfile.execute(dto);

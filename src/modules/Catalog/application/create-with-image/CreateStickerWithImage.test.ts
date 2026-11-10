@@ -6,7 +6,6 @@ import type { IImageStorageService } from "@/modules/Catalog/domain/gateways/IIm
 import { CreateStickerWithImage } from "./CreateStickerWithImage";
 import type { Sticker } from "@/modules/Catalog/domain/Sticker";
 import type { StickerId } from "@/shared/domain/StickerId";
-import { StickerOwnerAssignmentPolicy } from "@/modules/Catalog/application/policies/StickerOwnerAssignmentPolicy";
 
 describe("CreateStickerWithImage", () => {
   it("creates sticker after successful upload", async () => {
@@ -29,11 +28,10 @@ describe("CreateStickerWithImage", () => {
       delete: mock(async () => Result.ok<void, DomainError>()),
     };
 
-    const useCase = new CreateStickerWithImage(repo, imageStorage, new StickerOwnerAssignmentPolicy());
+    const useCase = new CreateStickerWithImage(repo, imageStorage);
 
     const result = await useCase.execute({
       ownerId: userId,
-      requesterId: userId,
       name: "Sticker A",
       description: "",
       priceAmount: 1,
@@ -63,11 +61,10 @@ describe("CreateStickerWithImage", () => {
       delete: mock(async () => Result.ok<void, DomainError>()),
     };
 
-    const useCase = new CreateStickerWithImage(repo, imageStorage, new StickerOwnerAssignmentPolicy());
+    const useCase = new CreateStickerWithImage(repo, imageStorage);
 
     const result = await useCase.execute({
       ownerId: "x",
-      requesterId: "y",
       name: "",
       description: "",
       priceAmount: 1,
@@ -97,11 +94,10 @@ describe("CreateStickerWithImage", () => {
       delete: mock(async () => Result.ok<void, DomainError>()),
     };
 
-    const useCase = new CreateStickerWithImage(repo, imageStorage, new StickerOwnerAssignmentPolicy());
+    const useCase = new CreateStickerWithImage(repo, imageStorage);
 
     const result = await useCase.execute({
       ownerId: userId,
-      requesterId: userId,
       name: "Sticker A",
       description: "",
       priceAmount: 1,

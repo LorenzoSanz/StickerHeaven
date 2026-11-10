@@ -53,7 +53,6 @@ describe("UpdateUserProfile Use Case", () => {
 
     const result = await useCase.execute({
       userId: userId.value,
-      requesterId: userId.value,
       email: newEmail,
       username: newName,
     });
@@ -77,7 +76,6 @@ describe("UpdateUserProfile Use Case", () => {
 
     const result = await useCase.execute({
       userId: userId.value,
-      requesterId: userId.value,
       email: newEmail,
     });
 
@@ -98,7 +96,6 @@ describe("UpdateUserProfile Use Case", () => {
 
     const result = await useCase.execute({
       userId: userId.value,
-      requesterId: userId.value,
       username: newName,
     });
 
@@ -118,7 +115,6 @@ describe("UpdateUserProfile Use Case", () => {
 
     const result = await useCase.execute({
       userId: userId.value,
-      requesterId: userId.value,
       email: existingEmail, // Mismo email
     });
 
@@ -128,22 +124,5 @@ describe("UpdateUserProfile Use Case", () => {
     
     expect(result.isSuccess).toBe(true);
     expect(mockRepo.findByEmail).not.toHaveBeenCalled(); // Debería omitir la comprobación
-  });
-
-  it("should fail if requester is not the target user", async () => {
-    const requester = createUser(userId, existingEmail, existingName);
-    const target = createUser(otherUserId, "target@example.com", "Target");
-
-    mockRepo.findById = mock(() =>
-      Promise.resolve(Result.ok<User | null, DomainError>(target))
-    );
-
-    const result = await useCase.execute({
-      userId: otherUserId.value,
-      requesterId: requester.id.value,
-      email: newEmail,
-    });
-
-    expect(result.isFailure).toBe(true);
   });
 });

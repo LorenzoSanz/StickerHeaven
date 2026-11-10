@@ -5,12 +5,10 @@ import { DomainError } from "@/shared/domain/DomainError";
 import { UserId } from "../../domain/UserId";
 import { Email } from "../../domain/Email";
 import { UserName } from "../../domain/UserName";
-import { UserProfileAccessPolicy } from "../policies/UserProfileAccessPolicy";
 
 export class UpdateUserProfile {
   constructor(
-    private userRepository: UserRepository,
-    private userProfileAccessPolicy: UserProfileAccessPolicy = new UserProfileAccessPolicy()
+    private userRepository: UserRepository
   ) {}
 
   async execute(dto: UpdateUserProfileDTO): Promise<Result<void, DomainError>> {
@@ -19,17 +17,6 @@ export class UpdateUserProfile {
       return Result.fail(userIdOrError.error!);
     }
     const userId = userIdOrError.getValue();
-
-    const requesterIdOrError = UserId.create(dto.requesterId);
-    if (requesterIdOrError.isFailure) {
-      return Result.fail(requesterIdOrError.error!);
-    }
-    const requesterId = requesterIdOrError.getValue();
-
-    const policyResult = this.userProfileAccessPolicy.assertSelf(userId, requesterId);
-    if (policyResult.isFailure) {
-      return Result.fail(policyResult.error!);
-    }
 
     const userResult = await this.userRepository.findById(userId);
     if (userResult.isFailure) {
