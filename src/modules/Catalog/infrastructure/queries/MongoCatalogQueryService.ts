@@ -6,6 +6,7 @@ import { StickerModel, IStickerDocument } from "../persistence/mongoose/StickerM
 import { Result } from "@/shared/domain/Result";
 import { DomainError } from "@/shared/domain/DomainError";
 import { UnexpectedError } from "@/shared/domain/UnexpectedError";
+import { escapeRegex } from "./escapeRegex";
 
 // Implementación con Mongoose para CatalogQueryService.
 export class MongoCatalogQueryService implements CatalogQueryService {
@@ -50,9 +51,10 @@ export class MongoCatalogQueryService implements CatalogQueryService {
       const filters: StickerSearchFilters = {};
 
       if (query.search) {
+        const pattern = escapeRegex(query.search);
         filters.$or = [
-          { name: { $regex: query.search, $options: "i" } },
-          { description: { $regex: query.search, $options: "i" } }
+          { name: { $regex: pattern, $options: "i" } },
+          { description: { $regex: pattern, $options: "i" } }
         ];
       }
 
