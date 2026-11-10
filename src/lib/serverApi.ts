@@ -4,7 +4,7 @@ if (typeof window !== "undefined") {
 }
 
 import { cookies } from "next/headers";
-import { env } from "@/config/env";
+import { publicEnv } from "@/config/publicEnv";
 import { getApiUrlForRewrites } from "@/config/nextConfigEnv";
 import { readErrorMessage } from "@/lib/readErrorMessage";
 import { toCookieHeader } from "@/lib/toCookieHeader";
@@ -59,7 +59,7 @@ export async function serverApiRequest(path: string, init?: ServerApiRequestInit
   }
 
   if (isUnsafeMethod && headers.has("cookie")) {
-    const appUrl = env.NEXT_PUBLIC_APP_URL.replace(/\/+$/, "");
+    const appUrl = publicEnv.NEXT_PUBLIC_APP_URL.replace(/\/+$/, "");
     if (!headers.has("origin")) headers.set("origin", appUrl);
     if (!headers.has("referer")) headers.set("referer", `${appUrl}/`);
   }

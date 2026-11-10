@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
-import { env } from "@/config/env";
+import { publicEnv } from "@/config/publicEnv";
 import { getStickerByIdAction } from "../_actions/get-sticker-by-id";
 import { AddToCartButton } from "@/components/cart/AddToCartButton";
 import { FavoriteButton } from "@/components/wishlist/FavoriteButton";
@@ -66,7 +66,7 @@ export default async function StickerDetailPage({ params }: StickerDetailPagePro
     notFound();
   }
 
-  const baseUrl = env.NEXT_PUBLIC_APP_URL.replace(/\/+$/, "");
+  const baseUrl = publicEnv.NEXT_PUBLIC_APP_URL.replace(/\/+$/, "");
   const stickerUrl = `${baseUrl}/stickers/${encodeURIComponent(sticker.id)}`;
 
   const productJsonLd = {

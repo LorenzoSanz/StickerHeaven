@@ -1,6 +1,6 @@
 
 import type { MetadataRoute } from "next";
-import { env } from "@/config/env";
+import { publicEnv } from "@/config/publicEnv";
 
 export default function robots(): MetadataRoute.Robots {
   return {
@@ -9,6 +9,6 @@ export default function robots(): MetadataRoute.Robots {
       allow: "/",
       disallow: ["/api/", "/dashboard", "/checkout", "/wishlist", "/_next/"],
     },
-    sitemap: `${env.NEXT_PUBLIC_APP_URL}/sitemap.xml`,
+    sitemap: `${publicEnv.NEXT_PUBLIC_APP_URL}/sitemap.xml`,
   };
 }

@@ -1,13 +1,13 @@
 import "@/styles/globals.css";
 import type { Metadata } from "next";
 import { connection } from "next/server";
-import { env } from "@/config/env";
+import { publicEnv } from "@/config/publicEnv";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { Providers } from "@/app/providers";
 
 export const metadata: Metadata = {
-  metadataBase: new URL(env.NEXT_PUBLIC_APP_URL),
+  metadataBase: new URL(publicEnv.NEXT_PUBLIC_APP_URL),
   title: {
     default: "StickerHeaven",
     template: "%s | StickerHeaven",
