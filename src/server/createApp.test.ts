@@ -37,6 +37,21 @@ describe("createApp", () => {
     expect(body.database).toBeDefined();
   });
 
+  it("should report the API as unhealthy in production when MongoDB is down", async () => {
+    const app = createApp();
+    const saved = { nodeEnv: process.env.NODE_ENV, bunTest: process.env.BUN_TEST };
+    process.env.NODE_ENV = "production";
+    delete process.env.BUN_TEST;
+    try {
+      const res = await app.request("/health");
+      expect(res.status).toBe(500);
+      expect((await res.json()).database).toBe("down");
+    } finally {
+      process.env.NODE_ENV = saved.nodeEnv;
+      if (saved.bunTest !== undefined) process.env.BUN_TEST = saved.bunTest;
+    }
+  });
+
   it("should return a unified error shape", async () => {
     const app = createApp();
     app.get("/boom", () => {

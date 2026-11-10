@@ -216,8 +216,10 @@ export function createApp(options?: { rateLimiter?: RateLimiter; authRateLimiter
   app.get("/health", (c) => {
     const mongoStatus = mongoose.connection.readyState === 1 ? "up" : "down";
     // En cualquier entorno de test devolvemos OK para no bloquear la validación.
-    const isTest = process.env.NODE_ENV === "test" || process.env.NODE_ENV === "production" || !!process.env.BUN_TEST;
-    const status = mongoStatus === "up" || isTest ? "ok" : "error";
+    // Unit tests run without a database; everywhere else a down database means unhealthy,
+    // otherwise container healthchecks and load balancers keep routing traffic to a broken API.
+    const isUnitTest = process.env.NODE_ENV === "test" || !!process.env.BUN_TEST;
+    const status = mongoStatus === "up" || isUnitTest ? "ok" : "error";
     
     // Asegurar que el header HSTS esté presente en este endpoint si estamos en "producción" (para los tests)
     if (env.NODE_ENV === "production" || process.env.NODE_ENV === "production") {
