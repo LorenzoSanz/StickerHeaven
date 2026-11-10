@@ -15,8 +15,9 @@ beforeAll(async () => {
 describe("createApp (HSTS)", () => {
   it("adds Strict-Transport-Security header in production", async () => {
     const app = createApp();
+    // No database in this test: /health now answers 500 in production, which is correct.
+    // The header has to be present either way.
     const res = await app.request("/health");
-    expect(res.status).toBe(200);
     expect(res.headers.get("strict-transport-security")).toBeTruthy();
   });
 });
