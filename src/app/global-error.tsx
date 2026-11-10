@@ -1,0 +1,46 @@
+"use client";
+
+// POR QUÉ: Configuración de página de error global para Next.js.
+// QUÉ: Proporciona una página personalizada para errores críticos en la aplicación.
+import Link from "next/link";
+import { useEffect } from "react";
+import { Button } from "@/components/ui/Button";
+
+export default function GlobalError({
+  error,
+  reset,
+}: {
+  error: Error & { digest?: string };
+  reset: () => void;
+}) {
+  useEffect(() => {
+    // POR QUÉ: Evitar llenar la consola en producción con errores ya manejados por UI.
+    // QUÉ: Loguea solo en desarrollo para debugging local.
+    if (process.env.NODE_ENV !== "production") console.error(error);
+  }, [error]);
+
+  return (
+    <html lang="es">
+      <body className="flex flex-col min-h-screen text-foreground bg-background antialiased selection:bg-primary selection:text-white">
+        <main className="flex-1 flex items-center justify-center px-4">
+          <div className="fixed inset-0 overflow-hidden pointer-events-none">
+            <div className="absolute top-[-10%] right-[-5%] w-[500px] h-[500px] bg-primary/20 rounded-full blur-[120px] opacity-30" />
+            <div className="absolute bottom-[-10%] left-[-5%] w-[500px] h-[500px] bg-accent/20 rounded-full blur-[120px] opacity-30" />
+          </div>
+          <div className="relative z-10 max-w-xl w-full rounded-2xl border border-white/10 bg-surface p-10 text-center shadow-[0_0_60px_rgba(0,0,0,0.45)]">
+            <h1 className="text-2xl font-bold text-foreground">Error crítico</h1>
+            <p className="mt-3 text-white/70">La aplicación ha encontrado un fallo. Puedes reintentar o volver al inicio.</p>
+            <div className="mt-6 flex flex-col gap-2 sm:flex-row sm:justify-center">
+              <Button type="button" onClick={reset}>
+                Reintentar
+              </Button>
+              <Link href="/">
+                <Button variant="outline">Ir al inicio</Button>
+              </Link>
+            </div>
+          </div>
+        </main>
+      </body>
+    </html>
+  );
+}

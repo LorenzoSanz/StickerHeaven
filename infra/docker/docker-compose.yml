@@ -1,0 +1,46 @@
+# Configuración de servicios para desarrollo local.
+# Utiliza Docker Compose para definir servicios como MongoDB, Redis y Mailpit.
+services:
+  mongodb:
+    image: mongo:latest
+    container_name: stickerheaven-mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+
+  mongo-express:
+    image: mongo-express
+    container_name: stickerheaven-mongo-express
+    restart: always
+    ports:
+      - "8081:8081"
+    environment:
+      - ME_CONFIG_MONGODB_URL=mongodb://mongodb:27017/
+    depends_on:
+      - mongodb
+
+  redis:
+    image: redis:7-alpine
+    container_name: stickerheaven-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - ../../../infra/redis/redis.dev.conf:/usr/local/etc/redis/redis.conf:ro
+    command: ["redis-server", "/usr/local/etc/redis/redis.conf"]
+
+  mailpit:
+    image: axllent/mailpit:v1.20
+    container_name: stickerheaven-mailpit
+    restart: unless-stopped
+    ports:
+      - "8025:8025"
+      - "1025:1025"
+    healthcheck:
+      test: ["CMD", "wget", "-q", "-O", "-", "http://localhost:8025/"]
+      interval: 10s
+      timeout: 3s
+      retries: 10
+
+volumes:
+  mongodb_data:

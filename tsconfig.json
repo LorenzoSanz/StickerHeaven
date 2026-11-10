@@ -1,0 +1,53 @@
+{
+  "compilerOptions": {
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
+    "allowJs": true,
+    "skipLibCheck": true,
+    
+    // Strict Mode: Habilita todas las comprobaciones estrictas de tipo.
+    // Fundamental para mantener la calidad del código y evitar errores en tiempo de ejecución.
+    "strict": true,
+    
+    "noEmit": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    
+    // Module Resolution: 'bundler' es la estrategia moderna para proyectos que usan
+    // empaquetadores como Webpack (Next.js) o Bun.
+    "moduleResolution": "bundler",
+    
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "react-jsx",
+    "incremental": true,
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
+    // Alias de rutas para importar módulos limpiamente (ej: @/components/...)
+    "paths": {
+      "@/*": [
+        "./src/*"
+      ]
+    },
+    // Target: ESNext
+    // Aprovechamos que Bun soporta las últimas características de JS nativamente,
+    // evitando transpilaciones innecesarias a versiones antiguas (ES5/ES6).
+    "target": "ESNext"
+  },
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
+    ".next/dev/types/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
+}

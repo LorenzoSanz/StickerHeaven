@@ -1,0 +1,18 @@
+/**
+ * POR QUÉ: Interfaz para comunicarse con el módulo Catalog.
+ * INTEGRIDAD: Decouples Sales from Catalog implementation details.
+ * ESTRUCTURA: Capa Application Port.
+ */
+import { Result } from "../../../../shared/domain/Result";
+import { DomainError } from "../../../../shared/domain/DomainError";
+import type { CatalogProductInfo } from "@/shared/contracts/CatalogPorts";
+import { StickerId } from "../../domain/StickerId";
+
+export type ProductInfo = CatalogProductInfo;
+
+export interface CatalogGateway {
+  getProductInfo(stickerId: StickerId): Promise<Result<ProductInfo, DomainError>>;
+  getProductsInfo(stickerIds: StickerId[]): Promise<Result<ProductInfo[], DomainError>>;
+  reduceStock(stickerId: StickerId, quantity: number): Promise<Result<void, DomainError>>;
+  restoreStock(stickerId: StickerId, quantity: number): Promise<Result<void, DomainError>>;
+}

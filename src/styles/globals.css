@@ -1,0 +1,206 @@
+@import "tailwindcss";
+
+:root {
+  /* Paleta de colores */
+  --background: #050505;
+  --foreground: #ededed;
+  
+  /* Colores de la marca */
+  --primary: #8b5cf6; /* Violet 500 */
+  --primary-dark: #7c3aed;
+  --primary-light: #a78bfa;
+  --secondary: #ec4899;
+  --secondary-dark: #db2777;
+  --accent: #06b6d4;
+  --accent-dark: #0891b2;
+  
+  /* Colores de superficie */
+  --surface: #18181b;
+  --surface-light: #27272a;
+  --surface-highlight: #27272a;
+}
+
+@theme {
+  --font-sans: system-ui, -apple-system, sans-serif;
+  
+  /* Extender colores de la paleta a variables */
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-primary: var(--primary);
+  --color-primary-dark: var(--primary-dark);
+  --color-primary-light: var(--primary-light);
+  --color-secondary: var(--secondary);
+  --color-secondary-dark: var(--secondary-dark);
+  --color-accent: var(--accent);
+  --color-accent-dark: var(--accent-dark);
+  --color-surface: var(--surface);
+  --color-surface-light: var(--surface-light);
+  --color-surface-highlight: var(--surface-highlight);
+
+  /* Animaciones */
+  --animate-marquee: marquee 25s linear infinite;
+  --animate-marquee-reverse: marquee-reverse 25s linear infinite;
+  --animate-gradient: gradient 8s ease infinite;
+  --animate-float: float 6s ease-in-out infinite;
+  --animate-pulse-slow: pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  --animate-bump: bump 160ms ease-out;
+  --animate-slide-out-right: slide-out-right 220ms ease-out forwards;
+  --animate-fade-in: fade-in 160ms ease-out;
+  --animate-fade-out: fade-out 140ms ease-in forwards;
+  --animate-modal-in: modal-in 180ms ease-out;
+  --animate-modal-out: modal-out 160ms ease-in forwards;
+  --animate-toast-in: toast-in 200ms ease-out;
+  --animate-toast-out: toast-out 180ms ease-in forwards;
+
+  /* Animaciones de movimiento */
+  @keyframes marquee {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+  /* Animación de deslizamiento a la izquierda */
+  @keyframes marquee-reverse {
+    0% { transform: translateX(-50%); }
+    100% { transform: translateX(0); }
+  }
+  /* Animación de gradiente */
+  @keyframes gradient {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+  /* Animación de flotar */
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+  /* Animación de zoom in */
+  @keyframes bump {
+    0% { transform: scale(1); }
+    40% { transform: scale(1.08); }
+    100% { transform: scale(1); }
+  }
+  /* Animación de deslizamiento a la derecha */
+  @keyframes slide-out-right {
+    0% { transform: translateX(0); opacity: 1; }
+    100% { transform: translateX(24px); opacity: 0; }
+  }
+  /* Animación de aparición */
+  @keyframes fade-in {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+  }
+  /* Animación de desaparición */   
+  @keyframes fade-out {
+    0% { opacity: 1; }
+    100% { opacity: 0; }
+  }
+  /* Animación de entrada del modal */
+  @keyframes modal-in {
+    0% { opacity: 0; transform: translateY(8px) scale(0.98); }
+    100% { opacity: 1; transform: translateY(0) scale(1); }
+  }
+  /* Animación de salida del modal */
+  @keyframes modal-out {
+    0% { opacity: 1; transform: translateY(0) scale(1); }
+    100% { opacity: 0; transform: translateY(8px) scale(0.985); }
+  }
+  /* Animación de entrada del toast */
+  @keyframes toast-in {
+    0% { opacity: 0; transform: translateY(10px) scale(0.99); }
+    100% { opacity: 1; transform: translateY(0) scale(1); }
+  }
+  /* Animación de salida del toast */
+  @keyframes toast-out {
+    0% { opacity: 1; transform: translateY(0) scale(1); }
+    100% { opacity: 0; transform: translateY(10px) scale(0.99); }
+  }
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  /* Gradiente de fondo para profundidad */
+  background-image: 
+    radial-gradient(circle at 15% 50%, rgba(76, 29, 149, 0.08), transparent 25%), 
+    radial-gradient(circle at 85% 30%, rgba(139, 92, 246, 0.08), transparent 25%);
+  font-family: var(--font-sans);
+  min-height: 100vh;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0a0a0a; 
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--primary);
+  border-radius: 5px;
+  border: 2px solid #0a0a0a; /* Crea padding effect */
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent);
+  box-shadow: 0 0 10px var(--accent); /* Glow */
+}
+
+.scrollbar-no-hover::-webkit-scrollbar-thumb:hover {
+  background: var(--primary);
+  box-shadow: none;
+}
+
+/* POR QUÉ: Los spinners nativos de inputs number rompen la estética y varían entre navegadores. */
+/* QUÉ: Permite ocultarlos de forma opt-in con la clase .no-number-spin (manteniendo step=1). */
+input.no-number-spin[type="number"]::-webkit-outer-spin-button,
+input.no-number-spin[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input.no-number-spin[type="number"] {
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+ 
+.page-transition {
+  animation: page-enter 300ms ease-out;
+  will-change: transform, opacity;
+}
+
+@keyframes page-enter {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page-transition {
+    animation: none !important;
+    transform: none !important;
+    opacity: 1 !important;
+  }
+
+  .route-loader-overlay {
+    transition: none !important;
+  }
+}
+
+/* POR QUÉ: Los navegadores aplican fondos claros y texto negro a campos autocompletados por defecto. */
+/* QUÉ: Fuerza el uso de los colores del tema y evita el cambio visual brusco mediante una transición infinita. */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: var(--foreground) !important;
+  transition: background-color 5000s ease-in-out 0s;
+  box-shadow: inset 0 0 20px 20px var(--surface) !important;
+}

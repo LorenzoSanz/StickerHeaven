@@ -1,0 +1,35 @@
+import { SessionQueryService, SessionUserDTO } from "../../application/queries/SessionQueryService";
+import { SessionRepository } from "../../domain/SessionRepository";
+
+/**
+ * PROPÓSITO: API pública del módulo: encapsula comportamiento y dependencias.
+ */
+export class IdentitySessionQueryService implements SessionQueryService {
+  constructor(
+    private sessionRepository: SessionRepository
+  ) {}
+
+  async getSessionUser(sessionId: string): Promise<SessionUserDTO | null> {
+    const sessionResult = await this.sessionRepository.findById(sessionId);
+    if (sessionResult.isFailure || !sessionResult.getValue()) {
+      return null;
+    }
+
+    const session = sessionResult.getValue()!;
+    if (!session.isValid()) {
+      return null;
+    }
+
+    const userResult = await this.sessionRepository.findUserBySessionId(sessionId);
+    if (userResult.isFailure || !userResult.getValue()) {
+      return null;
+    }
+
+    const user = userResult.getValue()!;
+    return {
+      id: user.id.value,
+      email: user.email.value,
+      name: user.name.value
+    };
+  }
+}

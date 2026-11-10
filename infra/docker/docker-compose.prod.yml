@@ -1,0 +1,101 @@
+# Configuración de Docker Compose para producción.
+# Define servicios para Nginx, Web, API, MongoDB y Redis.
+services:
+# Servicio de proxy reverso para manejar solicitudes HTTP y HTTPS.
+# Utiliza Nginx para redirigir tráfico a la web y la API.
+  nginx:
+    image: nginx:1.25-alpine
+    # Configura DNS para resolver nombres de dominio.
+    # Utiliza Cloudflare DNS para mejorar el rendimiento y la seguridad.
+    dns:
+      - ${DNS_SERVERS}
+    # Depende de los servicios web y api para funcionar.
+    # Asegurar que Nginx se inicie después de que se hayan iniciado web y api.
+    depends_on:
+      - web
+      - api
+    ports:
+      - "80:80"
+      - "443:443"
+    # Monta archivos de configuración de Nginx y certificados Let's Encrypt.
+    # Configura Nginx para servir contenido estático y manejar SSL.
+    volumes:
+      - ../nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ../nginx/conf.d/stickerheaven.docker.conf:/etc/nginx/conf.d/stickerheaven.conf:ro
+      - ../nginx/snippets:/etc/nginx/snippets:ro
+      - ../nginx/certs:/etc/letsencrypt:ro
+      - ../nginx/acme:/var/www/certbot:rw
+    restart: unless-stopped
+  # Servicio de aplicación web.
+  # Utiliza Next.js para renderizar la interfaz de usuario.
+  web:
+    image: stickerheaven-web:latest
+    build:
+      context: ../..
+      dockerfile: infra/docker/Dockerfile.web
+      args:
+        NEXT_PUBLIC_APP_URL: ${NEXT_PUBLIC_APP_URL}
+        NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY: ${NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY}
+        API_URL: ${API_URL}
+    environment:
+      NODE_ENV: production
+      NEXT_PUBLIC_APP_URL: ${NEXT_PUBLIC_APP_URL}
+      NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY: ${NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY}
+      API_URL: ${API_URL}
+    restart: unless-stopped
+    
+    # Servicio de API para manejar solicitudes de backend.
+    # Utiliza Node.js y Express para manejar solicitudes y respuestas.
+  api:
+    build:
+      context: ../..
+      dockerfile: infra/docker/Dockerfile.api
+    environment:
+      NODE_ENV: production
+      NEXT_PUBLIC_APP_URL: ${NEXT_PUBLIC_APP_URL}
+      NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY: ${NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY}
+      PORT: "3001"
+      TRUST_PROXY: "true"
+      API_URL: ${API_URL}
+      ALLOWED_ORIGINS: ${ALLOWED_ORIGINS}
+      DATABASE_URL: ${DATABASE_URL}
+      AUTH_SECRET: ${AUTH_SECRET}
+      CLOUDINARY_CLOUD_NAME: ${CLOUDINARY_CLOUD_NAME}
+      CLOUDINARY_API_KEY: ${CLOUDINARY_API_KEY}
+      CLOUDINARY_API_SECRET: ${CLOUDINARY_API_SECRET}
+      STRIPE_SECRET_KEY: ${STRIPE_SECRET_KEY}
+      STRIPE_WEBHOOK_SECRET: ${STRIPE_WEBHOOK_SECRET}
+      REDIS_URL: ${REDIS_URL}
+      CURRENCY: ${CURRENCY}
+    depends_on:
+      - mongodb
+      - redis
+    restart: unless-stopped
+    # Servicio de base de datos MongoDB.
+    # Utiliza MongoDB para almacenar datos de la aplicación.
+  mongodb:
+    image: mongo:7
+    restart: unless-stopped
+    volumes:
+      - mongodb_data:/data/db
+  
+    # Servicio de caché Redis.
+    # Utiliza Redis para almacenar datos en caché y mejorar el rendimiento.
+  redis:
+    image: redis:7-alpine
+    environment:
+      REDIS_PASSWORD: ${REDIS_PASSWORD:?REDIS_PASSWORD is required}
+    command: ["sh", "-c", "redis-server /usr/local/etc/redis/redis.conf --requirepass \"$REDIS_PASSWORD\""]
+    volumes:
+      - ../redis/redis.prod.conf:/usr/local/etc/redis/redis.conf:ro
+    healthcheck:
+      test: ["CMD-SHELL", "redis-cli -a \"$REDIS_PASSWORD\" ping | grep PONG"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+    restart: unless-stopped
+volumes:
+  # Volumen para persistir datos de MongoDB.
+  # Almacena datos de la base de datos MongoDB en un volumen persistente.
+  mongodb_data:
+
