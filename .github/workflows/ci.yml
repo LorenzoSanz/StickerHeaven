@@ -13,13 +13,13 @@ jobs:
 
       - uses: oven-sh/setup-bun@v2
         with:
-          bun-version: "latest"
+          bun-version: "1.3.14"
 
       - name: Cache Bun dependencies
         uses: actions/cache@v4
         with:
           path: ~/.bun/install/cache
-          key: ${{ runner.os }}-bun-${{ hashFiles('**/bun.lockb') }}
+          key: ${{ runner.os }}-bun-${{ hashFiles('**/bun.lock') }}
           restore-keys: |
             ${{ runner.os }}-bun-
 
@@ -38,7 +38,7 @@ jobs:
       - name: Dependency audit
         run: bun audit --audit-level=high
 
-  performance:
+  build:
     runs-on: ubuntu-latest
 
     steps:
@@ -46,12 +46,12 @@ jobs:
 
       - uses: oven-sh/setup-bun@v2
         with:
-          bun-version: "latest"
+          bun-version: "1.3.14"
       - name: Cache Bun dependencies
         uses: actions/cache@v4
         with:
           path: ~/.bun/install/cache
-          key: ${{ runner.os }}-bun-${{ hashFiles('**/bun.lockb') }}
+          key: ${{ runner.os }}-bun-${{ hashFiles('**/bun.lock') }}
           restore-keys: |
             ${{ runner.os }}-bun-
       - name: Install dependencies
