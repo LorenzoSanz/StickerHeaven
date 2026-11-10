@@ -1,5 +1,6 @@
 import { Context } from "hono";
 import { ConfirmPayment } from "@/modules/Sales/application/confirm-payment/ConfirmPayment";
+import type { ReleaseUnpaidOrders } from "@/modules/Sales/application/release-unpaid-orders/ReleaseUnpaidOrders";
 import { ILogger } from "@/shared/domain/ILogger";
 
 import { HttpStatus } from "@/shared/infrastructure/http/HttpStatus";
@@ -28,6 +29,7 @@ export class StripeWebhookController {
   constructor(
     private stripeGateway: WebhookEventVerifier,
     private confirmPayment: ConfirmPayment,
+    private releaseUnpaidOrders: Pick<ReleaseUnpaidOrders, "releaseByPaymentIntent">,
     private logger: ILogger,
     private webhookSecret: string
   ) {}
@@ -65,7 +67,17 @@ export class StripeWebhookController {
             this.logger.error("Failed to confirm payment", { error: result.error?.message });
             return c.json({ error: "Error interno del servidor" }, HttpStatus.INTERNAL_SERVER_ERROR);
         }
-      } else {
+      } else if (event.type === "payment_intent.canceled") {
+        const paymentIntent = event.data.object as { id?: unknown };
+        if (typeof paymentIntent?.id !== "string") {
+          this.logger.error("Webhook payload missing payment intent id");
+          return c.json({ error: "Payload de webhook inválido" }, HttpStatus.BAD_REQUEST);
+        }
+        const result = await this.releaseUnpaidOrders.releaseByPaymentIntent(paymentIntent.id);
+        if (result.isFailure) {
+          this.logger.error("Failed to release order for canceled intent", { error: result.error?.message });
+          return c.json({ error: "Error interno del servidor" }, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
       }
 
       return c.json({ received: true });

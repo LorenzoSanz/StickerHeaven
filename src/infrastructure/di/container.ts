@@ -89,6 +89,7 @@ const cartController = createLazySingleton(() => new CartController(
 const stripeWebhookController = createLazySingleton(() => new StripeWebhookController(
   new StripePaymentGateway(env.STRIPE_SECRET_KEY),
   salesModule.useCases.confirmPayment(),
+  salesModule.useCases.releaseUnpaidOrders(),
   sharedModule.logger(),
   env.STRIPE_WEBHOOK_SECRET
 ));
