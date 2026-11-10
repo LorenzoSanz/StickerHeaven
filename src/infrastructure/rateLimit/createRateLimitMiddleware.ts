@@ -1,16 +1,13 @@
-import type { MiddlewareHandler } from "hono";
+import type { Context, MiddlewareHandler } from "hono";
 import { HttpStatus } from "@/shared/infrastructure/http/HttpStatus";
 import type { RateLimiter } from "./RateLimiter";
 
-// El resumen de esta función es:
-// - Recibe un RateLimiter y una función para obtener la clave de limitación.
-// - Devuelve un middleware Hono que consume tokens para la clave y retorna 429 cuando se excede el cupo.
 export function createRateLimitMiddleware(
   limiter: RateLimiter,
-  getKey: (headers: Headers) => string
+  getKey: (c: Context) => string
 ): MiddlewareHandler {
   return async (c, next) => {
-    const key = getKey(c.req.raw.headers);
+    const key = getKey(c);
     const decision = await limiter.consume(key);
 
     if (!decision.allowed) {

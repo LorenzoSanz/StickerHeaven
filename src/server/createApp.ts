@@ -1,5 +1,7 @@
 import { Hono } from "hono";
+import type { Context } from "hono";
 import { cors } from "hono/cors";
+import { getConnInfo } from "@hono/node-server/conninfo";
 import { secureHeaders } from "hono/secure-headers";
 import mongoose from "mongoose";
 import { env } from "@/config/env";
@@ -15,7 +17,6 @@ import { createRateLimitMiddleware } from "@/infrastructure/rateLimit/createRate
 import { InMemoryRateLimiter } from "@/infrastructure/rateLimit/InMemoryRateLimiter";
 import { RedisRateLimiter } from "@/infrastructure/rateLimit/RedisRateLimiter";
 import type { RateLimiter } from "@/infrastructure/rateLimit/RateLimiter";
-import { cookieConfig } from "@/config/cookieConfig";
 import { getClientIp } from "./getClientIp";
 import { getRateLimitKey } from "./rateLimitKey";
 
@@ -40,6 +41,14 @@ function resolveClientIp(headers: Headers): string {
 }
 
 // Determina si un método HTTP es inseguro para mutaciones.
+function socketAddress(c: Context): string | undefined {
+  try {
+    return getConnInfo(c).remote.address;
+  } catch {
+    return undefined; // In-process requests (tests) have no socket.
+  }
+}
+
 function isUnsafeMethod(method: string): boolean {
   const m = method.toUpperCase();
   return m === "POST" || m === "PUT" || m === "PATCH" || m === "DELETE";
@@ -102,7 +111,7 @@ export function createApp(options?: { rateLimiter?: RateLimiter; routers?: ApiRo
   // Si TRUST_PROXY=false no existe una IP fiable; avisar para evitar rate limiting/logs engañosos en producción.
   // Loguea una advertencia sin PII y aplica un fallback de clave basado en cookies/UA para rate limiting.
   if (env.TRUST_PROXY !== "true") {
-    logger.warn("TRUST_PROXY is disabled; rate limiting will use cookie/user-agent fallback key");
+    logger.warn("TRUST_PROXY is disabled; rate limiting uses the socket address (set it to true behind nginx)");
   }
 
   app.use(
@@ -223,11 +232,10 @@ export function createApp(options?: { rateLimiter?: RateLimiter; routers?: ApiRo
 
   app.use(
     "*",
-    createRateLimitMiddleware(limiter, (headers) =>
-      getRateLimitKey(headers, {
+    createRateLimitMiddleware(limiter, (c) =>
+      getRateLimitKey(c.req.raw.headers, {
         trustProxy: env.TRUST_PROXY === "true",
-        sessionCookieName: cookieConfig.session.name,
-        anonymousCartCookieName: cookieConfig.cart.name,
+        remoteAddress: socketAddress(c),
       })
     )
   );
