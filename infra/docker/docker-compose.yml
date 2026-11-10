@@ -3,7 +3,7 @@ services:
     image: mongo:latest
     container_name: stickerheaven-mongo
     ports:
-      - "27017:27017"
+      - "127.0.0.1:27017:27017"
     volumes:
       - mongodb_data:/data/db
 
@@ -12,7 +12,7 @@ services:
     container_name: stickerheaven-mongo-express
     restart: always
     ports:
-      - "8081:8081"
+      - "127.0.0.1:8081:8081"
     environment:
       - ME_CONFIG_MONGODB_URL=mongodb://mongodb:27017/
     depends_on:
@@ -22,9 +22,9 @@ services:
     image: redis:7-alpine
     container_name: stickerheaven-redis
     ports:
-      - "6379:6379"
+      - "127.0.0.1:6379:6379"
     volumes:
-      - ../../../infra/redis/redis.dev.conf:/usr/local/etc/redis/redis.conf:ro
+      - ../redis/redis.dev.conf:/usr/local/etc/redis/redis.conf:ro
     command: ["redis-server", "/usr/local/etc/redis/redis.conf"]
 
   mailpit:
@@ -32,8 +32,8 @@ services:
     container_name: stickerheaven-mailpit
     restart: unless-stopped
     ports:
-      - "8025:8025"
-      - "1025:1025"
+      - "127.0.0.1:8025:8025"
+      - "127.0.0.1:1025:1025"
     healthcheck:
       test: ["CMD", "wget", "-q", "-O", "-", "http://localhost:8025/"]
       interval: 10s
