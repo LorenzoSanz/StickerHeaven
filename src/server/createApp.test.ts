@@ -39,16 +39,17 @@ describe("createApp", () => {
 
   it("should report the API as unhealthy in production when MongoDB is down", async () => {
     const app = createApp();
-    const saved = { nodeEnv: process.env.NODE_ENV, bunTest: process.env.BUN_TEST };
-    process.env.NODE_ENV = "production";
-    delete process.env.BUN_TEST;
+    const processEnv = process.env as Record<string, string | undefined>;
+    const saved = { nodeEnv: processEnv.NODE_ENV, bunTest: processEnv.BUN_TEST };
+    processEnv.NODE_ENV = "production";
+    delete processEnv.BUN_TEST;
     try {
       const res = await app.request("/health");
       expect(res.status).toBe(500);
       expect((await res.json()).database).toBe("down");
     } finally {
-      process.env.NODE_ENV = saved.nodeEnv;
-      if (saved.bunTest !== undefined) process.env.BUN_TEST = saved.bunTest;
+      processEnv.NODE_ENV = saved.nodeEnv;
+      if (saved.bunTest !== undefined) processEnv.BUN_TEST = saved.bunTest;
     }
   });
 
