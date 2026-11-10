@@ -1,8 +1,3 @@
-/**
-   * POR QUÉ: Implementación de persistencia para Cart usando MongoDB.
-   * INTEGRIDAD: Mapea entidades del dominio a formato de persistencia y maneja errores de concurrencia.
-   * ESTRUCTURA: Capa de infraestructura - Adapter.
- */
 import { CartRepository } from "@/modules/Cart/domain/CartRepository";
 import { Cart } from "@/modules/Cart/domain/Cart";
 import { CartId } from "@/modules/Cart/domain/CartId";
@@ -14,9 +9,6 @@ import { Result } from "@/shared/domain/Result";
 import { DomainError } from "@/shared/domain/DomainError";
 import { ConcurrencyError } from "@/shared/domain/ConcurrencyError";
 
-/**
- * PROPÓSITO: API pública del módulo: encapsula comportamiento y dependencias.
- */
 export class MongoCartRepository implements CartRepository {
   async save(cart: Cart): Promise<Result<void, DomainError>> {
     try {

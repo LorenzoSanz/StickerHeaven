@@ -46,8 +46,6 @@ function FilterSection({
       <summary className="cursor-pointer list-none select-none">
         <div className="flex items-center justify-between gap-4">
           <div className="text-sm font-semibold text-white/90">{title}</div>
-          {/* POR QUÉ: El control de despliegue debe dar feedback visual al pasar por encima del summary. */}
-          {/* QUÉ: Aplica hover en el chevron vía estilos centralizados con group-hover. */}
           <div className={getFilterChevronClassName()}>
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true">
               <path d="M6 9l6 6 6-6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
@@ -276,8 +274,6 @@ function StickerFiltersPanel({
               <div className="grid grid-cols-2 gap-2">
                 {visibleTagOptions.map((t) => {
                   const active = selectedTags.includes(t);
-                  // POR QUÉ: Los tags deben tener hover claro y no perder el estado activo en hover.
-                  // QUÉ: Usa una función pura que aplica hovers diferentes para activo/inactivo.
                   return (
                     <button
                       key={t}
@@ -308,8 +304,6 @@ function StickerFiltersPanel({
               <div className="grid grid-cols-1 gap-2">
                 {dateSortOptions.map((opt) => {
                   const active = dateSort === opt.value;
-                  // POR QUÉ: Un filtro seleccionado no debe parecer deseleccionado al hacer hover.
-                  // QUÉ: Separa el hover por estado (activo vs inactivo) en una función pura.
                   return (
                     <button
                       key={opt.value || "none"}
@@ -336,8 +330,6 @@ function StickerFiltersPanel({
               <div className="grid grid-cols-1 gap-2">
                 {priceSortOptions.map((opt) => {
                   const active = priceSort === opt.value;
-                  // POR QUÉ: En hover, el estado seleccionado debe seguir viéndose seleccionado.
-                  // QUÉ: Reutiliza el mismo contrato de clases que Fecha para coherencia visual.
                   return (
                     <button
                       key={opt.value || "none"}
@@ -408,8 +400,6 @@ export function StickerFiltersBar({ initialMinPrice, initialMaxPrice, initialTag
       .filter(Boolean)
   );
 
-  // POR QUÉ: Permitir combinaciones (fecha + precio) sin romper compatibilidad con el param sort existente.
-  // QUÉ: Modela la ordenación como dos selecciones independientes y deriva el sort final.
   const [dateSort, setDateSort] = useState<DateSortValue>(() => {
     const s = (initialSort ?? "").trim();
     if (s === "newest" || s === "oldest") return s;

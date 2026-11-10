@@ -1,8 +1,3 @@
-/**
- * POR QUÉ: Cancelar un pedido es una mutación con efectos externos (Stripe) y consistencia de stock; debe orquestarse en Application.
- * INTEGRIDAD: Valida ownership, valida estado, ejecuta reembolso/cancelación de pago y repone stock antes de marcar CANCELLED.
- * ESTRUCTURA: Capa Application - Caso de uso.
- */
 import { OrderRepository } from "../../domain/OrderRepository";
 import { PaymentGateway } from "../../domain/gateways/PaymentGateway";
 import { CatalogGateway } from "../gateways/CatalogGateway";
@@ -16,9 +11,6 @@ import { CustomerId } from "../../domain/CustomerId";
 import { OrderAccessPolicy } from "../policies/OrderAccessPolicy";
 import { OrderAlreadyCancelledError, OrderNotCancellableError, OrderNotFoundError } from "../../domain/Errors";
 
-/**
- * POR QUÉ: Mantiene la lógica de cancelación fuera del controller (infra) y la expresa como un caso de uso testeable.
- */
 export class CancelOrder {
   constructor(
     private orderRepository: OrderRepository,

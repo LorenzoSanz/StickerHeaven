@@ -1,8 +1,3 @@
-/**
- * POR QUÉ: Prueba el Order Aggregate.
- * INTEGRIDAD: Verifica order total calculation, status transitions, and invariants.
- * ESTRUCTURA: Suite de tests - Domain Unit Pruebas.
- */
 import { describe, it, expect } from "bun:test";
 import { Order } from "./Order";
 import { OrderItem } from "./OrderItem";

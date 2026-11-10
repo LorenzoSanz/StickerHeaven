@@ -1,8 +1,3 @@
-/**
- * POR QUÉ: Pruebas para ListOrders Caso de uso.
- * INTEGRIDAD: Verifica order retrieval and DTO mapping.
- * ESTRUCTURA: Suite de tests - Unit Pruebas.
- */
 import { ListOrders } from "./ListOrders";
 import { describe, it, expect, mock, beforeEach } from "bun:test";
 import { Result } from "@/shared/domain/Result";

@@ -1,8 +1,3 @@
-/**
- * POR QUÉ: Encapsula la validación de email para asegurar que el sistema solo trabaja con emails válidos.
- * INTEGRIDAD: Objeto de Valor pattern prevents primitive obsession and invalid states.
- * ESTRUCTURA: Capa Domain - No dependencies on infrastructure or application logic.
- */
 
 import { ValueObject } from "../../../shared/domain/ValueObject";
 import { Result } from "../../../shared/domain/Result";

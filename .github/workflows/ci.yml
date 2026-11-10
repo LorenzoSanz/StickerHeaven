@@ -1,26 +1,20 @@
-# Este archivo define el flujo de trabajo para la CI en StickerHeaven. (Hay que actualizarlo en el futuro)
 name: CI
 
 on:
   pull_request:
   push:
     branches: [main]
-# Ejecuta la CI en cada PR y push a main para asegurar la calidad del código.
-# Verifica tipos, ejecuta tests, lints y audita dependencias.
 jobs:
   quality:
     runs-on: ubuntu-latest
 
     steps:
-      # 1. Clona el repositorio en la máquina de GitHub
       - uses: actions/checkout@v4
 
-      # 2. Instala Bun en el runner
       - uses: oven-sh/setup-bun@v2
         with:
           bun-version: "latest"
 
-      # 3. Cachea dependencias de Bun para acelerar ejecuciones futuras
       - name: Cache Bun dependencies
         uses: actions/cache@v4
         with:
@@ -29,28 +23,21 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-bun-
 
-      # 4. Instala dependencias exactamente según el lockfile
       - name: Install dependencies
         run: bun install --frozen-lockfile
 
-      # 5. Verificación de tipos (TypeScript)
       - name: Typecheck
         run: bun run typecheck
 
-      # 6. Ejecuta tests
       - name: Test
         run: bun test
 
-      # 7. Linting
       - name: Lint
         run: bun run lint
 
-      # 8. Auditoría de dependencias
       - name: Dependency audit
         run: bun audit --audit-level=high
 
-# POR QUÉ: Ejecuta tests de rendimiento para verificar la eficiencia del servidor.
-# QUÉ: Simula tráfico concurrente y mide tiempos de respuesta.
   performance:
     runs-on: ubuntu-latest
 
@@ -60,8 +47,6 @@ jobs:
       - uses: oven-sh/setup-bun@v2
         with:
           bun-version: "latest"
-# POR QUÉ: Cachea dependencias de Bun para acelerar ejecuciones futuras.
-# QUÉ: Utiliza el hash del lockfile para identificar cambios y restaurar caché.
       - name: Cache Bun dependencies
         uses: actions/cache@v4
         with:
@@ -69,8 +54,6 @@ jobs:
           key: ${{ runner.os }}-bun-${{ hashFiles('**/bun.lockb') }}
           restore-keys: |
             ${{ runner.os }}-bun-
-# POR QUÉ: Instala dependencias exactamente según el lockfile.
-# QUÉ: Asegura consistencia en entornos de CI y desarrollo.
       - name: Install dependencies
         run: bun install --frozen-lockfile
 

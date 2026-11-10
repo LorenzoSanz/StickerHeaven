@@ -1,8 +1,3 @@
-/**
- * POR QUÉ: Mapper entre documentos Mongoose y la entidad de dominio Sticker (reconstitución).
- * INTEGRIDAD: Valida invariantes del valor.
- * ESTRUCTURA: Capa de infraestructura - Mapper.
- */
 import { Sticker } from "../../../domain/Sticker";
 import { StickerName } from "../../../domain/StickerName";
 import { StickerDescription } from "../../../domain/StickerDescription";
@@ -15,9 +10,6 @@ import { StickerTag } from "../../../domain/StickerTag";
 import { OwnerId } from "../../../domain/OwnerId";
 import { StickerId } from "../../../domain/StickerId";
 
-/**
- * POR QUÉ: Aísla el “shape” de persistencia del modelo de dominio, evitando que el dominio dependa de Mongoose.
- */
 export class StickerMapper {
   public static toDomain(raw: IStickerDocument): Sticker {
     const ownerIdOrError = OwnerId.create(raw.ownerId);

@@ -1,9 +1,3 @@
-/**
- * POR QUÉ: El módulo Catalog expone operaciones HTTP; el controller concentra el “adapter” HTTP→casos de uso.
- * QUÉ: Traduce requests (params/query/body/multipart) a DTOs de aplicación y mapea errores de dominio a HttpStatus.
- * LÍMITES: No contiene reglas de negocio; valida formato de entrada y delega en casos de uso/policies.
- * ESTRUCTURA: Capa Infrastructure - HTTP Controller.
- */
 import { Context } from "hono";
 import { CreateStickerWithImage } from "../../application/create-with-image/CreateStickerWithImage";
 import { ListStickers } from "../../application/list/ListStickers";
@@ -17,10 +11,6 @@ import { UpdateStickerDTO, UpdateStickerSchema } from "../../application/update/
 import { UpdateStickerWithImage } from "../../application/update-with-image/UpdateStickerWithImage";
 import { HttpStatus } from "@/shared/infrastructure/http/HttpStatus";
 
-/**
- * POR QUÉ: Agrupamos handlers para mantener el router fino y facilitar tests de mapping/validación HTTP.
- * QUÉ: Handlers para CRUD de stickers y búsqueda (GET/POST/PUT/DELETE) con soporte opcional de upload de imagen.
- */
 export class StickerController {
   constructor(
     private createStickerWithImage: CreateStickerWithImage,
@@ -84,17 +74,10 @@ export class StickerController {
     return undefined;
   }
 
-  /**
-   * POR QUÉ: La búsqueda es read-model; se implementa vía Query Service para evitar mutaciones y habilitar caching en el futuro.
-   * QUÉ: Busca/filtra stickers según querystring y retorna un listado paginado.
-   * HTTP: GET /stickers/search
-   */
   async search(c: Context): Promise<Response> {
     try {
       const query = c.req.query();
 
-      // POR QUÉ: Los filtros llegan como strings desde HTTP y pueden incluir espacios, mayúsculas o valores no numéricos (NaN).
-      // QUÉ: Normaliza (trim/lowercase/dedupe) y valida (Number.isFinite) para mantener el contrato de Query consistente.
       const parseOptionalFiniteNumber = (raw?: string): number | undefined => {
         if (typeof raw !== "string" || !raw.trim()) return undefined;
         const n = Number.parseFloat(raw);
@@ -142,7 +125,6 @@ export class StickerController {
    */
   async create(c: Context): Promise<Response> {
     try {
-      // POR QUÉ: Forzar el flujo "Sticker se crea en el dominio" y mantener Cloudinary en puertos de aplicación.
       const ownerId = c.get("userId") as string;
       if (!ownerId) {
         return c.json({ error: "No autorizado: falta identidad de usuario" }, HttpStatus.UNAUTHORIZED);
@@ -195,11 +177,6 @@ export class StickerController {
     }
   }
 
-  /**
-   * POR QUÉ: La actualización requiere ownership; el caso de uso aplica Policies y el controller solo adapta HTTP.
-   * QUÉ: Actualiza un sticker existente; puede aceptar JSON o multipart/form-data cuando hay imagen.
-   * HTTP: PUT /stickers/:id
-   */
   async update(c: Context): Promise<Response> {
     try {
       const id = c.req.param("id");

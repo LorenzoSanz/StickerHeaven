@@ -1,10 +1,4 @@
 
-/**
- * POR QUÉ: Aislamos autenticación/recuperación de sesión de los routers para que sea consistente y testeable.
- * QUÉ: Lee la cookie de sesión, valida la sesión contra el repositorio y, si es válida, inyecta userId/sessionId en el contexto.
- * LÍMITES: No decide autorización ni ownership; eso vive en Policies dentro de los casos de uso.
- * ESTRUCTURA: Capa Infrastructure - Middleware HTTP.
- */
 import { Context, Next } from "hono";
 import { createMiddleware } from "hono/factory";
 import { getCookie, deleteCookie } from "hono/cookie";

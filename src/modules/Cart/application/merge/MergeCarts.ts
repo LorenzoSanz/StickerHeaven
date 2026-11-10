@@ -1,8 +1,3 @@
-/**
- * POR QUÉ: Tras el login, un usuario puede tener un carrito guest previo (cookie) que debe consolidarse con su carrito autenticado.
- * INTEGRIDAD: Opera sobre agregados válidos (Cart) y persiste con el repositorio (incluye borrado del carrito invitado cuando aplica).
- * ESTRUCTURA: Capa Application - caso de uso de escritura.
- */
 import { CartRepository } from "../../domain/CartRepository";
 import { MergeCartsDTO } from "./MergeCartsDTO";
 import { Result } from "@/shared/domain/Result";
@@ -10,9 +5,6 @@ import { DomainError } from "@/shared/domain/DomainError";
 import { OwnerId } from "../../domain/OwnerId";
 import { AnonymousCartId } from "../../domain/AnonymousCartId";
 
-/**
- * POR QUÉ: Expresa el merge como una acción explícita para poder dispararla desde Identity (hook OnLoginSuccess) sin acoplar módulos.
- */
 export class MergeCarts {
   constructor(private cartRepository: CartRepository) {}
 

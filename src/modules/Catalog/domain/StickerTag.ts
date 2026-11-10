@@ -1,8 +1,3 @@
-/**
- * POR QUÉ: Objeto de Valor para Sticker Tags.
- * INTEGRIDAD: Valida invariantes del valor.
- * ESTRUCTURA: Capa Domain - Objeto de Valor.
- */
 import { ValueObject } from "../../../shared/domain/ValueObject";
 import { Result } from "../../../shared/domain/Result";
 import { DomainError } from "../../../shared/domain/DomainError";

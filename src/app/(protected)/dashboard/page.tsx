@@ -1,10 +1,3 @@
-/**
- * PROPÓSITO: Página de Next.js para un segmento de navegación del usuario.
- * RESPONSABILIDAD: Código de soporte del proyecto.
- * DEPENDENCIAS: Ver imports del archivo para dependencias explícitas.
- * SEGURIDAD/INTEGRIDAD: Mantiene invariantes explícitas cuando aplica.
- * NOTAS: Documentar aquí decisiones no obvias y tradeoffs relevantes.
- */
 import { getCurrentUser } from "./actions";
 import Link from "next/link";
 import { Package, Sparkles, Star, User } from "lucide-react";
@@ -15,7 +8,6 @@ export default async function DashboardPage() {
 
   return (
     <div className="px-4">
-      {/* POR QUÉ: Centramos el panel para evitar “espacios muertos” y dar un acceso rápido a cada área del dashboard. */}
       <div className="min-h-[calc(100dvh-96px)] grid place-items-center py-10">
         <div className="w-full max-w-3xl">
           <div className="mb-6 text-center">
@@ -25,7 +17,6 @@ export default async function DashboardPage() {
             </p>
           </div>
 
-          {/* POR QUÉ: Tiles cuadrados y flotantes que llevan a cada sección sin depender de navegación secundaria. */}
           <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
             <Link
               href="/dashboard/orders"

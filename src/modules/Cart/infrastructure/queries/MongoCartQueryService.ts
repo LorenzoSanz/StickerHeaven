@@ -1,8 +1,3 @@
-/**
- * POR QUÉ: Implementación de CartQueryService usando Mongoose.
- * INTEGRIDAD: Proporciona optimized read access to cart data.
- * ESTRUCTURA: Capa de infraestructura - Query Service.
- */
 import { CartQueryService } from "../../application/queries/CartQueryService";
 import { CartDTO, CartItemDTO } from "../../application/get/CartDTO";
 import { CartModel, ICartDocument } from "../persistence/mongoose/CartModel";
@@ -13,9 +8,6 @@ import { env } from "@/config/env";
 
 import { StickerId } from "../../domain/StickerId";
 
-/**
- * PROPÓSITO: API pública del módulo: encapsula comportamiento y dependencias.
- */
 export class MongoCartQueryService implements CartQueryService {
   constructor(private catalogGateway: CatalogGateway) {}
 
@@ -30,8 +22,6 @@ export class MongoCartQueryService implements CartQueryService {
       }
       
       if (!doc) {
-        // POR QUÉ: El read model de carrito debe ser sencillo de consumir: carrito vacío cuando no existe.
-        // QUÉ: Devuelve un DTO vacío sin sentinels (sin id) para evitar invariantes falsas.
         return Result.ok({
             items: [],
             totalAmount: 0,

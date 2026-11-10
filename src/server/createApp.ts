@@ -1,10 +1,3 @@
-/**
- * POR QUÉ: Este archivo centraliza la composición del servidor HTTP (Hono) para que la política transversal sea visible y auditable.
- * QUÉ: Aplica middlewares globales (secure headers, CORS, defensa anti-CSRF cuando hay cookies, logging y rate limiting) y monta routers por módulo bajo /api.
- * LÍMITES: No contiene lógica de negocio; solo coordina infraestructura y delega en controllers/casos de uso a través del container.
- * SEGURIDAD: Bloquea mutaciones con cookies si Origin/Referer no está en allowlist y niega navegación cross-site en unsafe methods.
- * OBSERVABILIDAD: Genera/propaga x-request-id y registra métricas por request (método, ruta, status, duración).
- */
 import { Hono } from "hono";
 import { cors } from "hono/cors";
 import { secureHeaders } from "hono/secure-headers";
@@ -178,7 +171,6 @@ export function createApp(options?: { rateLimiter?: RateLimiter; routers?: ApiRo
     await next();
   });
 
-  // PROPÓSITO: Asigna un ID único a cada request para logging y seguimiento.
   app.use("*", async (c, next) => {
     const requestId = c.req.header("x-request-id") || crypto.randomUUID();
     c.header("x-request-id", requestId);
@@ -201,7 +193,6 @@ export function createApp(options?: { rateLimiter?: RateLimiter; routers?: ApiRo
     });
   });
 
-  // PROPÓSITO: Endpoint de health check para verificar estado de conexión con MongoDB.
   app.get("/health", (c) => {
     const mongoStatus = mongoose.connection.readyState === 1 ? "up" : "down";
     // En cualquier entorno de test devolvemos OK para no bloquear la validación.
@@ -227,7 +218,6 @@ export function createApp(options?: { rateLimiter?: RateLimiter; routers?: ApiRo
   const windowMs = 60_000;
   const maxRequests = env.NODE_ENV === "development" ? 1000 : 100;
 
-  // PROPÓSITO: Configura el middleware de rate limiting basado en Redis o en memoria.
   const limiter =
     options?.rateLimiter ??
     (env.REDIS_URL
@@ -245,7 +235,6 @@ export function createApp(options?: { rateLimiter?: RateLimiter; routers?: ApiRo
     )
   );
 
-  // PROPÓSITO: Crea la API Hono con routers para autenticación, catálogo, ventas, carrito y marketing.
   const api = new Hono<AppEnv>();
   const authMiddleware = createAuthMiddleware(container.identity.repositories.session(), container.shared.logger());
 

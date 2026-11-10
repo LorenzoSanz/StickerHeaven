@@ -1,8 +1,3 @@
-/**
- * POR QUÉ: Command to create un nuevo sticker.
- * INTEGRIDAD: Orquesta validation and persistence.
- * ESTRUCTURA: Capa Application - Caso de uso.
- */
 import { StickerRepository } from "../../domain/StickerRepository";
 import { CreateStickerDTO } from "./CreateStickerDTO";
 import { Result } from "../../../../shared/domain/Result";
@@ -16,9 +11,6 @@ import { OwnerId } from "../../domain/OwnerId";
 import { StickerStock } from "../../domain/StickerStock";
 import { StickerOwnerAssignmentPolicy } from "../policies/StickerOwnerAssignmentPolicy";
 
-/**
- * PROPÓSITO: API pública del módulo: encapsula comportamiento y dependencias.
- */
 export class CreateSticker {
   constructor(
     private stickerRepository: StickerRepository,

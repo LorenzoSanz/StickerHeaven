@@ -1,8 +1,3 @@
-/**
- * POR QUÉ: Prueba el ListStickers caso de uso.
- * INTEGRIDAD: Verifica retrieval and mapping of sticker data.
- * ESTRUCTURA: Suite de tests - Unit Pruebas.
- */
 import { describe, it, expect, beforeEach } from "bun:test";
 import { ListStickers } from "./ListStickers";
 import { FakeCatalogQueryService } from "../testing/FakeCatalogQueryService";

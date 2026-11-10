@@ -1,8 +1,3 @@
-/**
- * POR QUÉ: Define el contrato para obtener información de productos del módulo Catalog.
- * INTEGRIDAD: Interface Adapter pattern.
- * ESTRUCTURA: Capa Application - Port.
- */
 import { Result } from "../../../shared/domain/Result";
 import { DomainError } from "../../../shared/domain/DomainError";
 import { StickerId } from "../domain/StickerId";

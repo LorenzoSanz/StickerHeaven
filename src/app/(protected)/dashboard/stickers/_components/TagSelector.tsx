@@ -4,10 +4,6 @@ import { useState } from "react";
 import { cn } from "@/lib/utils";
 import { Check } from "lucide-react";
 
-/**
- * POR QUÉ: Los tags deben ser consistentes con los filtros globales del catálogo.
- * QUÉ: Lista de etiquetas permitidas en la plataforma.
- */
 export const AVAILABLE_TAGS = [
   "anime",
   "cute",
@@ -29,10 +25,6 @@ interface TagSelectorProps {
   initialTags?: string[];
 }
 
-/**
- * POR QUÉ: Evita errores de escritura y garantiza que los stickers sean categorizables.
- * QUÉ: Componente visual para seleccionar múltiples etiquetas de una lista predefinida.
- */
 export function TagSelector({ initialTags = [] }: TagSelectorProps) {
   const [selected, setSelected] = useState<string[]>(initialTags);
 

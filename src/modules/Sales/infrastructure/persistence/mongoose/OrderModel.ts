@@ -1,8 +1,3 @@
-/**
- * POR QUÉ: Mongoose Schema for Order.
- * INTEGRIDAD: Impone invariantes del valor.
- * ESTRUCTURA: Capa de infraestructura - ODM Schema.
- */
 import mongoose, { Schema, Document } from "mongoose";
 
 export interface IMoneyDocument {

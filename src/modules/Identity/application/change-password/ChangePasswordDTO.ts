@@ -1,8 +1,3 @@
-/**
- * POR QUÉ: DTO para changing user password.
- * INTEGRIDAD: Define input data structure and validation schema.
- * ESTRUCTURA: Capa Application - DTO.
- */
 import { z } from "zod";
 // DTO para cambiar la contraseña de un usuario.
 export const ChangePasswordSchema = z.object({

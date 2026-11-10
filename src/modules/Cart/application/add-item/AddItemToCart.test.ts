@@ -1,8 +1,3 @@
-/**
- * POR QUÉ: Pruebas para AddItemToCart Caso de uso.
- * INTEGRIDAD: Verifica la integridad de la operación de agregar un ítem al carrito.
- * ESTRUCTURA: Suite de tests.
- */
 import { describe, it, expect, mock, beforeEach } from "bun:test";
 import { AddItemToCart } from "./AddItemToCart";
 import { CartRepository } from "../../domain/CartRepository";

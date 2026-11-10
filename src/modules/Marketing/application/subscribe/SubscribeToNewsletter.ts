@@ -1,6 +1,3 @@
-// PROPÓSITO: Caso de uso para suscribir a newsletters.
-// INTEGRIDAD: Garantiza que solo se suscriban correos electrónicos válidos.
-// ESTRUCTURA: Capa Application - Caso de uso.
 import type { IEmailService } from "@/shared/domain/IEmailService";
 import { Result } from "@/shared/domain/Result";
 import type { DomainError } from "@/shared/domain/DomainError";

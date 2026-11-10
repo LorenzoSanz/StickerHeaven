@@ -1,10 +1,8 @@
-// POR QUÉ: Servicio para enviar correos electrónicos a través de SMTP.
 import nodemailer from "nodemailer";
 import { IEmailService } from "@/shared/domain/IEmailService";
 import { Result } from "@/shared/domain/Result";
 import type { ILogger } from "@/shared/domain/ILogger";
 
-// POR QUÉ: Interfaz para el transporte de nodemailer.
 type Transport = {
   sendMail(input: {
     from: string;
@@ -14,14 +12,9 @@ type Transport = {
   }): Promise<unknown>;
 };
 
-// POR QUÉ: Implementación concreta del servicio de correo electrónico SMTP.
 export class SMTPEmailService implements IEmailService {
   private readonly transport: Transport;
 
-  /**
-   * POR QUÉ: Constructor para el servicio de correo electrónico SMTP.
-   * INTEGRIDAD: Asegura que se proporcionen las credenciales necesarias para autenticarse en el servidor SMTP.
-   */
   constructor(
     private readonly logger: ILogger,
     private readonly config: {
@@ -45,10 +38,6 @@ export class SMTPEmailService implements IEmailService {
         socketTimeout: 10_000,
       });
   }
-  /**
-   * POR QUÉ: Envía una confirmación de pedido por correo electrónico.
-   * INTEGRIDAD: Asegura que el correo electrónico se envíe correctamente y se registre en el log.
-   */
 
   async sendOrderConfirmation(to: string, orderId: string, totalAmount: number, currency: string): Promise<Result<void, Error>> {
     try {
@@ -67,10 +56,6 @@ export class SMTPEmailService implements IEmailService {
       return Result.fail(err);
     }
   }
-  /**
-   * POR QUÉ: Envía una prueba de descuento por correo electrónico.
-   * INTEGRIDAD: Asegura que el correo electrónico se envíe correctamente y se registre en el log.
-   */
 
   async sendNewsletterDiscountTest(to: string): Promise<Result<void, Error>> {
     try {

@@ -1,10 +1,3 @@
-/**
- * PROPÓSITO: Formulario cliente para crear Stickers con upload de imagen.
- * RESPONSABILIDAD: Construye multipart/form-data y llama a POST /api/stickers; gestiona estado UI/errores.
- * DEPENDENCIAS: Next router (navigation) y endpoint backend protegido.
- * SEGURIDAD/INTEGRIDAD: No expone secretos; depende de cookies HttpOnly para auth en el POST.
- * NOTAS: Si cambia el contrato del endpoint (campos/validación), actualizar inputs y mensajes.
- */
 "use client";
 
 import { FormEvent, useMemo, useRef, useState } from "react";

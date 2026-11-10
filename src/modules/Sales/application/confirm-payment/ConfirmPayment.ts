@@ -1,8 +1,3 @@
-/**
- * POR QUÉ: Caso de uso para confirmar un pago y actualizar el estado del pedido.
- * INTEGRIDAD: Operación idempotente. Garantiza que el pedido exista y no esté ya pagado.
- * ESTRUCTURA: Capa Application.
- */
 import { Result } from "@/shared/domain/Result";
 import { DomainError } from "@/shared/domain/DomainError";
 import { OrderRepository } from "../../domain/OrderRepository";
@@ -14,9 +9,6 @@ export interface ConfirmPaymentDTO {
   paymentIntentId: string;
 }
 
-/**
- * PROPÓSITO: API pública del módulo: encapsula comportamiento y dependencias.
- */
 export class ConfirmPayment {
   constructor(
     private orderRepository: OrderRepository,

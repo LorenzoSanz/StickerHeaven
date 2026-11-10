@@ -1,18 +1,9 @@
-/**
- * POR QUÉ: Logout desde UI necesita Server Action para devolver {success/error} y permitir toasts consistentes.
- * FLUJO: UI → Server Action → POST /api/auth/logout → Identity → siempre borramos cookie local para cerrar sesión en el navegador.
- * QUÉ: Intenta invalidar la sesión en backend y, en cualquier caso, elimina la cookie de sesión en Next para evitar sesiones “zombies”.
- */
 "use server";
 
 import { cookies } from "next/headers";
 import { deleteSessionCookie } from "@/config/sessionCookie";
 import { serverApiRequest } from "@/lib/serverApi";
 
-/**
- * POR QUÉ: Si el backend falla o la sesión ya no existe, el usuario igualmente espera “quedar deslogueado” en este navegador.
- * EFECTO: Siempre ejecuta `deleteSessionCookie` en el finally para limpiar credenciales locales.
- */
 export async function logoutAction(): Promise<{ error?: string; success?: true }> {
   const cookieStore = await cookies();
 

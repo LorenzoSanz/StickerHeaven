@@ -1,6 +1,5 @@
 "use client";
 
-// POR QUÉ: React 19 renombró useFormState a useActionState; mantiene el submit de server actions sin warnings.
 import { useActionState, useRef, useState } from "react";
 import { useFormStatus } from "react-dom";
 import Image from "next/image";
@@ -29,7 +28,6 @@ export function EditStickerForm({ sticker }: { sticker: StickerDTO }) {
   const dragDepth = useRef(0);
   const fileInputRef = useRef<HTMLInputElement | null>(null);
 
-  // POR QUÉ: Con Server Actions, React gestiona automáticamente method/enctype; declararlos manualmente provoca warnings en consola.
   return (
     <form action={action} className="space-y-4">
       <input type="hidden" name="stickerId" value={sticker.id} />

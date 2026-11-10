@@ -1,8 +1,3 @@
-/**
- * POR QUÉ: Raíz de Agregado del contexto correspondiente.
- * INTEGRIDAD: Impone invariantes del valor.
- * ESTRUCTURA: Capa Domain.
- */
 import { AggregateRoot } from "../../../shared/domain/AggregateRoot";
 import { Result } from "../../../shared/domain/Result";
 import { DomainError } from "../../../shared/domain/DomainError";
@@ -25,9 +20,6 @@ export interface OrderProps {
   version: number;
 }
 
-/**
- * PROPÓSITO: API pública del módulo: encapsula comportamiento y dependencias.
- */
 export class Order extends AggregateRoot<OrderProps, OrderId> {
   private constructor(props: OrderProps, id: OrderId) {
     super(props, id);
@@ -109,7 +101,6 @@ export class Order extends AggregateRoot<OrderProps, OrderId> {
     return this.props.version;
   }
 
-  // POR QUÉ: Asigna el ID externo de Payment Intent (p.ej., Stripe) asociado a este pedido.
   public assignPaymentIntent(id: PaymentIntentId): void {
       this.props.paymentIntentId = id;
       this.props.updatedAt = new Date();

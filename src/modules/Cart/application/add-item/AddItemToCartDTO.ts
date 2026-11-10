@@ -1,8 +1,3 @@
-/**
- * POR QUÉ: DTO para añadir items al carrito.
- * INTEGRIDAD: Define input data structure and validation schema.
- * ESTRUCTURA: Capa Application - DTO.
- */
 import { z } from "zod";
 
 export const AddItemToCartSchema = z.object({

@@ -1,8 +1,3 @@
-/**
- * POR QUÉ: Gestiona las peticiones HTTP para operaciones de Sales.
- * INTEGRIDAD: Valida la entrada y delega en la capa Application.
- * ESTRUCTURA: Capa de infraestructura - Controller.
- */
 import { Context } from "hono";
 import { Checkout } from "../../application/checkout/Checkout";
 import { CancelOrder } from "../../application/cancel-order/CancelOrder";
@@ -23,10 +18,6 @@ import {
   UnauthorizedOrderAccessError,
 } from "../../domain/Errors";
 
-/**
- * POR QUÉ: Concentramos el mapping HTTP↔Sales para que la capa Application quede libre de detalles de transporte.
- * QUÉ: Handlers de checkout/ordenes que validan identidad (userId), construyen DTOs y traducen errores de dominio a status.
- */
 export class SalesController {
   constructor(
     private createOrder: CreateOrder,

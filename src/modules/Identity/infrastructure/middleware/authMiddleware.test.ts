@@ -1,8 +1,3 @@
-/**
- * POR QUÉ: Prueba el Authentication Middleware.
- * INTEGRIDAD: Verifica validación de cookie de sesión e inyección en el contexto.
- * ESTRUCTURA: Suite de tests - Integration/Unit.
- */
 import { describe, it, expect, mock, beforeEach, beforeAll } from "bun:test";
 import { Context } from "hono";
 import { Session } from "../../domain/Session";

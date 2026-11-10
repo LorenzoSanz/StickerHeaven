@@ -1,9 +1,4 @@
 import { publicEnvSchema } from "@/config/envSchemas";
-/**
- * POR QUÉ: Next.js requiere accesos explícitos a variables `NEXT_PUBLIC_` para inyectarlas estáticamente en el cliente.
- * QUÉ: Actúa como un Adaptador de Entorno que mapea y valida las variables públicas.
- * LÍMITES: Solo maneja variables prefijadas con NEXT_PUBLIC_ para evitar fugas de secretos al navegador.
- */
 const parsedEnv = publicEnvSchema.safeParse({
   NEXT_PUBLIC_APP_URL: process.env.NEXT_PUBLIC_APP_URL,
   NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY: process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY,

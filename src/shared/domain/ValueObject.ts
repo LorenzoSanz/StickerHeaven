@@ -1,18 +1,6 @@
-/**
- * POR QUÉ: Base class for Value Objects. VOs are defined by their attributes and are immutable.
- * INTEGRIDAD: Impone invariantes del valor.
- * ESTRUCTURA: Núcleo compartido - Used for Email, Password, Money, etc.
- */
 
-/**
- * POR QUÉ: Define la estructura básica para Value Objects.
- * INTEGRIDAD: Asegura que los objetos de valor sean inmutables.
- */
 export interface ValueObjectProps {}
 
-/**
- * PROPÓSITO: API pública del módulo: encapsula comportamiento y dependencias.
- */
 export abstract class ValueObject<T extends ValueObjectProps> {
   protected readonly props: T;
 
@@ -20,10 +8,6 @@ export abstract class ValueObject<T extends ValueObjectProps> {
     this.props = Object.freeze(props);
   }
 
-  /**
-   * POR QUÉ: Compara si dos objetos de valor son iguales.
-   * INTEGRIDAD: Asegura que la comparación se realice basada en la igualdad de sus propiedades.
-   */ 
   public equals(vo?: ValueObject<T>): boolean {
     if (vo === null || vo === undefined) {
       return false;

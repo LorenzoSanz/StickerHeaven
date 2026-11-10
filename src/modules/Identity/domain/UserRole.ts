@@ -1,8 +1,3 @@
-/**
- * POR QUÉ: Objeto de Valor que representa el rol del usuario.
- * INTEGRIDAD: Impone invariantes del valor.
- * ESTRUCTURA: Capa Domain.
- */
 import { ValueObject } from "../../../shared/domain/ValueObject";
 import { Result } from "../../../shared/domain/Result";
 import { DomainError } from "../../../shared/domain/DomainError";
@@ -18,9 +13,6 @@ interface UserRoleProps {
   value: UserRoleType;
 }
 
-/**
- * PROPÓSITO: API pública del módulo: encapsula comportamiento y dependencias.
- */
 export class InvalidUserRoleError extends DomainError {
   constructor(role: string) {
     super(`Rol de usuario inválido: ${role}`);

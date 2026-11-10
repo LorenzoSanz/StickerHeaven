@@ -1,8 +1,3 @@
-/**
- * POR QUÉ: Subscriber that listens for OrderPaid events and sends confirmation emails.
- * INTEGRIDAD: Desacopla el envío de emails del script de transacción.
- * ESTRUCTURA: Capa de infraestructura - Event Subscriber.
- */
 import { DomainEventSubscriber } from "@/shared/infrastructure/events/DomainEventPublisher";
 import { DomainEvent } from "@/shared/domain/DomainEvent";
 import { OrderPaidEvent } from "@/modules/Sales/domain/events/OrderPaidEvent";
@@ -10,9 +5,6 @@ import { IEmailService } from "@/shared/domain/IEmailService";
 import { ILogger } from "@/shared/domain/ILogger";
 import { UserContactQueryService } from "@/shared/contracts/UserContactQueryService";
 
-/**
- * PROPÓSITO: API pública del módulo: encapsula comportamiento y dependencias.
- */
 export class OrderPaidSubscriber implements DomainEventSubscriber {
   constructor(
     private emailService: IEmailService,

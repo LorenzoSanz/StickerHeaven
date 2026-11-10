@@ -1,17 +1,11 @@
-# Servicio de API para manejar solicitudes de backend.
-# Utiliza Node.js y Express para manejar solicitudes y respuestas.
 FROM oven/bun:1.1.29-alpine AS runner
 
 WORKDIR /app
 ENV NODE_ENV=production
 
-# Copia archivos de configuración y código fuente.
-# Copia package.json, bun.lock, tsconfig.json y el directorio src al contenedor.
 COPY package.json bun.lock tsconfig.json ./
 COPY src ./src
 
-# Instala dependencias de producción.
-# Utiliza bun install para instalar dependencias listadas en package.json.
 RUN bun install --frozen-lockfile --production
 
 EXPOSE 3001

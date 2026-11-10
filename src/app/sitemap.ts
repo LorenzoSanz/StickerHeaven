@@ -1,5 +1,3 @@
-// POR QUÉ: Configuración de sitemap.xml para Next.js.
-// QUÉ: Genera un archivo XML con las URLs de la web para SEO y indexación.
 
 import type { MetadataRoute } from "next";
 import { env } from "@/config/env";
@@ -37,8 +35,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     },
   ];
 
-// POR QUÉ: Generar entradas para cada sticker en la API.
-// QUÉ: Añade URLs para cada sticker en la API al sitemap.xml.
   try {
     const limit = 200;
     const maxPages = 25;

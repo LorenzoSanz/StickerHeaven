@@ -1,10 +1,3 @@
-/**
- * PROPÓSITO: Página protegida para crear Stickers de forma profesional (fuente de verdad: dominio).
- * RESPONSABILIDAD: Renderiza el formulario y navega al catálogo tras creación.
- * DEPENDENCIAS: UI Next.js + endpoint protegido POST /api/stickers.
- * SEGURIDAD/INTEGRIDAD: Requiere sesión (cookies HttpOnly); no crea stickers desde Cloudinary directamente.
- * NOTAS: Útil para dev/admin; si se introduce rol admin real, esta ruta debería restringirse por rol.
- */
 import Link from "next/link";
 import { CreateStickerForm } from "./CreateStickerForm";
 import { DashboardShell } from "../../_components/DashboardShell";

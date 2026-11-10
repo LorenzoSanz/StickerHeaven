@@ -6,10 +6,6 @@ import { ChevronDown, Check } from "lucide-react";
 
 type SelectProps = React.SelectHTMLAttributes<HTMLSelectElement>;
 
-/**
- * POR QUÉ: Los select nativos tienen menús desplegables que no se pueden estilizar con CSS.
- * QUÉ: Componente Select totalmente personalizado para dropdowns que mantiene la compatibilidad con FormData.
- */
 export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
   function Select({ className, children, defaultValue, value, onChange, name, id, required, disabled, ...props }, ref) {
     const [isOpen, setIsOpen] = React.useState(false);

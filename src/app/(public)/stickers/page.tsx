@@ -1,10 +1,3 @@
-/**
- * PROPÓSITO: Página de Next.js para un segmento de navegación del usuario.
- * RESPONSABILIDAD: Código de soporte del proyecto.
- * DEPENDENCIAS: Ver imports del archivo para dependencias explícitas.
- * SEGURIDAD/INTEGRIDAD: Mantiene invariantes explícitas cuando aplica.
- * NOTAS: Documentar aquí decisiones no obvias y tradeoffs relevantes.
- */
 import { getStickersAction } from "./_actions/get-stickers";
 import { CatalogGrid } from "@/components/catalog/CatalogGrid";
 import { Pagination } from "@/components/catalog/Pagination";
@@ -163,8 +156,6 @@ export default async function StickersPage({
     totalPages = result.meta.totalPages;
   }
 
-  // POR QUÉ: Favoritos y wishlist deben ser privados; necesitamos identificar al usuario para aislar el storage.
-  // QUÉ: Obtiene userId si hay sesión y lo pasa a los cards para habilitar favoritos solo autenticado.
   const viewerUserId = await serverApiFetch<{ user: { id: string } }>("/api/auth/me", { method: "GET" })
     .then((r) => r.user.id)
     .catch(() => null);

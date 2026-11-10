@@ -22,8 +22,6 @@ function writeIds(storageKey: string, ids: string[]) {
   window.localStorage.setItem(storageKey, JSON.stringify(ids));
 }
 
-// POR QUÉ: Wishlist debe ser privada por usuario; un único key mezcla favoritos entre cuentas en el mismo navegador.
-// QUÉ: Permite inyectar un storageKey por usuario sin cambiar la API de consumo en UI.
 export function useWishlist({ storageKey = STORAGE_KEY }: { storageKey?: string } = {}) {
   const [ids, setIds] = useState<string[]>([]);
   const [hydrated, setHydrated] = useState(false);

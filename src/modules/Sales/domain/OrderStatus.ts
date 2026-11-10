@@ -1,8 +1,3 @@
-/**
- * POR QUÉ: Objeto de Valor que representa el estado de un pedido.
- * INTEGRIDAD: Impone invariantes del valor.
- * ESTRUCTURA: Capa Domain.
- */
 import { ValueObject } from "../../../shared/domain/ValueObject";
 import { Result } from "../../../shared/domain/Result";
 import { DomainError } from "../../../shared/domain/DomainError";
@@ -13,18 +8,12 @@ interface OrderStatusProps {
   value: OrderStatusType;
 }
 
-/**
- * PROPÓSITO: API pública del módulo: encapsula comportamiento y dependencias.
- */
 export class InvalidOrderStatusError extends DomainError {
   constructor(status: string) {
     super(`Invalid order status: ${status}`);
   }
 }
 
-/**
- * PROPÓSITO: API pública del módulo: encapsula comportamiento y dependencias.
- */
 export class OrderStatus extends ValueObject<OrderStatusProps> {
   public static readonly PENDING_PAYMENT = "PENDING_PAYMENT";
   public static readonly PAID = "PAID";

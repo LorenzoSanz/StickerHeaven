@@ -1,8 +1,3 @@
-/**
- * POR QUÉ: Unificamos feedback (success/error) vía Server Actions para mostrar toasts consistentes sin lógica de negocio en UI.
- * FLUJO: UI → Server Action → POST /api/auth/login → Identity (LoginUser) → backend responde Set-Cookie → Next lo propaga.
- * QUÉ: Valida formato, delega autenticación al backend y sincroniza la cookie HttpOnly en el navegador.
- */
 "use server";
 
 import { z } from "zod";
@@ -16,10 +11,6 @@ const loginSchema = z.object({
   password: z.string().min(1, "Contraseña requerida"),
 });
 
-/**
- * POR QUÉ: El navegador no puede leer cookies HttpOnly; en App Router necesitamos propagar Set-Cookie desde la respuesta del backend.
- * CONTRATO: Devuelve {success} o {error} (para UX). No redirige: la página decide navegación tras éxito.
- */
 export async function loginAction(
   prevState: unknown,
   formData: FormData

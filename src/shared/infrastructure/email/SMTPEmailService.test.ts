@@ -1,7 +1,3 @@
-/**
- * POR QUÉ: Testea el servicio `SMTPEmailService` para verificar que envía correos electrónicos correctamente.
- * INTEGRIDAD: Asegura que se envía el correo electrónico con los detalles correctos y se registra en el log.
- */
 import { describe, it, expect } from "bun:test";
 import { SMTPEmailService } from "./SMTPEmailService";
 import { Result } from "@/shared/domain/Result";

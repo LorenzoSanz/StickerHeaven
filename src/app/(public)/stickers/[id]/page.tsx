@@ -1,10 +1,3 @@
-/**
- * PROPÓSITO: Página de Next.js para un segmento de navegación del usuario.
- * RESPONSABILIDAD: Código de soporte del proyecto.
- * DEPENDENCIAS: Ver imports del archivo para dependencias explícitas.
- * SEGURIDAD/INTEGRIDAD: Mantiene invariantes explícitas cuando aplica.
- * NOTAS: Documentar aquí decisiones no obvias y tradeoffs relevantes.
- */
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
@@ -65,8 +58,6 @@ export async function generateMetadata({ params }: StickerDetailPageProps): Prom
 export default async function StickerDetailPage({ params }: StickerDetailPageProps) {
   const { id } = await params;
   const sticker = await getStickerByIdAction(id);
-  // POR QUÉ: Favoritos es una acción privada; necesitamos userId para aislar el storage por cuenta.
-  // QUÉ: Obtiene userId si hay sesión para habilitar el toggle; si no, el botón redirige a login.
   const viewerUserId = await serverApiFetch<{ user: { id: string } }>("/api/auth/me", { method: "GET" })
     .then((r) => r.user.id)
     .catch(() => null);

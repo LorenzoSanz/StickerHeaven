@@ -11,9 +11,6 @@ interface StickerCardProps {
   viewerUserId?: string | null;
 }
 
-/**
- * PROPÓSITO: API pública del módulo: ejecuta una acción con contrato explícito.
- */
 export function StickerCard({ sticker, viewerUserId }: StickerCardProps) {
   return (
     <div className="group relative flex flex-col gap-3 rounded-2xl bg-white/5 p-4 backdrop-blur-md border border-white/10 hover:bg-white/10 hover:border-white/20 transition-all duration-300 hover:shadow-[0_0_20px_rgba(139,92,246,0.15)] hover:-translate-y-1">

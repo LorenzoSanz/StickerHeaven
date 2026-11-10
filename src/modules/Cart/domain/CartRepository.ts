@@ -1,7 +1,3 @@
-/**
- * POR QUÉ: Define el contrato para persisting Cart aggregates.
- * ESTRUCTURA: Capa Domain - Repository Interface.
- */
 import { Cart } from "./Cart";
 import { Result } from "../../../shared/domain/Result";
 import { DomainError } from "../../../shared/domain/DomainError";

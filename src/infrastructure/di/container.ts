@@ -1,9 +1,3 @@
-/**
- * POR QUÉ: Contenedor central de inyección de dependencias para componer el monolito modular sin acoplar módulos entre sí.
- * QUÉ: Instancia módulos (domain/application) y conecta infraestructura (controllers, gateways, adapters, subscribers) con singletons lazy.
- * FLUJO: createApp → container.controllers.* → casos de uso → domain + ports → infraestructura (repos/Stripe/Cloudinary/Mongo).
- * LÍMITES: Este wiring no introduce reglas de negocio; solo conecta implementaciones con contratos.
- */
 
 import { createLazySingleton } from "./utils";
 import { env } from "@/config/env";
@@ -21,8 +15,6 @@ import { createCartModule } from "./modules/cart";
 import { createSalesModule } from "./modules/sales";
 import { createMarketingModule } from "./modules/marketing";
 
-// POR QUÉ: Módulos separados para encapsular lógica de negocio y conectar infraestructura.
-// QUÉ: Cada módulo tiene casos de uso, puertos y adaptadores para interactuar con infraestructura.
 const sharedModule = createSharedModule();
 const catalogModule = createCatalogModule({ logger: sharedModule.logger });
 const identityModule = createIdentityModule();
@@ -53,9 +45,6 @@ export const registerSubscribers = (): void => {
 // ============================================================================
 // CONTROLLERS
 // ============================================================================
-
-// POR QUÉ: Controladores HTTP para operaciones CRUD y transaccionales.
-// QUÉ: Proporcionan endpoints HTTP para interactuar con la lógica de negocio.
 
 const identityController = createLazySingleton(() => new IdentityController(
   identityModule.useCases.registerUser(),
@@ -97,8 +86,6 @@ const cartController = createLazySingleton(() => new CartController(
   sharedModule.logger()
 ));
 
-// POR QUÉ: Evitamos ramas de configuración implícitas; la verificación de webhooks debe usar Stripe siempre y fallar si falta config.
-// OBSERVABILIDAD: Si STRIPE_WEBHOOK_SECRET no está configurado, env.ts aborta en arranque y no se aceptan webhooks inseguros.
 const stripeWebhookController = createLazySingleton(() => new StripeWebhookController(
   new StripePaymentGateway(env.STRIPE_SECRET_KEY),
   salesModule.useCases.confirmPayment(),
@@ -110,10 +97,6 @@ const stripeWebhookController = createLazySingleton(() => new StripeWebhookContr
 // GLOBAL CONTAINER
 // ============================================================================
 
-// POR QUÉ: Exportamos el container global para ser utilizado en toda la aplicación.
-// QUÉ: Proporciona acceso a módulos compartidos, servicios y controladores.
-// LÍMITES: No debe usarse para inyección de dependencias implícita; se prefiere inyección explícita.
-// OBSERVABILIDAD: El container es el punto único de acceso a todos los componentes de la aplicación.
 export const container = {
   shared: {
     logger: sharedModule.logger,

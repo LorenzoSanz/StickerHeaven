@@ -1,8 +1,3 @@
-/**
- * POR QUÉ: Pruebas para GetCart Caso de uso.
- * INTEGRIDAD: Verifica correctness of retrieving cart.
- * ESTRUCTURA: Suite de tests.
- */
 import { describe, it, expect, mock, beforeEach } from "bun:test";
 import { GetCart } from "./GetCart";
 import { CartQueryService } from "../queries/CartQueryService";

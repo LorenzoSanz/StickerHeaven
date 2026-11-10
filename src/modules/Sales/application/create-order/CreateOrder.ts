@@ -1,8 +1,3 @@
-/**
- * POR QUÉ: La creación de un pedido es una mutación compleja (precio/stock/pago) y debe orquestarse en un único caso de uso.
- * INTEGRIDAD: Calcula importes en backend, valida stock, prepara Payment Intent y aplica compensación si algo falla.
- * ESTRUCTURA: Capa Application - coordina Domain + puertos (repos/gateways), sin depender de HTTP/DB/Stripe concretos.
- */
 import { OrderRepository } from "@/modules/Sales/domain/OrderRepository";
 import { CatalogGateway, ProductInfo } from "../gateways/CatalogGateway";
 import { PaymentGateway } from "../../domain/gateways/PaymentGateway";
@@ -21,10 +16,6 @@ import { PaymentIntentId } from "../../domain/PaymentIntentId";
 import { Quantity } from "@/shared/domain/Quantity";
 import { InsufficientStockError, ProductNotFoundError, UserIdRequiredToCreateOrderError } from "../../domain/Errors";
 
-/**
- * POR QUÉ: Este caso de uso modela el “crear pedido” como una transacción lógica con pasos y compensaciones.
- * QUÉ: Crea el agregado Order (PENDING_PAYMENT), crea Payment Intent, persiste y reduce stock; compensa si falla stock.
- */
 export class CreateOrder {
   constructor(
     private orderRepository: OrderRepository,
@@ -34,12 +25,6 @@ export class CreateOrder {
     private logger: ILogger
   ) {}
 
-  /**
-   * POR QUÉ: El importe del pago debe calcularse en backend (no confiar en precio enviado por el cliente).
-   * QUÉ: Valida items, resuelve precios/stock desde Catalog, crea Order y Payment Intent, persiste y reduce stock con compensación.
-   * @returns Resultado con `id` del pedido y `clientSecret` para completar pago en el frontend.
-   * NOTAS: Implementa un patrón tipo Saga: si falla la reserva de stock, restaura stock ya reducido y cancela el payment intent.
-   */
   async execute(dto: CreateOrderDTO): Promise<Result<{ id: string; clientSecret: string }, DomainError>> {
     const orderItems: OrderItem[] = [];
 
@@ -172,7 +157,6 @@ export class CreateOrder {
     return Result.ok({ id: order.id.value, clientSecret });
   }
 
-  // POR QUÉ: Si la reducción de stock falla, debemos revertir el pedido para mantener consistencia.
   private async reduceStockSequentially(orderItems: OrderItem[]): Promise<Result<void, DomainError>> {
     const reducedItems: OrderItem[] = [];
 

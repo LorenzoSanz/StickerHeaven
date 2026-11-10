@@ -1,4 +1,3 @@
-// PROPÓSITO: Prueba la función toCookieHeader para verificar que convierte cookies en una cadena de encabezado.
 import { describe, expect, test } from "bun:test";
 import { toCookieHeader } from "./toCookieHeader";
 

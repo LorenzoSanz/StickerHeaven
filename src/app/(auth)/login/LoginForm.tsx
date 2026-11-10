@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-// POR QUÉ: React 19 renombró useFormState a useActionState; permite Server Actions con estado sin warnings.
 import { useActionState } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { Input } from "@/components/ui/Input";
@@ -34,8 +33,6 @@ export function LoginForm() {
     flashNotify({ variant: "success", title: "Sesión iniciada", message: "Bienvenido de vuelta." });
     const returnTo = searchParams.get("returnTo");
     const destination = returnTo && returnTo.startsWith("/") ? returnTo : "/";
-    // POR QUÉ: La UI auth se computa en Server Components; refresh debe ocurrir sobre la ruta final, no sobre /login.
-    // QUÉ: Programamos el refresh para cuando el pathname coincida con el destino tras router.push.
     const destinationPathname = destination.split("?")[0]?.split("#")[0] ?? "/";
     pendingRefreshPathnameRef.current = destinationPathname;
     router.push(destination);
@@ -45,8 +42,6 @@ export function LoginForm() {
     const pending = pendingRefreshPathnameRef.current;
     if (!pending) return;
     if (pathname !== pending) return;
-    // POR QUÉ: Forzamos re-evaluación de Server Components una vez en la ruta destino para reflejar la cookie de sesión.
-    // QUÉ: Ejecuta router.refresh() y limpia el marcador para evitar refrescos repetidos.
     router.refresh();
     pendingRefreshPathnameRef.current = null;
   }, [pathname, router]);

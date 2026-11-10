@@ -1,8 +1,3 @@
-/**
- * POR QUÉ: Raíz de Agregado del contexto correspondiente.
- * INTEGRIDAD: Impone invariantes del valor.
- * ESTRUCTURA: Capa Domain - Raíz de Agregado.
- */
 import { AggregateRoot } from "../../../shared/domain/AggregateRoot";
 import { Result } from "../../../shared/domain/Result";
 import { CartId } from "./CartId";
@@ -20,9 +15,6 @@ interface CartProps {
   version: number;
 }
 
-/**
- * PROPÓSITO: API pública del módulo: encapsula comportamiento y dependencias.
- */
 export class Cart extends AggregateRoot<CartProps, CartId> {
   private constructor(props: CartProps, id: CartId) {
     super(props, id);

@@ -1,19 +1,6 @@
-/**
- * POR QUÉ: El rate limiting es transversal y debe aplicarse de forma uniforme a toda la API, independientemente del módulo.
- * QUÉ: Factory de middleware Hono que consulta un `RateLimiter` (Redis o in-memory) y responde 429 con Retry-After cuando corresponde.
- * LÍMITES: No decide la estrategia de clave (IP/cookie/UA); eso se inyecta vía `getKey` desde el entrypoint (createApp).
- * OBSERVABILIDAD: Usa el header estándar `retry-after` para facilitar backoff del cliente.
- */
 import type { MiddlewareHandler } from "hono";
 import { HttpStatus } from "@/shared/infrastructure/http/HttpStatus";
 import type { RateLimiter } from "./RateLimiter";
-
-/**
- * POR QUÉ: Se quiere desacoplar el “cómo limitar” (RateLimiter) del “dónde aplicarlo” (Hono middleware).
- * QUÉ: Crea un middleware que consume 1 token por request para la clave calculada y retorna 429 cuando se excede el cupo.
- * OBSERVABILIDAD: Cuando el RateLimiter lo provee, añade `retry-after` para que el cliente pueda reintentar con backoff.
- */
-
 
 // El resumen de esta función es:
 // - Recibe un RateLimiter y una función para obtener la clave de limitación.

@@ -1,8 +1,3 @@
-/**
- * POR QUÉ: Next usa rewrites hacia la API; Se necesita una forma consistente de resolver el base URL en server runtime.
- * QUÉ: Resuelve API_URL con fallback local en dev y falla explícitamente en producción si falta.
- * LÍMITES: No valida el esquema completo de env (eso lo hace env.ts); solo resuelve el endpoint de la API para SSR.
- */
 export function getApiUrlForRewrites(): string {
   const nodeEnv = process.env.NODE_ENV ?? "development";
   /**

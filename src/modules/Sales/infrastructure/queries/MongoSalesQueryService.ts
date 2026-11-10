@@ -1,8 +1,3 @@
-/**
- * POR QUÉ: Implementación de SalesQueryService usando Mongoose.
- * INTEGRIDAD: Proporciona optimized read access to sales data (orders).
- * ESTRUCTURA: Capa de infraestructura - Query Service.
- */
 import { SalesQueryService } from "../../application/queries/SalesQueryService";
 import { OrderDTO } from "../../application/OrderDTO";
 import { OrderModel, IOrderDocument } from "../persistence/mongoose/OrderModel";
@@ -10,9 +5,6 @@ import { Result } from "@/shared/domain/Result";
 import { DomainError } from "@/shared/domain/DomainError";
 import { OrderStatus } from "../../domain/OrderStatus";
 
-/**
- * PROPÓSITO: API pública del módulo: encapsula comportamiento y dependencias.
- */
 export class MongoSalesQueryService implements SalesQueryService {
   async getOrderById(orderId: string): Promise<Result<OrderDTO | null, DomainError>> {
     try {

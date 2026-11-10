@@ -1,5 +1,3 @@
-// QUE: Configuración de página 404 para Next.js.
-// PORQUE: Proporciona una página personalizada para cuando una URL no existe.
 
 import Link from "next/link";
 import { Card } from "@/components/ui/Card";

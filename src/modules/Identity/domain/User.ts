@@ -1,8 +1,3 @@
-/**
- * POR QUÉ: Representa un concepto del dominio.
- * INTEGRIDAD: Controla el límite de consistencia. Todos los cambios al estado del User deben pasar por esta clase.
- * ESTRUCTURA: Capa Domain - objeto de negocio central.
- */
 
 import { Entity } from "../../../shared/domain/Entity";
 import { Result } from "../../../shared/domain/Result";
@@ -21,9 +16,6 @@ export interface UserProps {
   createdAt: Date;
 }
 
-/**
- * PROPÓSITO: API pública del módulo: encapsula comportamiento y dependencias.
- */
 export class User extends Entity<UserProps, UserId> {
   private constructor(props: UserProps, id: UserId) {
     super(props, id);
@@ -37,7 +29,6 @@ export class User extends Entity<UserProps, UserId> {
     // Aquí se pueden añadir comprobaciones de invariantes
     const user = new User({
       ...props,
-      // POR QUÉ: Clona Date para asegurar que la entidad sea dueña de su estado.
       createdAt: props.createdAt ? new Date(props.createdAt) : new Date(),
     }, id ? id : UserId.random());
     return Result.ok(user);

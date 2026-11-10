@@ -1,7 +1,3 @@
-/**
- * PROPÓSITO: Test suite que valida contratos críticos y previene regresiones.
- * SEGURIDAD/INTEGRIDAD: Mantiene invariantes explícitas cuando aplica.
- */
 import { describe, it, expect, beforeAll } from "bun:test";
 import { applyTestEnv } from "@/config/testEnv";
 import { Hono } from "hono";

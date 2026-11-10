@@ -1,17 +1,9 @@
-/**
- * POR QUÉ: Caso de uso para vaciar el carrito (p.ej., tras checkout).
- * INTEGRIDAD: Elimina el carrito de la persistencia.
- * ESTRUCTURA: Capa Application - Caso de uso.
- */
 import { CartRepository } from "../../domain/CartRepository";
 import { Result } from "@/shared/domain/Result";
 import { DomainError } from "@/shared/domain/DomainError";
 import { OwnerId } from "../../domain/OwnerId";
 import { AnonymousCartId } from "../../domain/AnonymousCartId";
 
-/**
- * POR QUÉ: Modela “vaciar carrito” como comando (write-model) para poder dispararlo desde UI o subscribers tras eventos.
- */
 export class ClearCart {
   constructor(private cartRepository: CartRepository) {}
 

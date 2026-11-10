@@ -1,8 +1,3 @@
-/**
- * POR QUÉ: Gestiona las peticiones HTTP del módulo Cart.
- * INTEGRIDAD: Gestiona carrito anónimo vs usuario (cookie) y delega toda mutación a la capa Application.
- * ESTRUCTURA: Capa de infraestructura - HTTP Controller.
- */
 import { Context } from "hono";
 import { GetCart } from "../../application/get/GetCart";
 import { AddItemToCart } from "../../application/add-item/AddItemToCart";
@@ -15,9 +10,6 @@ import { HttpStatus } from "@/shared/infrastructure/http/HttpStatus";
 import { CartItemNotFoundError } from "../../domain/Errors";
 import { cookieConfig } from "@/config/cookieConfig";
 
-/**
- * POR QUÉ: Mantiene el router fino; centraliza mapping HTTP (cookies/params/body) a DTOs de casos de uso.
- */
 export class CartController {
   constructor(
     private getCart: GetCart,
@@ -54,7 +46,6 @@ export class CartController {
 
       const cartDTO = result.getValue();
       
-      // POR QUÉ: Sin cookie, el guest no tendría una “clave” estable para recuperar su carrito en requests futuros.
       if (!userId && !anonymousId && cartDTO.anonymousCartId) {
         setCookie(c, cookieConfig.cart.name, cartDTO.anonymousCartId, {
             maxAge: cookieConfig.cart.maxAge,

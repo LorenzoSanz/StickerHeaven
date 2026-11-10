@@ -1,10 +1,5 @@
 type TestEnvOverrides = Partial<Record<string, string>>;
 
-/**
- * POR QUÉ: Configuración de entorno de prueba para Next.js.
- * QUÉ: Define variables de entorno necesarias para ejecutar pruebas.
- * LÍMITES: Hay que asegurarse de que las variables de entorno sean válidas para el entorno de prueba.
- */
 const defaultTestEnv: Record<string, string> = {
   NODE_ENV: "test",
   NEXT_PUBLIC_APP_URL: "http://localhost:3000",

@@ -1,8 +1,3 @@
-/**
- * POR QUÉ: Caso de uso para update an existing sticker.
- * INTEGRIDAD: Valida invariantes del valor.
- * ESTRUCTURA: Capa Application - Caso de uso.
- */
 import { StickerRepository } from "../../domain/StickerRepository";
 import { UpdateStickerDTO } from "./UpdateStickerDTO";
 import { Result } from "@/shared/domain/Result";
@@ -17,9 +12,6 @@ import { StickerNotFoundError } from "../../domain/Errors";
 import { OwnerId } from "../../domain/OwnerId";
 import { StickerOwnershipPolicy } from "../policies/StickerOwnershipPolicy";
 
-/**
- * PROPÓSITO: API pública del módulo: encapsula comportamiento y dependencias.
- */
 export class UpdateSticker {
   constructor(
     private stickerRepository: StickerRepository,

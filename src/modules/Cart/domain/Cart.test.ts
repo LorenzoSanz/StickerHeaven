@@ -1,8 +1,3 @@
-/**
- * POR QUÉ: Prueba el Cart Aggregate.
- * INTEGRIDAD: Verifica invariants, quantity management, merging logic, and versioning.
- * ESTRUCTURA: Suite de tests - Domain Unit Pruebas.
- */
 import { describe, it, expect } from "bun:test";
 import { Cart } from "./Cart";
 import { CartId } from "./CartId";

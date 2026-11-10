@@ -1,6 +1,3 @@
-// PROPÓSITO: Test unitario para el caso de uso SubscribeToNewsletter.
-// INTEGRIDAD: Garantiza que solo se suscriban correos electrónicos válidos.
-// ESTRUCTURA: Capa Application - Test.
 import { describe, it, expect, mock, beforeEach } from "bun:test";
 import { Result } from "@/shared/domain/Result";
 import type { IEmailService } from "@/shared/domain/IEmailService";

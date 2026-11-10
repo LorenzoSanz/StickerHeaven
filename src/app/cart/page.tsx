@@ -1,10 +1,3 @@
-/**
- * PROPÓSITO: Página de Next.js para un segmento de navegación del usuario.
- * RESPONSABILIDAD: Código de soporte del proyecto.
- * DEPENDENCIAS: Ver imports del archivo para dependencias explícitas.
- * SEGURIDAD/INTEGRIDAD: Mantiene invariantes explícitas cuando aplica.
- * NOTAS: Documentar aquí decisiones no obvias y tradeoffs relevantes.
- */
 import { ShoppingCart } from "lucide-react";
 import { getCartAction } from "./actions";
 import { CartClient } from "./_components/CartClient";

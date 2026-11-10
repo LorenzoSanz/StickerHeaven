@@ -1,8 +1,3 @@
-/**
- * POR QUÉ: MongoDB implementation of OrderRepository.
- * INTEGRIDAD: Persists orders using Mongoose.
- * ESTRUCTURA: Capa de infraestructura.
- */
 import { OrderRepository } from "@/modules/Sales/domain/OrderRepository";
 import { Order } from "@/modules/Sales/domain/Order";
 import { CustomerId } from "@/modules/Sales/domain/CustomerId";
@@ -14,9 +9,6 @@ import { Result } from "@/shared/domain/Result";
 import { DomainError } from "@/shared/domain/DomainError";
 import { DomainEventPublisher } from "@/shared/infrastructure/events/DomainEventPublisher";
 
-/**
- * PROPÓSITO: API pública del módulo: encapsula comportamiento y dependencias.
- */
 export class MongoOrderRepository implements OrderRepository {
   constructor(private eventPublisher: DomainEventPublisher) {}
 

@@ -1,10 +1,3 @@
-/**
- * PROPÓSITO: Test suite que valida contratos críticos y previene regresiones.
- * RESPONSABILIDAD: Código de soporte del proyecto.
- * DEPENDENCIAS: Ver imports del archivo para dependencias explícitas.
- * SEGURIDAD/INTEGRIDAD: Mantiene invariantes explícitas cuando aplica.
- * NOTAS: Documentar aquí decisiones no obvias y tradeoffs relevantes.
- */
 import { describe, it, expect, mock, beforeEach } from "bun:test";
 import { OrderPaidSubscriber } from "./OrderPaidSubscriber";
 import { OrderPaidEvent } from "@/modules/Sales/domain/events/OrderPaidEvent";

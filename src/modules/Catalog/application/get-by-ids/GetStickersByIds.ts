@@ -1,17 +1,9 @@
-/**
- * POR QUÉ: Algunas pantallas necesitan hidratar varios stickers a la vez (batch) sin múltiples roundtrips.
- * INTEGRIDAD: Devuelve DTOs (read-model) para consumo externo sin exponer entidades de dominio.
- * ESTRUCTURA: Capa Application - Caso de uso.
- */
 import { StickerRepository } from "../../domain/StickerRepository";
 import { StickerDTO } from "../list/ListStickersDTO";
 import { Result } from "../../../../shared/domain/Result";
 import { DomainError } from "../../../../shared/domain/DomainError";
 import { StickerId } from "../../domain/StickerId";
 
-/**
- * POR QUÉ: Aísla la lógica de validación de ids + mapping a DTO en un único punto reutilizable.
- */
 export class GetStickersByIds {
   constructor(private stickerRepository: StickerRepository) {}
 
@@ -19,7 +11,6 @@ export class GetStickersByIds {
     const stickerIds: StickerId[] = [];
     for (const id of ids) {
         const idResult = StickerId.create(id);
-        // POR QUÉ: Un id inválido no debe tumbar toda la query batch; simplemente lo ignoramos.
         if (idResult.isSuccess) {
             stickerIds.push(idResult.getValue());
         }

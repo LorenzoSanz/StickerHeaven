@@ -1,8 +1,3 @@
-/**
- * POR QUÉ: Pruebas para ReduceStickerStock Caso de uso.
- * INTEGRIDAD: Verifica stock reduction logic and constraints.
- * ESTRUCTURA: Suite de tests - Unit Pruebas.
- */
 import { describe, it, expect, beforeEach } from "bun:test";
 import { ReduceStickerStock } from "./ReduceStickerStock";
 import { FakeStickerRepository } from "../testing/FakeStickerRepository";

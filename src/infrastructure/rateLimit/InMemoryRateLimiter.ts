@@ -1,9 +1,5 @@
-// PROPÓSITO: Implementa un RateLimiter en memoria para limitar el número de solicitudes por clave.
 import { RateLimiter, RateLimitDecision } from "./RateLimiter";
 
-/**
- * PROPÓSITO: API pública del módulo: encapsula comportamiento y dependencias.
- */
 export class InMemoryRateLimiter implements RateLimiter {
   private requestCounts = new Map<string, { count: number; resetAt: number }>();
   private lastCleanupAt = 0;
@@ -13,10 +9,6 @@ export class InMemoryRateLimiter implements RateLimiter {
     private readonly maxRequests: number
   ) {}
 
-  // PROPÓSITO: Consume 1 token para la clave dada.
-  // RESPONSABILIDAD: Aumenta el contador para la clave y verifica si se excede el límite.
-  // DEPENDENCIAS: windowMs y maxRequests.
-  // SEGURIDAD/INTEGRIDAD: Asegura que el contador no se exceda el límite y se restablezca correctamente.
   async consume(key: string): Promise<RateLimitDecision> {
     const now = Date.now();
 

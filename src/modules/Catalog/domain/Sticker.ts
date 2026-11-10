@@ -1,8 +1,3 @@
-/**
- * POR QUÉ: Raíz de Agregado del contexto correspondiente.
- * INTEGRIDAD: Mantiene invariantes de Sticker (campos tipados como Value Objects y protección contra mutación externa).
- * ESTRUCTURA: Capa Domain - lógica de negocio del agregado.
- */
 import { Entity } from "../../../shared/domain/Entity";
 import { Result } from "../../../shared/domain/Result";
 import { DomainError } from "../../../shared/domain/DomainError";
@@ -28,9 +23,6 @@ export interface StickerProps {
   version: number;
 }
 
-/**
- * PROPÓSITO: API pública del módulo: encapsula comportamiento y dependencias.
- */
 export class Sticker extends Entity<StickerProps, StickerId> {
   private constructor(props: StickerProps, id: StickerId) {
     super(props, id);
@@ -49,7 +41,6 @@ export class Sticker extends Entity<StickerProps, StickerId> {
     imageUrl: StickerUrl,
     rawTags: string[] = []
   ): Result<Sticker, DomainError> {
-    // POR QUÉ: Convertimos strings de entrada a Value Objects para validar/normalizar tags en el borde del agregado.
     const tags: StickerTag[] = [];
     for (const rawTag of rawTags) {
       const tagOrError = StickerTag.create(rawTag);
@@ -59,7 +50,6 @@ export class Sticker extends Entity<StickerProps, StickerId> {
       tags.push(tagOrError.getValue());
     }
 
-    // POR QUÉ: Clona inputs mutables (tags) para asegurar que la entidad sea dueña de su estado.
     const sticker = new Sticker({
       ownerId,
       name,
@@ -135,17 +125,14 @@ export class Sticker extends Entity<StickerProps, StickerId> {
   }
 
   get tags(): StickerTag[] {
-    // POR QUÉ: Retornamos copia para evitar que consumidores muten el estado interno del agregado.
     return [...this.props.tags];
   }
 
   get createdAt(): Date {
-    // POR QUÉ: Date es mutable; retornamos una nueva instancia para preservar encapsulación.
     return new Date(this.props.createdAt);
   }
   
   get updatedAt(): Date {
-    // POR QUÉ: Date es mutable; retornamos una nueva instancia para preservar encapsulación.
     return new Date(this.props.updatedAt);
   }
 

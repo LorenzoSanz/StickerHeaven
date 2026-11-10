@@ -1,8 +1,3 @@
-/**
- * POR QUÉ: Define el esquema de Mongoose para almacenamiento de User.
- * INTEGRIDAD: Preocupación de infraestructura. Refleja la estructura de base de datos, que puede diferir del Domain.
- * ESTRUCTURA: Capa de infraestructura - Persistence implementation detail.
- */
 import mongoose, { Schema, Document } from "mongoose";
 
 export interface UserDocument extends Omit<Document, '_id'> {

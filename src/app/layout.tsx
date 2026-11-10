@@ -1,5 +1,3 @@
-// POR QUÉ: Configuración de layout para Next.js.
-// QUÉ: Proporciona la estructura común para todas las páginas de la web.
 import "@/styles/globals.css";
 import type { Metadata } from "next";
 import { env } from "@/config/env";
@@ -7,8 +5,6 @@ import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { Providers } from "@/app/providers";
 
-// POR QUÉ: Configuración de metadatos para Next.js.
-// QUÉ: Proporciona información sobre la página a motores de búsqueda y redes sociales.
 export const metadata: Metadata = {
   metadataBase: new URL(env.NEXT_PUBLIC_APP_URL),
   title: {
@@ -43,8 +39,6 @@ export const metadata: Metadata = {
   },
 };
 
-// POR QUÉ: Configuración de layout para Next.js.
-// QUÉ: Proporciona la estructura común para todas las páginas de la web.
 export default function RootLayout({
   children,
 }: {

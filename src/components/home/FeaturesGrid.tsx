@@ -1,15 +1,5 @@
-/**
- * PROPÓSITO: Unidad del proyecto con responsabilidad acotada por su ubicación y nombre.
- * RESPONSABILIDAD: Código de soporte del proyecto.
- * DEPENDENCIAS: Ver imports del archivo para dependencias explícitas.
- * SEGURIDAD/INTEGRIDAD: Mantiene invariantes explícitas cuando aplica.
- * NOTAS: Documentar aquí decisiones no obvias y tradeoffs relevantes.
- */
 import Link from "next/link";
 
-/**
- * PROPÓSITO: API pública del módulo: ejecuta una acción con contrato explícito.
- */
 export function FeaturesGrid() {
   return (
     <>

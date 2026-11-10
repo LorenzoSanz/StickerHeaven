@@ -1,8 +1,3 @@
-/**
- * POR QUÉ: Implementación de CatalogQueryService usando Mongoose.
- * INTEGRIDAD: Proporciona read-only access to catalog data.
- * ESTRUCTURA: Capa de infraestructura - Query Service.
- */
 import { CatalogQueryService } from "../../application/queries/CatalogQueryService";
 import { ListStickersDTO, StickerDTO } from "../../application/list/ListStickersDTO";
 import { GetStickerByIdDTO } from "../../application/get-by-id/GetStickerByIdDTO";
@@ -11,7 +6,6 @@ import { StickerModel, IStickerDocument } from "../persistence/mongoose/StickerM
 import { Result } from "@/shared/domain/Result";
 import { DomainError } from "@/shared/domain/DomainError";
 import { UnexpectedError } from "@/shared/domain/UnexpectedError";
-
 
 // Implementación con Mongoose para CatalogQueryService.
 export class MongoCatalogQueryService implements CatalogQueryService {
@@ -77,8 +71,6 @@ export class MongoCatalogQueryService implements CatalogQueryService {
       }
 
       const sort: Record<string, 1 | -1> = {};
-      // POR QUÉ: El sort debe soportar combinaciones fecha+precio y mantenerse determinista entre páginas.
-      // QUÉ: Construye un sort compuesto y agrega tie-breaker por _id.
       if (query.sortBy === "price_asc") {
         sort["price.amount"] = 1;
         sort.createdAt = -1;

@@ -1,8 +1,3 @@
-/**
- * POR QUÉ: Implementación de StickerRepository usando Mongoose.
- * INTEGRIDAD: Gestiona las operaciones reales contra la base de datos.
- * ESTRUCTURA: Capa de infraestructura.
- */
 import { StickerRepository } from "../../../domain/StickerRepository";
 import { Sticker } from "../../../domain/Sticker";
 import { StickerModel, IStickerDocument } from "./StickerModel";
@@ -19,7 +14,6 @@ export class MongoStickerRepository implements StickerRepository {
     try {
       const raw = StickerMapper.toPersistence(sticker);
       
-      // POR QUÉ: Optimistic Concurrency Control (OCC)
       if (sticker.version === 0) {
         await StickerModel.findByIdAndUpdate(raw._id, raw, { upsert: true, new: true });
       } else {

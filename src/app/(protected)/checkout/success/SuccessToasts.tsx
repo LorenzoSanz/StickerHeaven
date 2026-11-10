@@ -1,7 +1,3 @@
-/**
- * POR QUÉ: El éxito de pago llega por redirect de Stripe; necesitamos mostrar un toast al aterrizar en la página de éxito.
- * QUÉ: Dispara un toast success una sola vez por sesión de pestaña.
- */
 "use client";
 
 import { useEffect } from "react";

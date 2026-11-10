@@ -1,9 +1,3 @@
-/**
- * POR QUÉ: El carrito depende de cookies (sesión y/o carrito anónimo) y requiere Server Actions para operar en SSR y revalidar caché.
- * FLUJO (guest): UI → Server Action → /api/cart → Cart module → backend puede emitir Set-Cookie (anonymous cart id) → Next lo propaga.
- * FLUJO (user): UI → Server Action → /api/cart con cookie de sesión → AuthMiddleware setea userId → casos de uso/policies.
- * LÍMITES: Aquí solo validamos input básico (Zod) y delegamos; no hay lógica de negocio.
- */
 "use server";
 
 import { revalidatePath } from "next/cache";
@@ -22,10 +16,6 @@ const cartItemSchema = z.object({
 
 const stickerIdSchema = cartItemSchema.shape.stickerId;
 
-/**
- * POR QUÉ: La UI necesita una lectura de carrito tolerante a “no autenticado” y “carrito inexistente”.
- * CONTRATO: Devuelve null en 401/404 (sin sesión o sin carrito); no lanza para evitar romper render SSR.
- */
 export async function getCartAction(): Promise<CartDTO | null> {
   try {
     return await serverApiFetch<CartDTO>("/api/cart", { method: "GET" });
@@ -37,10 +27,6 @@ export async function getCartAction(): Promise<CartDTO | null> {
   }
 }
 
-/**
- * POR QUÉ: La cantidad se actualiza como mutación explícita del carrito y debe invalidar el caché de /cart.
- * FLUJO: UI → Server Action → PATCH /api/cart/items/:id → Cart (use case) → revalidatePath(\"/cart\").
- */
 export async function updateItemQuantity(stickerId: string, quantity: number) {
   cartItemSchema.parse({ stickerId, quantity });
   await serverApiFetch(`/api/cart/items/${encodeURIComponent(stickerId)}`, {
@@ -51,9 +37,6 @@ export async function updateItemQuantity(stickerId: string, quantity: number) {
   revalidatePath("/cart");
 }
 
-/**
- * POR QUÉ: Eliminación de item como mutación; invalidamos el caché de /cart tras persistir en backend.
- */
 export async function removeItem(stickerId: string) {
   stickerIdSchema.parse(stickerId);
   await serverApiFetch(`/api/cart/items/${encodeURIComponent(stickerId)}`, {
@@ -88,8 +71,6 @@ export async function addItemToCartAction(
       cookieName: cookieConfig.cart.name,
       options: cookieConfig.cart,
     });
-    // POR QUÉ: En guest checkout, el backend puede crear un carrito y devolver un anonymousId vía Set-Cookie.
-    // QUÉ: Propagamos esa cookie en la respuesta de Next para que el navegador pueda recuperar el carrito en requests futuros.
 
     if (!res.ok) {
       throw new HttpError(await readErrorMessage(res), res.status);
@@ -105,10 +86,6 @@ export async function addItemToCartAction(
   return { success: true };
 }
 
-/**
- * POR QUÉ: Vaciar carrito es una mutación; devolvemos {error/success} para UX consistente (toasts) sin romper navegación.
- * EFECTO: Revalida /cart para reflejar el estado persistido en backend.
- */
 export async function clearCartAction(): Promise<{ error?: string; success?: true }> {
   try {
     await serverApiFetch("/api/cart", { method: "DELETE" });

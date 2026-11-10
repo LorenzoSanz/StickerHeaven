@@ -1,8 +1,3 @@
-/**
- * POR QUÉ: Interface for Order persistence.
- * INTEGRIDAD: Dependency Inversion Principle.
- * ESTRUCTURA: Capa Domain.
- */
 import { Order } from "./Order";
 import { CustomerId } from "./CustomerId";
 import { OrderId } from "./OrderId";

@@ -1,6 +1,3 @@
-// PROPÓSITO: Value Object para representar un correo electrónico de suscriptor.
-// INTEGRIDAD: Garantiza que solo se almacenen correos electrónicos válidos.
-// ESTRUCTURA: Capa Domain.
 import { ValueObject } from "@/shared/domain/ValueObject";
 import { Result } from "@/shared/domain/Result";
 import { DomainError } from "@/shared/domain/DomainError";

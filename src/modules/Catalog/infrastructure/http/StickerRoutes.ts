@@ -1,8 +1,3 @@
-/**
- * POR QUÉ: Routes for Catalog module.
- * INTEGRIDAD: Configura endpoints. La inyección de dependencias la gestiona quien llama (server.ts).
- * ESTRUCTURA: Capa de infraestructura - Routes.
- */
 import { Hono, MiddlewareHandler } from "hono";
 import { zValidator } from "@hono/zod-validator";
 import { StickerController } from "./StickerController";

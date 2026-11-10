@@ -1,15 +1,7 @@
-/**
- * POR QUÉ: Implementación de IEmailService (mock por ahora).
- * INTEGRIDAD: Registra el email en consola en vez de enviarlo.
- * ESTRUCTURA: Infraestructura compartida.
- */
 import { IEmailService } from "../../domain/IEmailService";
 import { Result } from "../../domain/Result";
 import { ILogger } from "../../domain/ILogger";
 
-/**
- * PROPÓSITO: API pública del módulo: encapsula comportamiento y dependencias.
- */
 export class ConsoleEmailService implements IEmailService {
   constructor(private logger: ILogger) {}
 

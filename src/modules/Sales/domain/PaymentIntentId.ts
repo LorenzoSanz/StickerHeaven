@@ -1,8 +1,3 @@
-/**
- * POR QUÉ: Representa un concepto del dominio.
- * INTEGRIDAD: Encapsula el ID para evitar primitive obsession y asegurar type safety.
- * ESTRUCTURA: Capa Domain - Objeto de Valor.
- */
 import { ValueObject } from "../../../shared/domain/ValueObject";
 import { Result } from "../../../shared/domain/Result";
 import { DomainError } from "../../../shared/domain/DomainError";
@@ -11,9 +6,6 @@ export interface PaymentIntentIdProps {
   value: string;
 }
 
-/**
- * PROPÓSITO: API pública del módulo: encapsula comportamiento y dependencias.
- */
 export class PaymentIntentId extends ValueObject<PaymentIntentIdProps> {
   private constructor(props: PaymentIntentIdProps) {
     super(props);

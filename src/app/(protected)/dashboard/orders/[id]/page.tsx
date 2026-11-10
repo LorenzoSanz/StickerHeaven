@@ -21,7 +21,6 @@ export default async function OrderDetailsPage({ params }: { params: Promise<{ i
         <Card className="p-10 text-center">
           <p className="text-white/70">No hemos podido encontrar este pedido.</p>
           <div className="mt-4">
-            {/* POR QUÉ: El listado de pedidos está en /dashboard/orders; este retorno debe llevar al listado real. */}
             <Link href="/dashboard/orders">
               <Button variant="outline">Volver a pedidos</Button>
             </Link>
@@ -40,7 +39,6 @@ export default async function OrderDetailsPage({ params }: { params: Promise<{ i
       description={`Realizado el ${formatDateISO(order.createdAt)}`}
       action={
         <>
-          {/* POR QUÉ: El listado de pedidos está en /dashboard/orders; este retorno debe llevar al listado real. */}
           <Link href="/dashboard/orders">
             <Button variant="outline" size="sm">
               Volver a pedidos

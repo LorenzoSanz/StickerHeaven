@@ -1,10 +1,3 @@
-/**
- * PROPÓSITO: Unidad del proyecto con responsabilidad acotada por su ubicación y nombre.
- * RESPONSABILIDAD: Código de soporte del proyecto.
- * DEPENDENCIAS: Ver imports del archivo para dependencias explícitas.
- * SEGURIDAD/INTEGRIDAD: Mantiene invariantes explícitas cuando aplica.
- * NOTAS: Documentar aquí decisiones no obvias y tradeoffs relevantes.
- */
 export function TestimonialsSection() {
   return (
     <section className="container mx-auto px-4 py-20 relative">
@@ -45,7 +38,6 @@ export function TestimonialsSection() {
             }`}
           >
             <div className="absolute top-0 right-0 p-8 opacity-10 text-8xl font-serif leading-none group-hover:text-primary transition-colors">
-              {/* POR QUÉ: Fix react/no-unescaped-entities while keeping the same UI decoration. */}
               &quot;
             </div>
 
@@ -57,7 +49,6 @@ export function TestimonialsSection() {
               ))}
             </div>
 
-            {/* POR QUÉ: Fix react/no-unescaped-entities without changing the rendered quote style. */}
             <p className="text-gray-300 mb-8 leading-relaxed relative z-10">
               &quot;{t.text}&quot;
             </p>

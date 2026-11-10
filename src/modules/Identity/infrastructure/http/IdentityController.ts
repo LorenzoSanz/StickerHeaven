@@ -1,10 +1,4 @@
 
-/**
- * POR QUÉ: Adapta peticiones HTTP a casos de uso de la capa Application.
- * INTEGRIDAD: Actúa como adaptador de interfaz (controller) en arquitectura hexagonal.
- * ESTRUCTURA: Capa de infraestructura - depende de la capa Application.
- */
-
 import { Context } from "hono";
 import { setCookie, deleteCookie, getCookie } from "hono/cookie";
 import { setSessionCookie, deleteSessionCookie } from "@/config/sessionCookie";
@@ -26,9 +20,6 @@ import { cookieConfig } from "@/config/cookieConfig";
 import { ILogger } from "@/shared/domain/ILogger";
 import { SessionQueryService } from "../../application/queries/SessionQueryService";
 
-/**
- * PROPÓSITO: API pública del módulo: encapsula comportamiento y dependencias.
- */
 export class IdentityController {
   constructor(
     private readonly registerUser: RegisterUser,
@@ -201,7 +192,6 @@ export class IdentityController {
         });
 
         this.logger.info("Usuario deslogueado correctamente");
-        // POR QUÉ: Un POST desde un <form> navega al endpoint; redirigir a "/" evita mostrar JSON en pantalla tras logout.
         const accept = c.req.header("accept") ?? "";
         if (accept.includes("application/json")) {
           return c.json({ message: "Cierre de sesión correcto" }, HttpStatus.OK);

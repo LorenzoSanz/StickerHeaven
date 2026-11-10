@@ -34,8 +34,6 @@ export function createSalesModule(deps: {
   cartWritePort: () => CartWritePort;
 }) {
   const getOrderRepository = createLazySingleton(() => new MongoOrderRepository(deps.eventPublisher()));
-  // POR QUÉ: Evitamos ramas de configuración implícitas; el gateway de pago debe ser Stripe en todos los entornos.
-  // OBSERVABILIDAD: La app ya no puede arrancar sin STRIPE_SECRET_KEY válida.
   const getPaymentGateway = createLazySingleton(() => new StripePaymentGateway(env.STRIPE_SECRET_KEY));
   const getSalesQueryService = createLazySingleton(() => new MongoSalesQueryService());
 

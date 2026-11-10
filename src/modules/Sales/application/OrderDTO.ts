@@ -1,8 +1,3 @@
-/**
- * POR QUÉ: DTO para Order information.
- * INTEGRIDAD: Pure data structure, no behavior.
- * ESTRUCTURA: Capa Application - DTO.
- */
 import type { OrderStatusType } from "../domain/OrderStatus";
 
 export interface OrderItemDTO {

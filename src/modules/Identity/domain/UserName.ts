@@ -1,15 +1,7 @@
-/**
- * POR QUÉ: Objeto de Valor representing a user's name.
- * INTEGRIDAD: Impone invariantes del valor.
- * ESTRUCTURA: Capa Domain - Objeto de Valor.
- */
 import { ValueObject } from "../../../shared/domain/ValueObject";
 import { Result } from "../../../shared/domain/Result";
 import { DomainError } from "../../../shared/domain/DomainError";
 
-/**
- * PROPÓSITO: API pública del módulo: encapsula comportamiento y dependencias.
- */
 export class InvalidUserNameError extends DomainError {
   constructor(reason: string) {
     super(`Nombre de usuario inválido: ${reason}`);

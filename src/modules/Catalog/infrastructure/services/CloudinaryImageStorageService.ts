@@ -1,10 +1,3 @@
-/**
- * PROPÓSITO: Unidad del proyecto con responsabilidad acotada por su ubicación y nombre.
- * RESPONSABILIDAD: Código de soporte del proyecto.
- * DEPENDENCIAS: Ver imports del archivo para dependencias explícitas.
- * SEGURIDAD/INTEGRIDAD: Mantiene invariantes explícitas cuando aplica.
- * NOTAS: Documentar aquí decisiones no obvias y tradeoffs relevantes.
- */
 
 import { v2 as cloudinary } from "cloudinary";
 import { IImageStorageService } from "../../domain/gateways/IImageStorageService";
@@ -13,9 +6,6 @@ import { DomainError } from "@/shared/domain/DomainError";
 import { env } from "@/config/env";
 import { ILogger } from "@/shared/domain/ILogger";
 
-/**
- * PROPÓSITO: Implementación con Cloudinary para IImageStorageService.
- */
 export class CloudinaryImageStorageService implements IImageStorageService {
   constructor(private logger: ILogger) {
     cloudinary.config({

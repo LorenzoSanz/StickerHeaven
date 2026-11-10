@@ -1,10 +1,3 @@
-/**
- * POR QUÉ: DTO para actualizar stickers en el catálogo.
- * RESPONSABILIDAD: Transferir datos entre la capa de presentación y la capa de aplicación.
- * DEPENDENCIAS: z (Zod) para validación.
- * SEGURIDAD/INTEGRIDAD: Permite actualizaciones parciales.
- * ESTRUCTURA: Capa Application - DTO.
- */
 import { z } from "zod";
 
 export const UpdateStickerSchema = z.object({

@@ -1,8 +1,3 @@
-/**
- * POR QUÉ: Caso de uso para restore/increase stock of a sticker.
- * INTEGRIDAD: Used for compensation transactions (Sagas) or stock replenishment.
- * ESTRUCTURA: Capa Application.
- */
 import { StickerRepository } from "../../domain/StickerRepository";
 import { Result } from "../../../../shared/domain/Result";
 import { DomainError } from "../../../../shared/domain/DomainError";
@@ -13,9 +8,6 @@ import { StickerId } from "../../domain/StickerId";
 import { Quantity } from "../../../../shared/domain/Quantity";
 import { RestoreStickerStockDTO } from "./RestoreStickerStockDTO";
 
-/**
- * PROPÓSITO: API pública del módulo: encapsula comportamiento y dependencias.
- */
 export class RestoreStickerStock {
   constructor(private stickerRepository: StickerRepository) {}
 
@@ -35,7 +27,6 @@ export class RestoreStickerStock {
     }
 
     const currentStock = sticker.stock.value;
-    // POR QUÉ: Asegura que el stock no desborde ni quede inválido (aunque es improbable con +)
     const newStockOrError = StickerStock.create(currentStock + quantity.value);
 
     if (newStockOrError.isFailure) {

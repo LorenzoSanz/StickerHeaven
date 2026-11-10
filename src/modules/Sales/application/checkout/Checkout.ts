@@ -1,13 +1,3 @@
-/**
- * POR QUÉ: Caso de uso para gestionar el proceso de checkout convirtiendo items del carrito en un pedido.
- * INTEGRIDAD: Garantiza que el pedido se cree a partir del estado autoritativo del carrito.
- * ESTRUCTURA: Capa Application - Caso de uso.
- *
- * FLUJO:
- * 1) Obtener snapshot del carrito (CartGateway).
- * 2) Validar que haya items y usuario autenticado.
- * 3) Delegar en CreateOrder (calcula total en backend, prepara pago, reduce stock con compensación).
- */
 import { CartGateway, CartItemDTO } from "../../domain/gateways/CartGateway";
 import { CreateOrder } from "../create-order/CreateOrder";
 import { Result } from "@/shared/domain/Result";
@@ -18,17 +8,12 @@ type CheckoutValue = { id: string; clientSecret: string };
 type CheckoutResult = Result<CheckoutValue, DomainError>;
 
 function stableCheckoutKey(cartId: string, items: CartItemDTO[]): string {
-  // POR QUÉ: El checkout es sensible a doble click/reintentos; generamos una clave estable basada en el “snapshot” del carrito.
   const normalized = items
     .map((i) => ({ stickerId: i.stickerId, quantity: i.quantity }))
     .sort((a, b) => a.stickerId.localeCompare(b.stickerId));
   return `${cartId}:${JSON.stringify(normalized)}`;
 }
 
-/**
- * POR QUÉ: Evitamos crear múltiples PaymentIntents/pedidos si el usuario dispara checkout repetidamente con el mismo carrito.
- * QUÉ: Deduplica por un TTL corto y comparte promesas “in-flight” por clave de snapshot.
- */
 export class Checkout {
   private readonly cacheTtlMs = 30_000;
   private readonly maxCachedEntries = 200;

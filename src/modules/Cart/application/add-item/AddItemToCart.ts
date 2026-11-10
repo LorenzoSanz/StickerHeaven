@@ -1,8 +1,3 @@
-/**
- * POR QUÉ: Caso de uso para añadir un item al carrito. Crea el carrito si no existe.
- * INTEGRIDAD: Valida invariantes del valor.
- * ESTRUCTURA: Capa Application - Caso de uso.
- */
 import { CartRepository } from "../../domain/CartRepository";
 import { Cart } from "../../domain/Cart";
 import { CartId } from "../../domain/CartId";
@@ -15,21 +10,12 @@ import { AnonymousCartId } from "../../domain/AnonymousCartId";
 import { Quantity } from "../../../../shared/domain/Quantity";
 import { AddItemToCartDTO } from "./AddItemToCartDTO";
 
-/**
- * PROPÓSITO: API pública del módulo: encapsula comportamiento y dependencias.
- */
 export class AddItemToCart {
   constructor(
     private cartRepository: CartRepository,
     private catalogGateway: CatalogGateway
   ) {}
 
-  /**
-   * POR QUÉ: El “añadir al carrito” es una mutación y debe validar invariantes antes de persistir.
-   * QUÉ: Resuelve el carrito del usuario o invitado (creándolo si no existe), valida cantidad/stock vía gateway al catálogo y guarda con OCC.
-   * @param dto Identidad (userId o anonymousId), stickerId y cantidad solicitada.
-   * @returns Resultado con el id del carrito y, si corresponde, un anonymousId generado para guests.
-   */
   async execute(dto: AddItemToCartDTO): Promise<Result<{ cartId: string; anonymousId: string | null }, DomainError>> {
     const { userId, anonymousId, stickerId, quantity } = dto;
     

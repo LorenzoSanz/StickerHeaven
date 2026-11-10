@@ -1,8 +1,3 @@
-/**
- * POR QUÉ: Command to delete a sticker.
- * INTEGRIDAD: Valida invariantes del valor.
- * ESTRUCTURA: Capa Application - Caso de uso.
- */
 import { StickerRepository } from "../../domain/StickerRepository";
 import { Result } from "../../../../shared/domain/Result";
 import { DomainError } from "../../../../shared/domain/DomainError";
@@ -13,9 +8,6 @@ import { StickerId } from "../../domain/StickerId";
 import { DeleteStickerDTO } from "./DeleteStickerDTO";
 import { StickerOwnershipPolicy } from "../policies/StickerOwnershipPolicy";
 
-/**
- * PROPÓSITO: API pública del módulo: encapsula comportamiento y dependencias.
- */
 export class DeleteSticker {
   constructor(
     private stickerRepository: StickerRepository,

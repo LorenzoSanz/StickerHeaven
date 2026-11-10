@@ -152,8 +152,6 @@ body {
   box-shadow: none;
 }
 
-/* POR QUÉ: Los spinners nativos de inputs number rompen la estética y varían entre navegadores. */
-/* QUÉ: Permite ocultarlos de forma opt-in con la clase .no-number-spin (manteniendo step=1). */
 input.no-number-spin[type="number"]::-webkit-outer-spin-button,
 input.no-number-spin[type="number"]::-webkit-inner-spin-button {
   -webkit-appearance: none;
@@ -193,8 +191,6 @@ input.no-number-spin[type="number"] {
   }
 }
 
-/* POR QUÉ: Los navegadores aplican fondos claros y texto negro a campos autocompletados por defecto. */
-/* QUÉ: Fuerza el uso de los colores del tema y evita el cambio visual brusco mediante una transición infinita. */
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,

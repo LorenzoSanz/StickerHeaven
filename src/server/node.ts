@@ -1,9 +1,3 @@
-/**
- * POR QUÉ: Entrypoint del proceso de API cuando se ejecuta en Node/Bun.
- * QUÉ: Carga env, conecta Mongo, decide el rate limiter (Redis si está disponible) y levanta el servidor Hono.
- * LÍMITES: No implementa reglas de negocio; solo gestiona lifecycle del proceso y recursos de infraestructura.
- * OBSERVABILIDAD: Registra el modo de rate limit y la URL de escucha; captura crash para salir con code 1.
- */
 import { serve } from "@hono/node-server";
 import { connectMongo, disconnectMongo } from "@/server/connectMongo";
 import { createApp } from "@/server/createApp";

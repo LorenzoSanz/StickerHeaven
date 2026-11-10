@@ -1,8 +1,3 @@
-/**
- * POR QUÉ: Caso de uso para retrieve a specific order por ID.
- * INTEGRIDAD: Garantiza que el pedido exista y pertenezca al usuario solicitante.
- * ESTRUCTURA: Capa Application - Caso de uso.
- */
 import { Result } from "@/shared/domain/Result";
 import { DomainError } from "@/shared/domain/DomainError";
 import { CustomerId } from "../../domain/CustomerId";
@@ -12,9 +7,6 @@ import { SalesQueryService } from "../queries/SalesQueryService";
 import { OrderReadAccessPolicy } from "../policies/OrderReadAccessPolicy";
 import { OrderNotFoundError } from "../../domain/Errors";
 
-/**
- * PROPÓSITO: API pública del módulo: encapsula comportamiento y dependencias.
- */
 export class GetOrderById {
   constructor(
     private readonly salesQueryService: SalesQueryService,

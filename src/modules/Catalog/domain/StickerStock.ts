@@ -1,8 +1,3 @@
-/**
- * POR QUÉ: Objeto de Valor que representa el stock disponible de un sticker.
- * INTEGRIDAD: Impone invariantes del valor.
- * ESTRUCTURA: Capa Domain.
- */
 import { ValueObject } from "../../../shared/domain/ValueObject";
 import { Result } from "../../../shared/domain/Result";
 import { DomainError } from "../../../shared/domain/DomainError";

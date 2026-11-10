@@ -1,8 +1,3 @@
-/**
- * POR QUÉ: Perfil/password requieren sesión; Server Actions permiten validar input, enviar cookies SSR y redirigir en servidor.
- * FLUJO: UI → Server Action → /api/auth/profile (PUT) o /api/auth/profile/password (PUT) → Identity (use case + policies).
- * LÍMITES: La validación aquí es de formato/UX; la validación y autorización definitiva vive en backend.
- */
 "use server";
 
 import { z } from "zod";
@@ -20,10 +15,6 @@ const passwordSchema = z.object({
   newPassword: z.string().min(8, "La contraseña debe tener al menos 8 caracteres"),
 });
 
-/**
- * POR QUÉ: Actualizar perfil es una mutación; devolvemos {error|success} para feedback sin recargar la página.
- * EFECTO: En 401 redirige a /login (sesión expirada o inexistente).
- */
 export async function updateProfile(prevState: unknown, formData: FormData) {
   const username = formData.get("username") as string;
   const email = formData.get("email") as string;
@@ -49,10 +40,6 @@ export async function updateProfile(prevState: unknown, formData: FormData) {
   return { success: "Perfil actualizado correctamente" };
 }
 
-/**
- * POR QUÉ: Cambiar contraseña requiere conocer el password actual; la UI solo valida formato y delega.
- * EFECTO: En 401 redirige a /login; en éxito retorna mensaje para toasts/UI.
- */
 export async function changePassword(prevState: unknown, formData: FormData) {
   const currentPassword = formData.get("currentPassword") as string;
   const newPassword = formData.get("newPassword") as string;

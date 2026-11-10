@@ -1,7 +1,3 @@
-/**
- * POR QUÉ: Un route group (protected) no aplica seguridad por sí solo; necesitamos una barrera server-side.
- * QUÉ: Este layout valida sesión y redirige a /login si el usuario no está autenticado.
- */
 import type { ReactNode } from "react";
 import { redirect } from "next/navigation";
 import { serverApiFetch } from "@/lib/serverApi";

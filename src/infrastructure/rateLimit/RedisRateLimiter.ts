@@ -1,4 +1,3 @@
-// PROPÓSITO: Implementa un RateLimiter usando Redis para limitar el número de solicitudes por clave.
 import { createClient, type RedisClientType } from "redis";
 import { RateLimiter, RateLimitDecision } from "./RateLimiter";
 
@@ -12,9 +11,6 @@ end
 return current
 `;
 
-/**
- * PROPÓSITO: API pública del módulo: encapsula comportamiento y dependencias.
- */
 export class RedisRateLimiter implements RateLimiter {
   private client: RedisClientType;
   private readonly redisUrl: string;
@@ -28,7 +24,6 @@ export class RedisRateLimiter implements RateLimiter {
     this.client = this.buildClient();
   }
 
-  // PROPÓSITO: Crea un cliente Redis con configuración básica.
   private buildClient(): RedisClientType {
     return createClient({
       url: this.redisUrl,
@@ -40,7 +35,6 @@ export class RedisRateLimiter implements RateLimiter {
     });
   }
 
-  // PROPÓSITO: Asegura que el cliente Redis está conectado.
   private async ensureConnected(): Promise<void> {
     if (this.client.isReady) return;
     if (!this.client.isOpen) {
@@ -73,13 +67,11 @@ export class RedisRateLimiter implements RateLimiter {
     await this.client.ping();
   }
 
-  // PROPÓSITO: Cierra la conexión con Redis.
   async disconnect(): Promise<void> {
     if (!this.client.isOpen) return;
     await this.client.quit();
   }
 
-  // PROPÓSITO: Consume una solicitud para la clave dada y devuelve la decisión de limitación de tasa.
   async consume(key: string): Promise<RateLimitDecision> {
     try {
       await this.ensureConnected();

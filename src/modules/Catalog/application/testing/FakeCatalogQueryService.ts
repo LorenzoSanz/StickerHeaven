@@ -5,9 +5,6 @@ import { ListStickersDTO, StickerDTO } from "@/modules/Catalog/application/list/
 import { GetStickerByIdDTO } from "@/modules/Catalog/application/get-by-id/GetStickerByIdDTO";
 import { PaginatedStickersDTO, SearchStickersQuery } from "@/modules/Catalog/application/queries/SearchStickersQuery";
 
-/**
- * PROPÓSITO: API pública del módulo: encapsula comportamiento y dependencias.
- */
 export class FakeCatalogQueryService implements CatalogQueryService {
   private stickers: GetStickerByIdDTO[] = [];
 

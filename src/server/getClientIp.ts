@@ -1,8 +1,3 @@
-/**
- * POR QUÉ: Obtener la IP del cliente basada en encabezados HTTP para rastrear actividad y prevenir abusos.
- * QUÉ: Expone una función para recuperar la IP del cliente basada en encabezados HTTP.
- * LÍMITES: No valida la validez de la IP; asume que los encabezados son correctos.
- */
 export function getClientIp(headers: Headers, trustProxy: boolean): string {
   if (!trustProxy) return "unknown";
 

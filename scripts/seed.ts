@@ -14,7 +14,6 @@ import { NullLogger } from "../src/shared/infrastructure/logger/NullLogger";
 
 const logger = new NullLogger();
 
-// PROPÓSITO: Seed de la base de datos con usuarios y stickers de ejemplo.
 async function seed() {
   console.log("Iniciando seeding de la base de datos para que los profes prueben la app.");
 

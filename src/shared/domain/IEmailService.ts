@@ -1,8 +1,3 @@
-/**
- * POR QUÉ: Interface for sending emails.
- * INTEGRIDAD: Decouples domain from email provider.
- * ESTRUCTURA: Shared Domain.
- */
 import { Result } from "./Result";
 
 export interface IEmailService {

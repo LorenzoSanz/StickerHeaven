@@ -10,12 +10,6 @@ import { DomainError } from "../../../../shared/domain/DomainError";
 import { AnonymousCartId } from "../../domain/AnonymousCartId";
 import { Quantity } from "@/shared/domain/Quantity";
 
-
-// /**
-//  * POR QUÉ: Pruebas para MergeCarts Caso de uso.
-//  * INTEGRIDAD: Verifica la integridad de la operación de fusionar carritos.
-//  * ESTRUCTURA: Suite de tests.
-//  */
 describe("MergeCarts Use Case", () => {
   let useCase: MergeCarts;
   let mockRepo: CartRepository;

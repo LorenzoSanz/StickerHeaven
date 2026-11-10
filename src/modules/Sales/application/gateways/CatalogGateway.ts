@@ -1,8 +1,3 @@
-/**
- * POR QUÉ: Interfaz para comunicarse con el módulo Catalog.
- * INTEGRIDAD: Decouples Sales from Catalog implementation details.
- * ESTRUCTURA: Capa Application Port.
- */
 import { Result } from "../../../../shared/domain/Result";
 import { DomainError } from "../../../../shared/domain/DomainError";
 import type { CatalogProductInfo } from "@/shared/contracts/CatalogPorts";

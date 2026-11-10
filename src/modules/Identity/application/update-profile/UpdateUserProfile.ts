@@ -1,8 +1,3 @@
-/**
- * POR QUÉ: Caso de uso para update user profile (email and username).
- * INTEGRIDAD: Impone invariantes del valor.
- * ESTRUCTURA: Capa Application.
- */
 import { UserRepository } from "../../domain/UserRepository";
 import { UpdateUserProfileDTO } from "./UpdateUserProfileDTO";
 import { Result } from "@/shared/domain/Result";
@@ -11,7 +6,6 @@ import { UserId } from "../../domain/UserId";
 import { Email } from "../../domain/Email";
 import { UserName } from "../../domain/UserName";
 import { UserProfileAccessPolicy } from "../policies/UserProfileAccessPolicy";
-
 
 export class UpdateUserProfile {
   constructor(

@@ -1,10 +1,3 @@
-/**
- * PROPÓSITO: Command para crear un Sticker desde el dominio con imagen (single source of truth).
- * RESPONSABILIDAD: Orquesta validación de invariantes → upload a Cloudinary → persistencia en Mongo.
- * DEPENDENCIAS: StickerRepository (persistencia) + IImageStorageService (Cloudinary u otro).
- * SEGURIDAD/INTEGRIDAD: Asegura que no exista Sticker sin URL válida; compensa borrando la imagen si falla persistencia.
- * NOTAS: Cloudinary no es fuente de verdad; solo almacena la imagen, el Sticker nace aquí.
- */
 import { Result } from "@/shared/domain/Result";
 import { DomainError } from "@/shared/domain/DomainError";
 import type { StickerRepository } from "@/modules/Catalog/domain/StickerRepository";
@@ -31,9 +24,6 @@ export type CreateStickerWithImageDTO = {
   image: { buffer: Buffer; filename?: string };
 };
 
-/**
- * PROPÓSITO: API pública del módulo: ejecuta un Command con un contrato explícito.
- */
 export class CreateStickerWithImage {
   constructor(
     private stickerRepository: StickerRepository,

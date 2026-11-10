@@ -1,4 +1,3 @@
-// PORQUE: Next.js v16 usa la configuración de ESLint plana, la configuración antigua no está disponible.
 
 import nextCoreWebVitals from "eslint-config-next/core-web-vitals";
 

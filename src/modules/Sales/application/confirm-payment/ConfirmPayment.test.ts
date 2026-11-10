@@ -1,8 +1,3 @@
-/**
- * POR QUÉ: Pruebas para ConfirmPayment Caso de uso.
- * INTEGRIDAD: Verifica success flow, idempotency, and error handling.
- * ESTRUCTURA: Suite de tests - Unit Pruebas.
- */
 import { describe, it, expect, mock, beforeEach } from "bun:test";
 import { ConfirmPayment } from "./ConfirmPayment";
 import { OrderRepository } from "../../domain/OrderRepository";

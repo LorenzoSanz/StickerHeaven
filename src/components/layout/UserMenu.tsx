@@ -71,8 +71,6 @@ export function UserMenu({ name, email }: { name: string; email: string }) {
   useEffect(() => {
     if (!pendingRefreshPathname) return;
     if (pathname !== pendingRefreshPathname) return;
-    // POR QUÉ: El header y otros elementos autenticados se renderizan en Server Components.
-    // QUÉ: Refresca la ruta destino después del logout para sincronizar UI con la cookie eliminada.
     router.refresh();
     setPendingRefreshPathname(null);
   }, [pathname, pendingRefreshPathname, router]);
@@ -125,7 +123,6 @@ export function UserMenu({ name, email }: { name: string; email: string }) {
 
             <div className="p-2">
               <div className="space-y-1">
-                {/* POR QUÉ: Añadimos acceso directo al panel para que el usuario llegue a /dashboard sin pasar por secciones específicas. */}
                 <Link
                   role="menuitem"
                   href="/dashboard"
@@ -141,7 +138,6 @@ export function UserMenu({ name, email }: { name: string; email: string }) {
                   <span className="text-white/35">→</span>
                 </Link>
 
-                {/* POR QUÉ: Mantenemos 'Cuenta' como acceso a perfil, pero debajo del panel para una jerarquía clara. */}
                 <Link
                   role="menuitem"
                   href="/dashboard/profile"
@@ -172,7 +168,6 @@ export function UserMenu({ name, email }: { name: string; email: string }) {
                   <span className="text-white/35">→</span>
                 </Link>
 
-                {/* POR QUÉ: /dashboard pasa a ser el panel; 'Pedidos' debe llevar al listado real en /dashboard/orders. */}
                 <Link
                   role="menuitem"
                   href="/dashboard/orders"
@@ -188,7 +183,6 @@ export function UserMenu({ name, email }: { name: string; email: string }) {
                   <span className="text-white/35">→</span>
                 </Link>
 
-                {/* POR QUÉ: Señalizamos la acción destructiva de salir con color rojo para reducir salidas accidentales. */}
                 <button
                   role="menuitem"
                   type="button"
@@ -203,8 +197,6 @@ export function UserMenu({ name, email }: { name: string; email: string }) {
                       }
                       flashNotify({ variant: "info", title: "Sesión cerrada", message: "Has salido correctamente." });
                       setOpen(false);
-                      // POR QUÉ: router.refresh debe ocurrir sobre la ruta final para re-evaluar Server Components sin carreras.
-                      // QUÉ: Navega a la landing y programa el refresh para cuando el pathname sea el destino.
                       setPendingRefreshPathname("/");
                       router.push("/");
                     } finally {

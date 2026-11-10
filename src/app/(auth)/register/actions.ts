@@ -1,8 +1,3 @@
-/**
- * POR QUÉ: Unificamos feedback (success/error) vía Server Actions para mostrar toasts consistentes sin lógica de negocio en UI.
- * FLUJO: UI → Server Action → POST /api/auth/register → Identity (RegisterUser + crear sesión) → Next setea cookie de sesión.
- * QUÉ: Valida formato, delega registro al backend y establece cookie HttpOnly en el navegador con el sessionId devuelto.
- */
 "use server";
 
 import { z } from "zod";
@@ -17,10 +12,6 @@ const registerSchema = z.object({
   password: z.string().min(MIN_PASSWORD_LENGTH, `La contraseña debe tener al menos ${MIN_PASSWORD_LENGTH} caracteres`),
 });
 
-/**
- * POR QUÉ: En App Router, la forma más fiable de establecer cookie de sesión es hacerlo en el servidor de Next.
- * CONTRATO: Devuelve {success} o {error}; no redirige (la pantalla decide el siguiente paso).
- */
 export async function registerAction(
   prevState: unknown,
   formData: FormData
@@ -56,7 +47,6 @@ export async function registerAction(
   }
 
   const cookieStore = await cookies();
-  // POR QUÉ: La cookie es HttpOnly; el cliente no puede leerla, así que la emitimos desde Next usando el config centralizado.
   setSessionCookie(
     {
       set: (name, value, opts) => cookieStore.set(name, value, opts as any),

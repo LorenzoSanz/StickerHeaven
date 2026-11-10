@@ -1,8 +1,3 @@
-/**
- * POR QUÉ: DTO para crear un pedido.
- * INTEGRIDAD: Transporta datos entre límites sin comportamiento.
- * ESTRUCTURA: Capa Application - DTO.
- */
 import { z } from "zod";
 
 export const CreateOrderSchema = z.object({

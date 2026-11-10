@@ -1,8 +1,3 @@
-/**
- * POR QUÉ: Interface for session persistence.
- * INTEGRIDAD: Define el contrato para storing and retrieving sessions.
- * ESTRUCTURA: Capa Domain - Repository Interface.
- */
 import { Session } from "./Session";
 import { Result } from "../../../shared/domain/Result";
 import { DomainError } from "../../../shared/domain/DomainError";

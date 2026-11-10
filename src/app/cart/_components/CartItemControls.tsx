@@ -1,19 +1,9 @@
-/**
- * PROPÓSITO: Unidad del proyecto con responsabilidad acotada por su ubicación y nombre.
- * RESPONSABILIDAD: Código de soporte del proyecto.
- * DEPENDENCIAS: Ver imports del archivo para dependencias explícitas.
- * SEGURIDAD/INTEGRIDAD: Mantiene invariantes explícitas cuando aplica.
- * NOTAS: Documentar aquí decisiones no obvias y tradeoffs relevantes.
- */
 "use client";
 
 import { useEffect, useState } from "react";
 import { Trash2, Minus, Plus } from "lucide-react";
 import { Spinner } from "@/components/ui/Spinner";
 
-/**
- * PROPÓSITO: API pública del módulo: ejecuta una acción con contrato explícito.
- */
 export function CartItemControls({
   quantity,
   isUpdating,
@@ -27,8 +17,6 @@ export function CartItemControls({
   onUpdateQuantity: (nextQuantity: number) => void;
   onRemove: () => void;
 }) {
-  // POR QUÉ: Permitir edición manual de cantidad sin disparar updates en cada tecla y sin perder el estilo compacto.
-  // QUÉ: Mantiene un input controlado y aplica el cambio en blur/Enter con clamp mínimo 1.
   const [draftQuantity, setDraftQuantity] = useState<string>(String(quantity));
 
   useEffect(() => {

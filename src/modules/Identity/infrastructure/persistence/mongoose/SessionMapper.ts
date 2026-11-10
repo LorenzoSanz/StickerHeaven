@@ -1,17 +1,9 @@
 
-/**
- * POR QUÉ: Converts between Domain Entities and Persistence Models (Mongoose Documents).
- * INTEGRIDAD: Patrón Data Mapper. Mantiene el Domain aislado de detalles de base de datos.
- * ESTRUCTURA: Capa de infraestructura - Mapper.
- */
 import { Session, SessionProps } from "../../../domain/Session";
 import { SessionDocument } from "./SessionModel";
 import { SessionId } from "../../../domain/SessionId";
 import { UserId } from "../../../domain/UserId";
 
-/**
- * PROPÓSITO: API pública del módulo: encapsula comportamiento y dependencias.
- */
 export class SessionMapper {
   static toDomain(raw: SessionDocument): Session {
     return Session.reconstitute({

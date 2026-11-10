@@ -1,9 +1,4 @@
 
-/**
- * POR QUÉ: Implementación de SessionRepository usando Mongoose.
- * INTEGRIDAD: Persists session data.
- * ESTRUCTURA: Capa de infraestructura - Repository Implementation.
- */
 import { SessionRepository } from "../../../domain/SessionRepository";
 import { Session } from "../../../domain/Session";
 import { SessionModel, SessionDocument } from "./SessionModel";
@@ -15,9 +10,6 @@ import { User } from "../../../domain/User";
 import { UserModel, UserDocument } from "./UserModel";
 import { UserMapper } from "./UserMapper";
 
-/**
- * PROPÓSITO: API pública del módulo: encapsula comportamiento y dependencias.
- */
 export class MongoSessionRepository implements SessionRepository {
   async save(session: Session): Promise<Result<void, DomainError>> {
     try {

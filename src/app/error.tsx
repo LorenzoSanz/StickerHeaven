@@ -1,8 +1,5 @@
 "use client";
 
-// POR QUÉ: Configuración de página de error para Next.js.
-// QUÉ: Proporciona una página personalizada para errores en la aplicación.
-// Asegura que el usuario tenga una experiencia fluida y sin interrupciones en caso de error.
 import Link from "next/link";
 import { useEffect } from "react";
 import { Card } from "@/components/ui/Card";
@@ -16,8 +13,6 @@ export default function Error({
   reset: () => void;
 }) {
   useEffect(() => {
-    // POR QUÉ: Evitar llenar la consola en producción con errores ya manejados por UI.
-    // QUÉ: Loguea solo en desarrollo para debugging local.
     if (process.env.NODE_ENV !== "production") console.error(error);
   }, [error]);
 

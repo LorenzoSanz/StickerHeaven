@@ -1,8 +1,5 @@
 "use client";
 
-// POR QUÉ: Configuración de plantilla para Next.js.
-// QUÉ: Proporciona una estructura común para todas las páginas de la web.
-
 import { usePathname } from "next/navigation";
 import { RouteTransitionOverlay } from "@/components/ui/RouteTransitionOverlay";
 

@@ -1,7 +1,3 @@
-/**
- * POR QUÉ: Las server actions redirigen en el servidor; usamos query params para disparar toasts tras navegación.
- * QUÉ: Muestra un toast de éxito y limpia el query param para evitar repetición al refrescar.
- */
 "use client";
 
 import { useEffect } from "react";

@@ -1,8 +1,3 @@
-/**
- * POR QUÉ: Define la estructura de datos de entrada para el registro de usuario.
- * INTEGRIDAD: DTO (Data Transfer Object) desacopla las capas externas (API) de la firma del caso de uso.
- * ESTRUCTURA: Capa Application - Define el límite de entrada.
- */
 
 import { z } from "zod";
 

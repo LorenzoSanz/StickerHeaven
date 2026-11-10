@@ -1,10 +1,3 @@
-/**
- * PROPÓSITO: Unidad del proyecto con responsabilidad acotada por su ubicación y nombre.
- * RESPONSABILIDAD: Código de soporte del proyecto.
- * DEPENDENCIAS: Ver imports del archivo para dependencias explícitas.
- * SEGURIDAD/INTEGRIDAD: Mantiene invariantes explícitas cuando aplica.
- * NOTAS: Documentar aquí decisiones no obvias y tradeoffs relevantes.
- */
 export function MarqueeStrip() {
   return (
     <div className="w-full bg-primary/10 border-y border-primary/20 overflow-hidden py-4 relative">

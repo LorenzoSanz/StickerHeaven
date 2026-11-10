@@ -1,8 +1,3 @@
-/**
- * POR QUÉ: Caso de uso para actualizar la cantidad de un item del carrito.
- * INTEGRIDAD: Valida invariantes del valor.
- * ESTRUCTURA: Capa Application - Caso de uso.
- */
 import { CartRepository } from "../../domain/CartRepository";
 import { UpdateCartItemQuantityDTO } from "./UpdateCartItemQuantityDTO";
 import { Result } from "@/shared/domain/Result";
@@ -12,9 +7,6 @@ import { Quantity } from "@/shared/domain/Quantity";
 import { OwnerId } from "../../domain/OwnerId";
 import { AnonymousCartId } from "../../domain/AnonymousCartId";
 
-/**
- * PROPÓSITO: API pública del módulo: encapsula comportamiento y dependencias.
- */
 export class UpdateCartItemQuantity {
   constructor(private cartRepository: CartRepository) {}
 

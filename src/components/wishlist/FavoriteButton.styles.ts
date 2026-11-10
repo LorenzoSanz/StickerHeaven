@@ -1,8 +1,3 @@
-/**
- * PROPÓSITO: Centralizar estilos derivados (Tailwind classes) para el botón de favoritos.
- * RESPONSABILIDAD: Garantizar centrado del icono y coherencia visual sin depender de runtime de Next.
- * DEPENDENCIAS: Solo utilidades puras (cn).
- */
 import { cn } from "@/lib/utils";
 
 export function getFavoriteButtonClassName({ active }: { active: boolean }) {

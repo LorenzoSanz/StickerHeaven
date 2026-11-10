@@ -1,13 +1,5 @@
-/**
- * PROPÓSITO: Unidad del proyecto con responsabilidad acotada por su ubicación y nombre.
- * RESPONSABILIDAD: Código de soporte del proyecto.
- * DEPENDENCIAS: Ver imports del archivo para dependencias explícitas.
- * SEGURIDAD/INTEGRIDAD: Mantiene invariantes explícitas cuando aplica.
- * NOTAS: Documentar aquí decisiones no obvias y tradeoffs relevantes.
- */
 "use client";
 
-// POR QUÉ: React 19 renombró useFormState a useActionState; mantiene el mismo flujo de forms sin warnings en consola.
 import { useActionState } from "react";
 import { useEffect, useRef } from "react";
 import { useFormStatus } from "react-dom";

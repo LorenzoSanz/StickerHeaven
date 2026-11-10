@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-// POR QUÉ: React 19 renombró useFormState a useActionState; permite Server Actions con estado sin warnings.
 import { useActionState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";

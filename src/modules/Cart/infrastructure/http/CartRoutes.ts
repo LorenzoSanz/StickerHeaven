@@ -1,9 +1,4 @@
 
-/**
- * POR QUÉ: Define rutas HTTP para el módulo Cart.
- * INTEGRIDAD: Maps URLs to Controller methods and applies middleware.
- * ESTRUCTURA: Capa de infraestructura - Routes.
- */
 import { Hono, MiddlewareHandler } from "hono";
 import { zValidator } from "@hono/zod-validator";
 import { CartController } from "./CartController";

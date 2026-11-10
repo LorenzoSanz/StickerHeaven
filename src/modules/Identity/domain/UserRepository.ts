@@ -1,8 +1,3 @@
-/**
- * POR QUÉ: Define el contrato para user persistence.
- * INTEGRIDAD: Patrón Repository (Puerto). Permite que el Domain sea agnóstico de la tecnología de base de datos.
- * ESTRUCTURA: Capa Domain - Interface only. Implementation belongs in Infrastructure.
- */
 
 import { User } from "./User";
 import { Result } from "../../../shared/domain/Result";

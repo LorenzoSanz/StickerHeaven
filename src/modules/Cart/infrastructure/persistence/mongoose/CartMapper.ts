@@ -1,8 +1,3 @@
-/**
- * POR QUÉ: Transforms data between Domain and Persistence formats.
- * INTEGRIDAD: Valida invariantes del valor.
- * ESTRUCTURA: Capa de infraestructura - Data Transformer.
- */
 import { Cart } from "@/modules/Cart/domain/Cart";
 import { CartId } from "@/modules/Cart/domain/CartId";
 import { CartItem } from "@/modules/Cart/domain/CartItem";
@@ -12,9 +7,6 @@ import { AnonymousCartId } from "@/modules/Cart/domain/AnonymousCartId";
 import { Quantity } from "@/shared/domain/Quantity";
 import { ICartDocument } from "./CartModel";
 
-/**
- * PROPÓSITO: API pública del módulo: encapsula comportamiento y dependencias.
- */
 export class CartMapper {
   static toDomain(raw: ICartDocument): Cart {
     const items = raw.items.map((item) => {

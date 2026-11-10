@@ -1,8 +1,3 @@
-/**
- * POR QUÉ: Representa la identidad de un User.
- * INTEGRIDAD: Valida invariantes del valor.
- * ESTRUCTURA: Capa Domain - Objeto de Valor.
- */
 import { ValueObject } from "../../../shared/domain/ValueObject";
 import { Result } from "../../../shared/domain/Result";
 import { DomainError } from "../../../shared/domain/DomainError";
@@ -12,9 +7,6 @@ export interface UserIdProps {
   value: string;
 }
 
-/**
- * PROPÓSITO: API pública del módulo: encapsula comportamiento y dependencias.
- */
 export class UserId extends ValueObject<UserIdProps> {
   private constructor(props: UserIdProps) {
     super(props);

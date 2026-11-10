@@ -1,11 +1,7 @@
-# Servicio de frontend para manejar solicitudes de usuario.
-# Utiliza Next.js para renderizar páginas y manejar solicitudes de usuario.
 FROM oven/bun:1.1.29-alpine AS build
 
 WORKDIR /app
 
-# Configuración de variables de entorno para Next.js.
-# Establece variables de entorno necesarias para Next.js.
 ARG NEXT_PUBLIC_APP_URL
 ARG NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY
 ARG API_URL
@@ -15,8 +11,6 @@ ENV NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=$NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY
 ENV API_URL=$API_URL
 ENV NODE_ENV=production
 
-# Copia archivos de configuración y código fuente.
-# Copia package.json, bun.lock, next.config.ts, tsconfig.json, next-env.d.ts, postcss.config.js, eslint.config.mjs, public y src al contenedor.
 COPY package.json bun.lock next.config.ts tsconfig.json next-env.d.ts postcss.config.js eslint.config.mjs ./
 COPY public ./public
 COPY src ./src

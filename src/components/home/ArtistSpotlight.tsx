@@ -1,10 +1,3 @@
-/**
- * PROPÓSITO: Unidad del proyecto con responsabilidad acotada por su ubicación y nombre.
- * RESPONSABILIDAD: Código de soporte del proyecto.
- * DEPENDENCIAS: Ver imports del archivo para dependencias explícitas.
- * SEGURIDAD/INTEGRIDAD: Mantiene invariantes explícitas cuando aplica.
- * NOTAS: Documentar aquí decisiones no obvias y tradeoffs relevantes.
- */
 "use client";
 
 import { useState } from "react";
@@ -18,9 +11,6 @@ const ARTIST_IMAGES = [
   "/assets/test-images/Stickers/sticker13.png",
 ];
 
-/**
- * PROPÓSITO: API pública del módulo: ejecuta una acción con contrato explícito.
- */
 export function ArtistSpotlight() {
   const [activeImage, setActiveImage] = useState(ARTIST_IMAGES[0]);
   const [isAnimating, setIsAnimating] = useState(false);

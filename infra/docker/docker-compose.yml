@@ -1,5 +1,3 @@
-# Configuración de servicios para desarrollo local.
-# Utiliza Docker Compose para definir servicios como MongoDB, Redis y Mailpit.
 services:
   mongodb:
     image: mongo:latest

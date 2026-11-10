@@ -1,10 +1,3 @@
-/**
- * PROPÓSITO: Test suite que valida contratos críticos y previene regresiones.
- * RESPONSABILIDAD: Asegura microinteracciones (hover) consistentes en filtros.
- * DEPENDENCIAS: Ver imports del archivo para dependencias explícitas.
- * SEGURIDAD/INTEGRIDAD: No aplica (solo clases de UI).
- * NOTAS: Estas pruebas son deliberadamente de strings para no depender de Next hooks.
- */
 import { describe, expect, it } from "bun:test";
 import {
   getFilterChevronClassName,

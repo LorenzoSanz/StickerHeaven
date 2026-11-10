@@ -14,8 +14,6 @@ export function WishlistClient({ userId }: { userId: string }) {
   const { ids, hydrated, clear } = useWishlist({ storageKey: `wishlist_sticker_ids:${userId}` });
   const [items, setItems] = useState<StickerDTO[]>([]);
   const [loading, setLoading] = useState(false);
-  // POR QUÉ: Evitar que fallos de red disparen error boundaries repetidamente y llenen la consola de logs.
-  // QUÉ: Captura errores en estado local y muestra un fallback con reintento.
   const [error, setError] = useState<string | null>(null);
   const [retryToken, setRetryToken] = useState(0);
 

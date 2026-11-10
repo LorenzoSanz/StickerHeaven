@@ -1,8 +1,3 @@
-/**
- * POR QUÉ: Caso de uso para reduce stock of a sticker.
- * INTEGRIDAD: Valida invariantes del valor.
- * ESTRUCTURA: Capa Application.
- */
 import { StickerRepository } from "../../domain/StickerRepository";
 import { Result } from "../../../../shared/domain/Result";
 import { DomainError } from "../../../../shared/domain/DomainError";
@@ -13,9 +8,6 @@ import { StickerId } from "../../domain/StickerId";
 import { Quantity } from "../../../../shared/domain/Quantity";
 import { ReduceStickerStockDTO } from "./ReduceStickerStockDTO";
 
-/**
- * PROPÓSITO: API pública del módulo: encapsula comportamiento y dependencias.
- */
 export class ReduceStickerStock {
   constructor(private stickerRepository: StickerRepository) {}
 

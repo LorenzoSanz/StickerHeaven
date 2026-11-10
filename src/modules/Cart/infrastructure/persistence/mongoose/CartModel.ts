@@ -1,8 +1,3 @@
-/**
- * POR QUÉ: Database schema definition for Cart.
- * INTEGRIDAD: Impone invariantes del valor.
- * ESTRUCTURA: Capa de infraestructura - ODM Schema.
- */
 import mongoose from "mongoose";
 
 const cartItemSchema = new mongoose.Schema({

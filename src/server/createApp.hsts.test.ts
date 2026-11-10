@@ -1,7 +1,3 @@
-/**
- * POR QUÉ: Si la API se sirve detrás de un reverse proxy, debe emitir HSTS en producción para forzar HTTPS.
- * QUÉ: Verifica que createApp añade Strict-Transport-Security cuando NODE_ENV=production.
- */
 import { describe, expect, it, beforeAll } from "bun:test";
 import { applyTestEnv } from "@/config/testEnv";
 

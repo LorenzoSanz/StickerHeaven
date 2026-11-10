@@ -1,8 +1,3 @@
-/**
- * POR QUÉ: Mapper entre documentos Mongoose y el agregado de dominio Order (reconstitución).
- * INTEGRIDAD: Valida invariantes del valor.
- * ESTRUCTURA: Capa de infraestructura - Data Mapper.
- */
 import { Order } from "@/modules/Sales/domain/Order";
 import { OrderItem } from "@/modules/Sales/domain/OrderItem";
 import { OrderStatus } from "@/modules/Sales/domain/OrderStatus";
@@ -14,9 +9,6 @@ import { PaymentIntentId } from "@/modules/Sales/domain/PaymentIntentId";
 import { IOrderDocument } from "./OrderModel";
 import { Quantity } from "@/shared/domain/Quantity";
 
-/**
- * POR QUÉ: Aísla el modelo de persistencia (Mongo/Mongoose) del dominio para mantener dependencias en una sola dirección.
- */
 export class OrderMapper {
   public static toDomain(raw: IOrderDocument): Order {
     const items: OrderItem[] = [];

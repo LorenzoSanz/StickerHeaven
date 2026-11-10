@@ -1,15 +1,9 @@
-/**
- * POR QUÉ: Wishlist debe ser privada y accesible solo para usuarios autenticados.
- * QUÉ: Página protegida que renderiza la wishlist del usuario (UI cliente).
- */
 import { WishlistClient } from "../../(public)/wishlist/WishlistClient";
 import { serverApiFetch } from "@/lib/serverApi";
 
 export const dynamic = "force-dynamic";
 
 export default async function WishlistPage() {
-  // POR QUÉ: La wishlist se guarda aislada por usuario en localStorage; necesitamos su id para calcular el storageKey.
-  // QUÉ: Lee el usuario autenticado desde el backend y lo pasa al cliente.
   const me = await serverApiFetch<{ user: { id: string } }>("/api/auth/me", { method: "GET" });
   return (
     <div className="min-h-screen bg-[#0a0a0a] text-white">

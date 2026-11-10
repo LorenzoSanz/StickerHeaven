@@ -1,8 +1,3 @@
-/**
- * POR QUÉ: Evita importar el módulo env solo-servidor desde código relacionado con cliente.
- * OBSERVABILIDAD: Falla si src/lib/stripe.ts depende de src/config/env.ts.
- * ESTRUCTURA: Suite de tests - regresión de seguridad.
- */
 import { describe, it, expect } from "bun:test";
 import { readFile } from "node:fs/promises";
 import path from "node:path";

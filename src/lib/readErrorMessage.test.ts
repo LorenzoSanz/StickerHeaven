@@ -1,4 +1,3 @@
-// PROPÓSITO: Testea la extracción de mensajes de error de Responses.
 
 import { describe, expect, it } from "bun:test";
 import { readErrorMessage } from "@/lib/readErrorMessage";

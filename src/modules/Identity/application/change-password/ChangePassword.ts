@@ -1,8 +1,3 @@
-/**
- * POR QUÉ: Caso de uso para change user password.
- * INTEGRIDAD: Verifica current password antes de actualizar.
- * ESTRUCTURA: Capa Application.
- */
 import { UserRepository } from "../../domain/UserRepository";
 import { IPasswordHasher } from "../../domain/IPasswordHasher";
 import { ChangePasswordDTO } from "./ChangePasswordDTO";

@@ -1,12 +1,8 @@
-// PORQUÉ: Prueba que ningún módulo importe internamente otro módulo.
-// INTEGRIDAD: Verifica que solo se importen los módulos públicos.
-// ESTRUCTURA: Suite de tests - Unit Pruebas.
 
 import { test } from "bun:test";
 import fs from "node:fs";
 import path from "node:path";
 
-// PROPÓSITO: Recorre recursivamente un directorio y devuelve una lista de todos los archivos TypeScript.
 function walkFiles(dir: string, out: string[] = []): string[] {
   for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
     const abs = path.join(dir, entry.name);
@@ -21,7 +17,6 @@ function walkFiles(dir: string, out: string[] = []): string[] {
   return out;
 }
 
-// PROPÓSITO: Extrae todos los especificadores de importación de una cadena de código TypeScript.
 function extractImportSpecifiers(source: string): string[] {
   const out: string[] = [];
 
@@ -32,7 +27,6 @@ function extractImportSpecifiers(source: string): string[] {
     out.push(m[1]);
   }
 
-  // PROPÓSITO: Extrae todos los especificadores de importación con efectos secundarios.
   const sideEffectRe = /\bimport\s+["']([^"']+)["']/g;
   for (;;) {
     const m = sideEffectRe.exec(source);
@@ -43,7 +37,6 @@ function extractImportSpecifiers(source: string): string[] {
   return out;
 }
 
-// PROPÓSITO: Extrae el nombre del módulo a partir de una ruta de archivo.  
 function moduleNameFromFilePath(filePath: string): string | null {
   const normalized = filePath.replace(/\\/g, "/");
   const marker = "/src/modules/";
@@ -54,7 +47,6 @@ function moduleNameFromFilePath(filePath: string): string | null {
   return moduleName || null;
 }
 
-// PROPÓSITO: Extrae el nombre del módulo a partir de una ruta de importación.
 function moduleNameFromImportPath(specifier: string): string | null {
   if (!specifier.startsWith("@/modules/")) return null;
   const rest = specifier.slice("@/modules/".length);
@@ -62,7 +54,6 @@ function moduleNameFromImportPath(specifier: string): string | null {
   return moduleName || null;
 }
 
-// PROPÓSITO: Verifica si una importación es permitida entre módulos.
 function isAllowedCrossModuleImport(specifier: string, targetModule: string): boolean {
   return (
     specifier === `@/modules/${targetModule}/public` ||
@@ -71,7 +62,6 @@ function isAllowedCrossModuleImport(specifier: string, targetModule: string): bo
   );
 }
 
-// PROPÓSITO: Prueba que ningún módulo importe internamente otro módulo.
 test("modules do not import other modules internals (only public API)", () => {
   const repoRoot = process.cwd();
   const modulesRoot = path.join(repoRoot, "src", "modules");

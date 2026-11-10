@@ -1,8 +1,3 @@
-/**
- * POR QUÉ: Prueba el CreateOrder caso de uso.
- * INTEGRIDAD: Verifica order creation orchestration, validation, and stock reduction.
- * ESTRUCTURA: Suite de tests - Unit Pruebas.
- */
 import { CreateOrder } from "./CreateOrder";
 import { OrderRepository } from "@/modules/Sales/domain/OrderRepository";
 import { CatalogGateway, ProductInfo } from "../gateways/CatalogGateway";

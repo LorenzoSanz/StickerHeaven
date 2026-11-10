@@ -1,8 +1,3 @@
-/**
- * POR QUÉ: Caso de uso para eliminar un item del carrito.
- * INTEGRIDAD: Valida invariantes del valor.
- * ESTRUCTURA: Capa Application - Caso de uso.
- */
 import { CartRepository } from "../../domain/CartRepository";
 import { RemoveItemFromCartDTO } from "./RemoveItemFromCartDTO";
 import { Result } from "@/shared/domain/Result";
@@ -11,9 +6,6 @@ import { StickerId } from "../../domain/StickerId";
 import { OwnerId } from "../../domain/OwnerId";
 import { AnonymousCartId } from "../../domain/AnonymousCartId";
 
-/**
- * PROPÓSITO: API pública del módulo: encapsula comportamiento y dependencias.
- */
 export class RemoveItemFromCart {
   constructor(private cartRepository: CartRepository) {}
 

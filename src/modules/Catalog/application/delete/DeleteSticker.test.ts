@@ -1,8 +1,3 @@
-/**
- * POR QUÉ: Prueba el DeleteSticker caso de uso.
- * INTEGRIDAD: Verifica authorization and deletion logic.
- * ESTRUCTURA: Suite de tests - Unit Pruebas.
- */
 import { describe, it, expect, beforeEach } from "bun:test";
 import { DeleteSticker } from "./DeleteSticker";
 import { FakeStickerRepository } from "../testing/FakeStickerRepository";

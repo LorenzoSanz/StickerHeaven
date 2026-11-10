@@ -1,8 +1,3 @@
-/**
- * POR QUÉ: Interfaz del repositorio de stickers.
- * INTEGRIDAD: Define el contrato para persistencia sin detalles de implementación.
- * ESTRUCTURA: Capa Domain - interfaz de repositorio.
- */
 import { Sticker } from "./Sticker";
 import { StickerId } from "./StickerId";
 import { Result } from "../../../shared/domain/Result";

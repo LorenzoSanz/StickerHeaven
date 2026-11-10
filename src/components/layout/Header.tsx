@@ -1,10 +1,3 @@
-/**
- * PROPÓSITO: Unidad del proyecto con responsabilidad acotada por su ubicación y nombre.
- * RESPONSABILIDAD: Código de soporte del proyecto.
- * DEPENDENCIAS: Ver imports del archivo para dependencias explícitas.
- * SEGURIDAD/INTEGRIDAD: Mantiene invariantes explícitas cuando aplica.
- * NOTAS: Documentar aquí decisiones no obvias y tradeoffs relevantes.
- */
 import Link from "next/link";
 import { Suspense } from "react";
 import { serverApiFetch } from "@/lib/serverApi";
@@ -12,9 +5,6 @@ import type { CartDTO } from "@/modules/Cart/public";
 import { SearchBar } from "../SearchBar";
 import { UserMenu } from "./UserMenu";
 
-/**
- * PROPÓSITO: API pública del módulo: ejecuta una acción con contrato explícito.
- */
 export async function Header() {
   const [me, cart] = await Promise.all([
     serverApiFetch<{ user: { id: string; name: string; email: string } }>("/api/auth/me", { method: "GET" }).catch(() => null),
@@ -46,8 +36,6 @@ export async function Header() {
           <Link href="/stickers" className="text-gray-300 hover:text-white hover:drop-shadow-[0_0_8px_rgba(139,92,246,0.5)] transition-all">
             Catálogo
           </Link>
-          {/* POR QUÉ: Wishlist es privada y no debe ser accesible para invitados. */}
-          {/* QUÉ: Oculta el acceso directo si no hay sesión; el route está protegido server-side igualmente. */}
           {isAuthenticated ? (
             <Link
               href="/wishlist"

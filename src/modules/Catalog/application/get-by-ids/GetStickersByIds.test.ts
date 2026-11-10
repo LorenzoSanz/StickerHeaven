@@ -1,8 +1,3 @@
-/**
- * POR QUÉ: Pruebas para GetStickersByIds Caso de uso.
- * INTEGRIDAD: Verifica batch retrieval of stickers.
- * ESTRUCTURA: Suite de tests - Unit Pruebas.
- */
 import { describe, it, expect, beforeEach } from "bun:test";
 import { GetStickersByIds } from "./GetStickersByIds";
 import { FakeStickerRepository } from "../testing/FakeStickerRepository";

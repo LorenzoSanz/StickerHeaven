@@ -1,9 +1,6 @@
 import { SessionQueryService, SessionUserDTO } from "../../application/queries/SessionQueryService";
 import { SessionRepository } from "../../domain/SessionRepository";
 
-/**
- * PROPÓSITO: API pública del módulo: encapsula comportamiento y dependencias.
- */
 export class IdentitySessionQueryService implements SessionQueryService {
   constructor(
     private sessionRepository: SessionRepository

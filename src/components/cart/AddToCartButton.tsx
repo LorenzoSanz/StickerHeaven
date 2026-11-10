@@ -1,10 +1,3 @@
-/**
- * PROPÓSITO: Botón cliente para añadir un sticker al carrito vía la API de carrito.
- * RESPONSABILIDAD: Llama a /api/cart/items y ofrece feedback (cargando/error).
- * DEPENDENCIAS: Usa las acciones existentes del carrito.
- * SEGURIDAD/INTEGRIDAD: Depende de cookies HttpOnly; no expone datos sensibles.
- * NOTAS: Intencionalmente simple; se puede ampliar con más UX y analítica.
- */
 
 "use client";
 

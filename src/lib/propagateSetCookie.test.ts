@@ -1,11 +1,6 @@
-/**
- * POR QUÉ: Necesitamos garantizar que la propagación de Set-Cookie a cookies() sea determinista y compatible.
- * QUÉ: Testea extracción de cookie, normalización sameSite y soporte de getSetCookie()/set-cookie.
- */
 import { describe, expect, test } from "bun:test";
 import { propagateCookieFromResponse } from "./propagateSetCookie";
 
-// PROPÓSITO: Crea un stub para simular el comportamiento de cookieStore.set().
 function createCookieStoreStub() {
   const setCalls: Array<{ name: string; value: string; options: Record<string, unknown> }> = [];
   return {
@@ -16,7 +11,6 @@ function createCookieStoreStub() {
   };
 }
 
-// PROPÓSITO: Testea la extracción de cookie de set-cookie header fallback.
 describe("propagateCookieFromResponse", () => {
   test("extracts cookie from set-cookie header fallback", () => {
     const res = new Response(null, {
@@ -43,7 +37,6 @@ describe("propagateCookieFromResponse", () => {
     ]);
   });
 
-  // PROPÓSITO: Testea soporte para headers.getSetCookie() cuando está presente.
   test("supports headers.getSetCookie() when present", () => {
     const res = new Response(null);
     (res.headers as unknown as { getSetCookie?: () => string[] }).getSetCookie = () => [

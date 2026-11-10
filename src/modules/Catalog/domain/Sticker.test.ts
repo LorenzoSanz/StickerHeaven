@@ -1,9 +1,4 @@
 
-/**
- * POR QUÉ: Prueba el Sticker Aggregate.
- * INTEGRIDAD: Verifica invariantes y lógica de negocio.
- * ESTRUCTURA: Suite de tests - Domain Unit Pruebas.
- */
 import { describe, it, expect } from "bun:test";
 import { Sticker } from "./Sticker";
 import { OwnerId } from "./OwnerId";

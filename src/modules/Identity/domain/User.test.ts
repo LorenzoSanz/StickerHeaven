@@ -1,8 +1,3 @@
-/**
- * POR QUÉ: Prueba el User Aggregate.
- * INTEGRIDAD: Verifica user creation, invariants, and behavior.
- * ESTRUCTURA: Suite de tests - Domain Unit Pruebas.
- */
 import { describe, it, expect } from "bun:test";
 import { User } from "./User";
 import { Email } from "./Email";

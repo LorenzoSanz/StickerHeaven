@@ -1,10 +1,4 @@
 
-/**
- * POR QUÉ: Define las rutas HTTP del módulo Identity usando Hono.
- * INTEGRIDAD: Vincula los métodos del controller a rutas URL específicas.
- * ESTRUCTURA: Capa de infraestructura - Router configuration.
- */
-
 import { Hono, MiddlewareHandler } from "hono";
 import { zValidator } from "@hono/zod-validator";
 import { IdentityController } from "./IdentityController";
@@ -14,9 +8,6 @@ import { UpdateUserProfileSchema } from "../../application/update-profile/Update
 import { ChangePasswordSchema } from "../../application/change-password/ChangePasswordDTO";
 import { requireAuth } from "@/shared/infrastructure/http/requireAuth";
 
-/**
- * PROPÓSITO: API pública del módulo: ejecuta una acción con contrato explícito.
- */
 export function createIdentityRouter(controller: IdentityController, authMiddleware: MiddlewareHandler) {
   const app = new Hono();
 

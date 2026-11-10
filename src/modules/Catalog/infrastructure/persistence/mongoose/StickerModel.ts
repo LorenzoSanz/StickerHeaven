@@ -1,8 +1,3 @@
-/**
- * POR QUÉ: Mongoose Schema for Sticker.
- * INTEGRIDAD: Define la estructura del documento Sticker en MongoDB.
- * ESTRUCTURA: Capa de infraestructura - Persistence Model.
- */
 import mongoose, { Schema, Document } from "mongoose";
 
 export interface IStickerDocument extends Omit<Document, "_id"> {

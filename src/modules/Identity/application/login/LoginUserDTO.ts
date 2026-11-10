@@ -1,8 +1,3 @@
-/**
- * POR QUÉ: Define el contrato para user login input.
- * INTEGRIDAD: Valida invariantes del valor.
- * ESTRUCTURA: Capa Application - DTO (Data Transfer Object).
- */
 
 import { z } from "zod";
 

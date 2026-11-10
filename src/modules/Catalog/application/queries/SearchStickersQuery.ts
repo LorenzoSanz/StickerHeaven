@@ -1,8 +1,3 @@
-/**
- * POR QUÉ: Define los criterios para buscar stickers.
- * INTEGRIDAD: Pure data structure.
- * ESTRUCTURA: Capa Application (Query Side).
- */
 export interface SearchStickersQuery {
   page?: number;
   limit?: number;
@@ -11,8 +6,6 @@ export interface SearchStickersQuery {
   maxPrice?: number;
   tags?: string[];
   ownerId?: string;
-  // POR QUÉ: La UI permite ordenar por fecha y por precio de forma combinable, sin perder compatibilidad con el param existente.
-  // QUÉ: Extiende el contrato de sortBy con combinaciones compuestas de (fecha + precio).
   sortBy?:
     | "price_asc"
     | "price_desc"
@@ -24,11 +17,6 @@ export interface SearchStickersQuery {
     | "oldest_price_desc";
 }
 
-/**
- * POR QUÉ: Representa un concepto del dominio.
- * INTEGRIDAD: Includes metadata for frontend pagination.
- * ESTRUCTURA: Capa Application (Query Side).
- */
 export interface PaginatedStickersDTO {
   data: Array<{
     id: string;

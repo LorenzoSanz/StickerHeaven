@@ -1,7 +1,3 @@
-/**
- * POR QUÉ: Representa un concepto del dominio.
- * INTEGRIDAD: Valida invariantes del valor.
- */
 import { ValueObject } from "../../../shared/domain/ValueObject";
 import { Result } from "../../../shared/domain/Result";
 import { DomainError } from "../../../shared/domain/DomainError";
@@ -11,9 +7,6 @@ export interface OwnerIdProps {
   value: string;
 }
 
-/**
- * PROPÓSITO: API pública del módulo: encapsula comportamiento y dependencias.
- */
 export class OwnerId extends ValueObject<OwnerIdProps> {
   private constructor(props: OwnerIdProps) {
     super(props);

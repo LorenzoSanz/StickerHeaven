@@ -1,8 +1,3 @@
-/**
- * POR QUÉ: Query para listar stickers.
- * INTEGRIDAD: Devuelve DTOs, no entidades de dominio.
- * ESTRUCTURA: Capa Application - Caso de uso.
- */
 import { CatalogQueryService } from "../queries/CatalogQueryService";
 import { ListStickersDTO } from "./ListStickersDTO";
 import { Result } from "../../../../shared/domain/Result";
@@ -12,9 +7,6 @@ export interface ListStickersRequestDTO {
   ownerId?: string; // Se mantiene por compatibilidad, aunque no se usa en el listado simple
 }
 
-/**
- * PROPÓSITO: API pública del módulo: encapsula comportamiento y dependencias.
- */
 export class ListStickers {
   constructor(private queryService: CatalogQueryService) {}
 

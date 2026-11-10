@@ -1,8 +1,3 @@
-/**
- * POR QUÉ: DTO para listar stickers.
- * INTEGRIDAD: Transporta datos entre límites sin comportamiento.
- * ESTRUCTURA: Capa Application - DTO.
- */
 export interface StickerDTO {
   id: string;
   ownerId: string;

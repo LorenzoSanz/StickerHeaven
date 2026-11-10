@@ -1,9 +1,3 @@
-/**
- * POR QUÉ: Se necesitaba una definición única y validada del “contrato de entorno” para evitar arrancar con config incompleta o insegura.
- * QUÉ: Define schemas Zod para variables privadas (server) y públicas (NEXT_PUBLIC_*) y valida dependencias condicionales (p.ej. SMTP).
- * LÍMITES: No lee process.env ni aplica defaults operativos; solo describe y valida estructura/formatos.
- * SEGURIDAD: Impone mínimos (AUTH_SECRET, URLs) para prevenir despliegues inseguros por configuración accidental.
- */
 import { z } from "zod";
 
 /**

@@ -1,9 +1,4 @@
 /// <reference types="bun-types" />
-/**
- * POR QUÉ: Valida el comportamiento del caso de uso RegisterUser.
- * INTEGRIDAD: TDD - asegura que el caso de uso funciona como se espera antes de desplegar.
- * ESTRUCTURA: Suite de tests - Uses in-memory repositories for fast feedback.
- */
 
 import { describe, it, expect, beforeEach } from "bun:test";
 import { RegisterUser } from "./RegisterUser";

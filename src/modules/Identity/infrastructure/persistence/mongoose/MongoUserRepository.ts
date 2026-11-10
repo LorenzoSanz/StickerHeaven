@@ -1,8 +1,3 @@
-/**
- * POR QUÉ: Implements UserRepository using Mongoose.
- * INTEGRIDAD: Repository Implementation. Adapts domain interface to Mongoose calls.
- * ESTRUCTURA: Capa de infraestructura.
- */
 
 import { UserRepository } from "../../../domain/UserRepository";
 import { User } from "../../../domain/User";
@@ -14,9 +9,6 @@ import { UserMapper } from "./UserMapper";
 import { Result } from "@/shared/domain/Result";
 import { DomainError } from "@/shared/domain/DomainError";
 
-/**
- * PROPÓSITO: API pública del módulo: encapsula comportamiento y dependencias.
- */
 export class MongoUserRepository implements UserRepository {
   async save(user: User): Promise<Result<void, DomainError>> {
     try {

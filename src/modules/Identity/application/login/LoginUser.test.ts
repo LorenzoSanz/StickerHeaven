@@ -1,9 +1,4 @@
 /// <reference types="bun-types" />
-/**
- * POR QUÉ: Verifica la lógica del caso de uso LoginUser.
- * INTEGRIDAD: Valida invariantes del valor.
- * ESTRUCTURA: Suite de tests - Unit Pruebas.
- */
 
 import { describe, it, expect, mock, beforeEach } from "bun:test";
 import { LoginUser, InvalidCredentialsError } from "./LoginUser";

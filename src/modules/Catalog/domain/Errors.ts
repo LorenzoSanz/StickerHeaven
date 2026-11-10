@@ -1,8 +1,3 @@
-/**
- * POR QUÉ: Errores específicos del dominio para el módulo Catalog.
- * INTEGRIDAD: Define explicit error types for better error handling.
- * ESTRUCTURA: Capa Domain - Errors.
- */
 import { DomainError } from "../../../shared/domain/DomainError";
 
 export class StickerNotFoundError extends DomainError {

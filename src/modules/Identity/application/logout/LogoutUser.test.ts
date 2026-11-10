@@ -1,8 +1,3 @@
-/**
- * POR QUÉ: Pruebas para LogoutUser Caso de uso.
- * INTEGRIDAD: Verifica session invalidation.
- * ESTRUCTURA: Suite de tests - Unit Pruebas.
- */
 import { describe, it, expect, beforeEach } from "bun:test";
 import { LogoutUser } from "./LogoutUser";
 import { Session } from "../../domain/Session";

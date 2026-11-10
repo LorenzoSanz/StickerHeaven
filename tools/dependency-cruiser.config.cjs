@@ -1,5 +1,3 @@
-// PROPÓSITO: Configuración de dependency-cruiser para detectar dependencias circulares y huerfanas.
-// Revisar su repo de github si no me acuerdo: https://github.com/sverweij/dependency-cruiser
 
 /** @type {import('dependency-cruiser').IConfiguration} */
 module.exports = {
@@ -224,8 +222,6 @@ module.exports = {
     },
     collapse: '^(src/(?:app|components|lib|server|infrastructure|shared|styles|types)|src/modules/[^/]+)',
    
-   
-
     // Which modules to exclude
     // exclude : {
     //   // path: an array of regular expressions in strings to match against

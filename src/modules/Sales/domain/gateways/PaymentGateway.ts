@@ -1,8 +1,3 @@
-/**
- * POR QUÉ: Interface for Payment Gateway (e.g., Stripe).
- * INTEGRIDAD: Port definition for Dependency Inversion.
- * ESTRUCTURA: Capa Domain - Gateway Interface.
- */
 import { Result } from "@/shared/domain/Result";
 import { DomainError } from "@/shared/domain/DomainError";
 import { Money } from "@/shared/domain/Money";

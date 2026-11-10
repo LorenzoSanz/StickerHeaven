@@ -1,8 +1,3 @@
-/**
- * POR QUÉ: Converts between Domain Entities and Persistence Models (Mongoose Documents).
- * INTEGRIDAD: Patrón Data Mapper. Mantiene el Domain aislado de detalles de base de datos.
- * ESTRUCTURA: Capa de infraestructura.
- */
 
 import { User } from "../../../domain/User";
 import { Email } from "../../../domain/Email";
@@ -12,9 +7,6 @@ import { UserRole } from "../../../domain/UserRole";
 import { UserDocument } from "./UserModel";
 import { UserId } from "../../../domain/UserId";
 
-/**
- * PROPÓSITO: API pública del módulo: encapsula comportamiento y dependencias.
- */
 export class UserMapper {
   /**
    * Reconstituye una entidad de dominio a partir de datos persistidos.

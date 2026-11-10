@@ -1,18 +1,9 @@
-/**
- * PROPÓSITO: Acceso a persistencia para una entidad/aggregate, encapsulando IO.
- * RESPONSABILIDAD: Código de soporte del proyecto.
- * DEPENDENCIAS: Ver imports del archivo para dependencias explícitas.
- * SEGURIDAD/INTEGRIDAD: Maneja IO y errores sin filtrar datos sensibles.
- */
 import { StickerRepository } from "@/modules/Catalog/domain/StickerRepository";
 import { Sticker } from "@/modules/Catalog/domain/Sticker";
 import { StickerId } from "@/modules/Catalog/domain/StickerId";
 import { DomainError } from "@/shared/domain/DomainError";
 import { Result } from "@/shared/domain/Result";
 
-/**
- * PROPÓSITO: API pública del módulo: encapsula comportamiento y dependencias.
- */
 export class FakeStickerRepository implements StickerRepository {
   private store = new Map<string, Sticker>();
 

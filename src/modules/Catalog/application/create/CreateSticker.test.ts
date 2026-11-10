@@ -1,16 +1,4 @@
-/**
- * PROPÓSITO: Test suite que valida contratos críticos y previene regresiones.
- * RESPONSABILIDAD: Código de soporte del proyecto.
- * DEPENDENCIAS: Ver imports del archivo para dependencias explícitas.
- * SEGURIDAD/INTEGRIDAD: Mantiene invariantes explícitas cuando aplica.
- * NOTAS: Documentar aquí decisiones no obvias y tradeoffs relevantes.
- */
 /// <reference types="bun-types" />
-/**
- * POR QUÉ: Prueba el CreateSticker caso de uso.
- * INTEGRIDAD: Verifica sticker creation logic and validation.
- * ESTRUCTURA: Suite de tests - Unit Pruebas.
- */
 import { describe, it, expect, beforeEach } from "bun:test";
 import { CreateSticker } from "./CreateSticker";
 import { FakeStickerRepository } from "../testing/FakeStickerRepository";

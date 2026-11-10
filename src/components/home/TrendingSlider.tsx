@@ -1,10 +1,3 @@
-/**
- * PROPÓSITO: Unidad del proyecto con responsabilidad acotada por su ubicación y nombre.
- * RESPONSABILIDAD: Código de soporte del proyecto.
- * DEPENDENCIAS: Ver imports del archivo para dependencias explícitas.
- * SEGURIDAD/INTEGRIDAD: Mantiene invariantes explícitas cuando aplica.
- * NOTAS: Documentar aquí decisiones no obvias y tradeoffs relevantes.
- */
 "use client";
 
 import { useState } from "react";
@@ -23,9 +16,6 @@ const TRENDING_ITEMS = [
   { id: 8, src: "/assets/test-images/Stickers/sticker8.png", name: "Vaporwave", price: "4,50 €" },
 ];
 
-/**
- * PROPÓSITO: API pública del módulo: ejecuta una acción con contrato explícito.
- */
 export function TrendingSlider() {
   const [currentIndex, setCurrentIndex] = useState(0);
 

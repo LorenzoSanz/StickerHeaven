@@ -1,8 +1,3 @@
-/**
- * POR QUÉ: DTO para updating user profile.
- * INTEGRIDAD: Define input data structure and validation schema.
- * ESTRUCTURA: Capa Application - DTO.
- */
 import { z } from "zod";
 
 export const UpdateUserProfileSchema = z.object({

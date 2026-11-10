@@ -1,8 +1,3 @@
-/**
- * POR QUÉ: Sales HTTP Router.
- * INTEGRIDAD: Maps HTTP requests to Sales controller actions.
- * ESTRUCTURA: Capa de infraestructura - Router.
- */
 import { Hono, MiddlewareHandler } from "hono";
 import { zValidator } from "@hono/zod-validator";
 import { SalesController } from "./SalesController";

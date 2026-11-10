@@ -1,7 +1,3 @@
-/**
- * POR QUÉ: /dashboard se convierte en un panel (hub) con tiles; el listado de pedidos necesita una ruta propia para no mezclar navegación con contenido.
- * QUÉ: Renderiza el listado de pedidos del usuario en /dashboard/orders manteniendo la misma funcionalidad y enlaces a detalle.
- */
 import Link from "next/link";
 import { getCurrentUser, getUserOrders } from "../actions";
 import type { OrderApiDTO } from "../actions";

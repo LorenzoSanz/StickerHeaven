@@ -13,13 +13,6 @@ import { StickerNotFoundError } from "../../domain/Errors";
 import { OwnerId } from "../../domain/OwnerId";
 import { StickerOwnershipPolicy } from "../policies/StickerOwnershipPolicy";
 
-/**
- * POR QUÉ: DTO para actualizar stickers en el catálogo con una nueva imagen.
- * RESPONSABILIDAD: Transferir datos entre la capa de presentación y la capa de aplicación.
- * DEPENDENCIAS: z (Zod) para validación.
- * SEGURIDAD/INTEGRIDAD: Permite actualizaciones parciales y reemplazo de imágenes.
- * ESTRUCTURA: Capa Application - DTO.
- */
 export type UpdateStickerWithImageDTO = UpdateStickerDTO & {
   image?: { buffer: Buffer; filename?: string };
 };

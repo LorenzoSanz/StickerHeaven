@@ -1,10 +1,3 @@
-/**
- * PROPÓSITO: Test suite del Command CreateStickerWithImage.
- * RESPONSABILIDAD: Protege el orden correcto (validar → subir → persistir) y evita regresiones.
- * DEPENDENCIAS: Mocks de StickerRepository e IImageStorageService.
- * SEGURIDAD/INTEGRIDAD: Garantiza que no se suban imágenes si falla validación y no se persista si falla upload.
- * NOTAS: Mantener estos tests cerca del caso de uso para TDD y cambios de contrato.
- */
 import { describe, it, expect, mock } from "bun:test";
 import { Result } from "@/shared/domain/Result";
 import { DomainError } from "@/shared/domain/DomainError";

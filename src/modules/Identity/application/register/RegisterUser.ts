@@ -1,8 +1,3 @@
-/**
- * POR QUÉ: Orquesta el proceso de registro de usuario.
- * INTEGRIDAD: Aplica reglas de unicidad (email) y crea el agregado User en estado válido (hash de password incluido).
- * ESTRUCTURA: Capa Application - depende de Domain y puertos (repos/hasher), nunca de infraestructura.
- */
 
 import { UserRepository } from "../../domain/UserRepository";
 import { RegisterUserDTO } from "./RegisterUserDTO";

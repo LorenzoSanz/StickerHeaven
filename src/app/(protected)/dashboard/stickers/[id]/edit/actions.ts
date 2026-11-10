@@ -16,12 +16,6 @@ const updateStickerSchema = z.object({
   tags: z.string().optional(),
 });
 
-/**
- * POR QUÉ: Centraliza la actualización del sticker (con o sin imagen) como Server Action para operar con cookies SSR y redirects.
- * FLUJO: UI (form) → Server Action → PATCH /api/stickers/:id → Catalog (controller → use case → policy → repo/Cloudinary).
- * CONTRATO: Si no hay imagen se envía JSON; si hay imagen se envía multipart/form-data para mantener el upload en backend.
- * EFECTO: Revalida /dashboard/stickers y redirige con querystring `updated=1` en éxito; redirige a /login en 401.
- */
 export async function updateSticker(prevState: unknown, formData: FormData) {
   const payload = {
     stickerId: String(formData.get("stickerId") || ""),
@@ -43,7 +37,6 @@ export async function updateSticker(prevState: unknown, formData: FormData) {
 
   try {
     if (!hasImage) {
-      // POR QUÉ: El endpoint soporta PATCH JSON cuando no hay binarios, evitando la sobrecarga del multipart.
       const tags = validation.data.tags
         ? validation.data.tags
             .split(",")
@@ -64,7 +57,6 @@ export async function updateSticker(prevState: unknown, formData: FormData) {
         json,
       });
     } else {
-      // POR QUÉ: Cuando hay archivo debemos usar multipart y evitar helpers que fuerzan content-type JSON.
       const multipart = new FormData();
       multipart.set("name", validation.data.name);
       multipart.set("description", validation.data.description);

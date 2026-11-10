@@ -24,8 +24,6 @@ export function createCatalogModule(deps: { logger: () => ILogger }) {
   const getStickerRepository = createLazySingleton(() => new MongoStickerRepository());
   const getCatalogQueryService = createLazySingleton(() => new MongoCatalogQueryService());
 
-  // POR QUÉ: Evitamos ramas de configuración implícitas; el storage de imágenes debe ser Cloudinary en todos los entornos.
-  // OBSERVABILIDAD: La app ya no puede arrancar sin credenciales Cloudinary válidas.
   const getImageStorageService = createLazySingleton(() => new CloudinaryImageStorageService(deps.logger()));
   const getStickerOwnerAssignmentPolicy = createLazySingleton(() => new StickerOwnerAssignmentPolicy());
   const getStickerOwnershipPolicy = createLazySingleton(() => new StickerOwnershipPolicy());

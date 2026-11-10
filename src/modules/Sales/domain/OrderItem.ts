@@ -1,8 +1,3 @@
-/**
- * POR QUÉ: Representa un concepto del dominio.
- * INTEGRIDAD: Objeto de valor inmutable dentro del agregado Order.
- * ESTRUCTURA: Capa Domain.
- */
 import { ValueObject } from "../../../shared/domain/ValueObject";
 import { Result } from "../../../shared/domain/Result";
 import { DomainError } from "../../../shared/domain/DomainError";
@@ -19,9 +14,6 @@ export interface OrderItemProps {
   unitPrice: Money;
 }
 
-/**
- * PROPÓSITO: API pública del módulo: encapsula comportamiento y dependencias.
- */
 export class OrderItem extends ValueObject<OrderItemProps> {
   private constructor(props: OrderItemProps) {
     super(props);
@@ -62,7 +54,6 @@ export class OrderItem extends ValueObject<OrderItemProps> {
   }
 
   get totalPrice(): Money {
-    // POR QUÉ: We know quantity is positive and price is valid, so multiplication shouldn't fail.
     return this.props.unitPrice.multiply(this.props.quantity.value).getValue();
   }
 }

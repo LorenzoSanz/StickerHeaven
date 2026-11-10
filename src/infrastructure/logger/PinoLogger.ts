@@ -1,8 +1,3 @@
-/**
- * POR QUÉ: Implements structured logging using Pino.
- * INTEGRIDAD: Adapta Pino a la interfaz ILogger, con formato dependiente del entorno.
- * ESTRUCTURA: Infrastructure - Logger Adapter.
- */
 
 import pino from "pino";
 import { ILogger } from "@/shared/domain/ILogger";
