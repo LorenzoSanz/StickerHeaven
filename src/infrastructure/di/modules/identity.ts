@@ -30,7 +30,7 @@ export function createIdentityModule() {
   };
 
   const queries = {
-    sessionQueryService: createLazySingleton(() => new IdentitySessionQueryService(getSessionRepository(), getUserRepository())),
+    sessionQueryService: createLazySingleton(() => new IdentitySessionQueryService(getSessionRepository())),
     userContactQueryService: getUserContactQueryService,
   };
   
