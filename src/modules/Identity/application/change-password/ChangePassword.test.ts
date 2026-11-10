@@ -8,6 +8,7 @@ import { UserName } from "../../domain/UserName";
 import { HashedPassword } from "../../domain/HashedPassword";
 import { UserRole } from "../../domain/UserRole";
 import { UserId } from "../../domain/UserId";
+import { SessionRepository } from "../../domain/SessionRepository";
 import { Result } from "@/shared/domain/Result";
 import { DomainError } from "@/shared/domain/DomainError";
 
@@ -15,6 +16,7 @@ describe("ChangePassword Use Case", () => {
   let useCase: ChangePassword;
   let mockRepo: UserRepository;
   let mockHasher: IPasswordHasher;
+  let mockSessions: SessionRepository;
 
   const userId = UserId.create(crypto.randomUUID()).getValue();
   const currentPassword = "oldPassword123";
@@ -34,7 +36,11 @@ describe("ChangePassword Use Case", () => {
       verify: mock(() => Promise.resolve(false)),
     } as unknown as IPasswordHasher;
 
-    useCase = new ChangePassword(mockRepo, mockHasher);
+    mockSessions = {
+      deleteAllForUserExcept: mock(() => Promise.resolve(Result.ok<void, DomainError>())),
+    } as unknown as SessionRepository;
+
+    useCase = new ChangePassword(mockRepo, mockHasher, mockSessions);
   });
 
   const createUser = () => {
@@ -86,5 +92,27 @@ describe("ChangePassword Use Case", () => {
     expect(result.isFailure).toBe(true);
     expect(result.error?.message).toBe("Contraseña Actual Incorrecta");
     expect(mockRepo.save).not.toHaveBeenCalled();
+  });
+
+  it("signs out every other session of the user after a change", async () => {
+    const user = createUser();
+    (mockRepo.findById as ReturnType<typeof mock>).mockResolvedValue(Result.ok<User | null, DomainError>(user));
+    (mockHasher.compare as ReturnType<typeof mock>).mockResolvedValue(true);
+
+    const result = await useCase.execute(
+      { userId: userId.value, currentPassword, newPassword },
+      "current-session"
+    );
+
+    expect(result.isSuccess).toBe(true);
+    expect(mockSessions.deleteAllForUserExcept).toHaveBeenCalledWith(userId.value, "current-session");
+  });
+
+  it("keeps other sessions when the current password is wrong", async () => {
+    (mockRepo.findById as ReturnType<typeof mock>).mockResolvedValue(Result.ok<User | null, DomainError>(createUser()));
+
+    await useCase.execute({ userId: userId.value, currentPassword: "wrongPassword1", newPassword }, "current-session");
+
+    expect(mockSessions.deleteAllForUserExcept).not.toHaveBeenCalled();
   });
 });

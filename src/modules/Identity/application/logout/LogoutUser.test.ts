@@ -29,6 +29,13 @@ describe("LogoutUser", () => {
       return Result.ok(undefined);
     }
 
+    async deleteAllForUserExcept(userId: string, keepSessionId: string | null): Promise<Result<void, DomainError>> {
+      for (const [id, session] of this.store) {
+        if (session.userId.value === userId && id !== keepSessionId) this.store.delete(id);
+      }
+      return Result.ok(undefined);
+    }
+
     async findUserBySessionId(_sessionId: string): Promise<Result<User | null, DomainError>> {
       return Result.ok(null);
     }

@@ -21,7 +21,7 @@ export function createIdentityModule() {
     registerUser: createLazySingleton(() => new RegisterUser(getUserRepository(), getPasswordHasher())),
     logoutUser: createLazySingleton(() => new LogoutUser(getSessionRepository())),
     updateUserProfile: createLazySingleton(() => new UpdateUserProfile(getUserRepository())),
-    changePassword: createLazySingleton(() => new ChangePassword(getUserRepository(), getPasswordHasher())),
+    changePassword: createLazySingleton(() => new ChangePassword(getUserRepository(), getPasswordHasher(), getSessionRepository())),
   };
   
   const repositories = {

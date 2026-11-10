@@ -252,7 +252,7 @@ export class IdentityController {
         userId
       };
 
-      const result = await this.changePasswordUseCase.execute(dto);
+      const result = await this.changePasswordUseCase.execute(dto, c.get("sessionId") ?? null);
 
       if (result.isSuccess) {
         this.logger.info("Contraseña cambiada correctamente", { userId });

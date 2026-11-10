@@ -5,14 +5,16 @@ import { Result } from "@/shared/domain/Result";
 import { DomainError } from "@/shared/domain/DomainError";
 import { UserId } from "../../domain/UserId";
 import { Password } from "../../domain/Password";
+import { SessionRepository } from "../../domain/SessionRepository";
 
 export class ChangePassword {
   constructor(
     private userRepository: UserRepository,
-    private passwordHasher: IPasswordHasher
+    private passwordHasher: IPasswordHasher,
+    private sessionRepository: SessionRepository
   ) {}
 
-  async execute(dto: ChangePasswordDTO): Promise<Result<void, DomainError>> {
+  async execute(dto: ChangePasswordDTO, currentSessionId: string | null = null): Promise<Result<void, DomainError>> {
     const userIdOrError = UserId.create(dto.userId);
     if (userIdOrError.isFailure) {
       return Result.fail(userIdOrError.error!);
@@ -60,6 +62,13 @@ export class ChangePassword {
     const saveResult = await this.userRepository.save(user);
     if (saveResult.isFailure) {
         return Result.fail(saveResult.error!);
+    }
+
+    // A password change is often a reaction to a compromised account: every other session,
+    // including a stolen one, has to stop working. The session making the change stays.
+    const revokeResult = await this.sessionRepository.deleteAllForUserExcept(userId.value, currentSessionId);
+    if (revokeResult.isFailure) {
+        return Result.fail(revokeResult.error!);
     }
 
     return Result.ok();

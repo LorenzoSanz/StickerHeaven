@@ -44,6 +44,16 @@ export class MongoSessionRepository implements SessionRepository {
     }
   }
 
+  async deleteAllForUserExcept(userId: string, keepSessionId: string | null): Promise<Result<void, DomainError>> {
+    try {
+      const filter = keepSessionId ? { userId, _id: { $ne: keepSessionId } } : { userId };
+      await SessionModel.deleteMany(filter);
+      return Result.ok(undefined);
+    } catch (error) {
+      return Result.fail(new DomainError(`Failed to delete user sessions: ${error}`));
+    }
+  }
+
   async findUserBySessionId(sessionId: string): Promise<Result<User | null, DomainError>> {
     try {
       const sessionRaw = await SessionModel.findOne({ _id: sessionId }).lean<SessionDocument>();
