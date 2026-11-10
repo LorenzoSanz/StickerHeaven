@@ -1,9 +1,9 @@
 # StickerHeaven
 
 An online sticker marketplace: artists list stickers with limited stock, buyers
-add them to a cart and pay with Stripe. Built as the final project (TFC) of a
-higher vocational degree in web application development, then reviewed and
-hardened as a portfolio project.
+add them to a cart and pay with Stripe. A personal project built to practise
+the parts of an e-commerce backend that are easy to get wrong: stock under
+concurrency, asynchronous payments, sessions and module boundaries.
 
 **Stack:** TypeScript · Next.js 16 · React 19 · Hono on Bun · MongoDB (Mongoose) ·
 Redis · Stripe · Cloudinary · Docker · nginx · GitHub Actions
@@ -170,6 +170,63 @@ and `REDIS_PASSWORD`, and TLS certificates in `infra/nginx/certs`.
 - The `ADMIN` role exists in the data model but no feature uses it yet.
 - The unpaid-order sweep runs in the API process; with several API instances
   each runs it (safe thanks to optimistic locking, but redundant).
+
+## Trade-offs and what I would change
+
+Already addressed:
+
+- **Rate limits per instance.** Counters live in Redis when `REDIS_URL` is set,
+  so limits hold across API instances and restarts; in-memory is only the
+  development default.
+- **CSRF relying on headers.** The `Origin`/`Referer` check is covered by tests
+  for an allowed origin, a foreign origin and a request with neither.
+- **Two processes instead of one.** The reasons and the cost are written down in
+  [ADR 0004](docs/adr/0004-web-and-api-processes.md).
+
+Still open:
+
+- **Domain events are in memory.** `OrderPaid` is published after the order is
+  saved. If the process dies in between, the confirmation email is not sent and
+  the cart is not cleared. The order itself is correct, but the side effects
+  are lost. The fix is a transactional outbox: store the event with the order
+  and deliver it from a background worker.
+- **`infrastructure/adapters` is a crossing point.** Tests keep adapters on each
+  module's public API, but nothing stops business logic from creeping into
+  them. A rule limiting adapters to translation would close that gap.
+- **`shared/` can grow into a dumping ground.** It should only hold the shared
+  kernel and contracts; there is no test enforcing that yet.
+- **Module names.** `Sales` is mostly orders and `Marketing` is only a
+  newsletter. `Orders` and `Newsletter` would be clearer. Renaming has a cost,
+  so it is worth doing only when a module's scope changes.
+- **Every page renders per request.** The CSP nonce rules out static HTML, and
+  the protected layout fetches the user on each navigation. Splitting public
+  content from per-user state would let catalog pages be cached again.
+- **Some server actions live next to routes** in `src/app` instead of in a
+  single client for the API. That was quicker to write, but the calls are
+  harder to find.
+
+## Scaling plan
+
+None of this is needed at the current size; it is the order I would apply it in.
+
+1. **Run more instances.** Web and API are stateless (sessions live in MongoDB,
+   rate limits in Redis), so nginx can balance several of each. Before that,
+   move the unpaid-order sweep to a single scheduled job.
+2. **Cache by business rule, not by URL.** The catalog and prices can be
+   slightly stale, so they can live in Redis for a short TTL (a price for 60
+   seconds, for example). Stock at checkout and order state are never cached.
+   Entries are invalidated on writes or from domain events.
+3. **Move events out of the process.** Add the outbox described above and
+   publish to Redis Streams or a message broker. Events are only published from
+   the order repository, so the change stays in infrastructure and the use
+   cases do not change.
+4. **Scale MongoDB.** Start by scaling it vertically. Then add read replicas
+   for the catalog while orders and payments stay on the primary. Shard by
+   user or region only if write volume requires it. The queries avoid global
+   lookups that would make that harder.
+5. **Put a CDN in front of nginx** for images and static assets, and split the
+   current `/health` endpoint into readiness (database and Redis reachable) and
+   liveness checks for an orchestrator.
 
 ## Project layout
 
