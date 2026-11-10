@@ -2,13 +2,14 @@ FROM oven/bun:1.1.29-alpine AS runner
 
 WORKDIR /app
 ENV NODE_ENV=production
+RUN chown bun:bun /app
+USER bun
 
-COPY package.json bun.lock tsconfig.json ./
-COPY src ./src
+COPY --chown=bun:bun package.json bun.lock tsconfig.json ./
+COPY --chown=bun:bun src ./src
 
 RUN bun install --frozen-lockfile --production
 
 EXPOSE 3001
 
 CMD ["bun", "run", "src/server/node.ts"]
-
