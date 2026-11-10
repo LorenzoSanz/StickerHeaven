@@ -6,6 +6,8 @@ import { getApiUrlForRewrites } from './src/config/nextConfigEnv';
 
 const nextConfig: NextConfig = {
 
+  // Self-contained server with only the files it needs; the Docker image ships this, not the repo.
+  output: "standalone",
   productionBrowserSourceMaps: false,
   reactStrictMode: true,
 
