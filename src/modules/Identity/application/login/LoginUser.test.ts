@@ -129,4 +129,12 @@ describe("LoginUser Use Case", () => {
     expect(result.error).toBeInstanceOf(InvalidCredentialsError);
     // Nota: ocultamos deliberadamente el error de validación específico por seguridad en Login
   });
+
+  it("runs a password verification even when the email is unknown", async () => {
+    const result = await loginUser.execute({ email: "nobody@example.com", password: validPasswordStr });
+
+    expect(result.isFailure).toBe(true);
+    expect(result.error).toBeInstanceOf(InvalidCredentialsError);
+    expect(mockHasher.compare).toHaveBeenCalledTimes(1);
+  });
 });

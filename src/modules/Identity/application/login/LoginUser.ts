@@ -9,6 +9,7 @@ import { Result } from "../../../../shared/domain/Result";
 import { DomainError } from "../../../../shared/domain/DomainError";
 import { Email } from "../../domain/Email";
 import { Password } from "../../domain/Password";
+import { HashedPassword } from "../../domain/HashedPassword";
 import { OnLoginSuccess } from "../interfaces/OnLoginSuccess";
 
 export class InvalidCredentialsError extends DomainError {
@@ -18,11 +19,18 @@ export class InvalidCredentialsError extends DomainError {
 }
 
 export class LoginUser {
+  private dummyHashPromise: Promise<HashedPassword> | null = null;
+
   constructor(
     private readonly userRepository: UserRepository,
     private readonly passwordHasher: IPasswordHasher,
     private readonly sessionRepository: SessionRepository
   ) {}
+
+  private dummyHash(): Promise<HashedPassword> {
+    this.dummyHashPromise ??= this.passwordHasher.hash(Password.create("timing-equalizer").getValue());
+    return this.dummyHashPromise;
+  }
 
   async execute(dto: LoginUserDTO): Promise<Result<LoginOutputDTO, DomainError>> {
     const emailResult = Email.create(dto.email);
@@ -44,6 +52,9 @@ export class LoginUser {
     }
     const user = userResult.getValue();
     if (!user) {
+      // Spend the same Argon2 work as a real check: answering instantly for unknown emails
+      // would let anyone tell registered addresses apart by response time.
+      await this.passwordHasher.compare(password, await this.dummyHash());
       return Result.fail(new InvalidCredentialsError());
     }
 

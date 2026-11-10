@@ -11,10 +11,11 @@ import { UserName } from "../../domain/UserName";
 import { HashedPassword } from "../../domain/HashedPassword";
 import { UserRole } from "../../domain/UserRole";
 
-// Error de dominio cuando el email ya está registrado.
+// Deliberately vague and without echoing the email back: the response should not confirm
+// which addresses have an account more than strictly necessary.
 export class UserAlreadyExistsError extends DomainError {
-  constructor(email: string) {
-    super(`Ya existe un usuario con el email <${email}>.`);
+  constructor() {
+    super("No se ha podido completar el registro con ese email.");
   }
 }
 
@@ -56,7 +57,7 @@ export class RegisterUser {
     const existingUser = existingUserResult.getValue();
     
     if (existingUser) {
-      return Result.fail(new UserAlreadyExistsError(dto.email));
+      return Result.fail(new UserAlreadyExistsError());
     }
 
     const passwordHash = await this.passwordHasher.hash(password);
