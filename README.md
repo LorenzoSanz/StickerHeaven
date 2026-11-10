@@ -30,7 +30,7 @@ Aquí tienes los pasos para probarlo todo en 1 minuto:
 
 5.  **Credenciales de prueba**:
     - **Email**: `admin@stickerheaven.com`
-    - **Password**: `admin123`
+    - **Password**: la que imprime `bun seed` (o la de `SEED_ADMIN_PASSWORD` si la defines)
 
 ---
 

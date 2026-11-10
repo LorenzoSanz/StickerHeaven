@@ -2,6 +2,7 @@
  * Script de seeding para poblar la base de datos con datos iniciales de prueba.
  * Crea un usuario administrador y varios stickers de ejemplo.
  */
+import { randomBytes } from "node:crypto";
 import { v4 as uuidv4 } from "uuid";
 import * as argon2 from "argon2";
 import { connectMongo, disconnectMongo } from "../src/server/connectMongo";
@@ -14,8 +15,22 @@ import { NullLogger } from "../src/shared/infrastructure/logger/NullLogger";
 
 const logger = new NullLogger();
 
+// The seed wipes users, stickers, orders, carts and sessions before inserting demo data.
+// Running it against a real database would destroy it, so production is refused outright.
+function assertNotProduction(): void {
+  if (process.env.NODE_ENV === "production") {
+    console.error("Seed refused: NODE_ENV=production. It deletes every collection before seeding.");
+    process.exit(1);
+  }
+}
+
+function adminPassword(): string {
+  return process.env.SEED_ADMIN_PASSWORD || randomBytes(12).toString("base64url");
+}
+
 async function seed() {
-  console.log("Iniciando seeding de la base de datos para que los profes prueben la app.");
+  assertNotProduction();
+  console.log("Iniciando seeding de la base de datos con datos de demostración.");
 
   try {
     await connectMongo(logger);
@@ -30,7 +45,8 @@ async function seed() {
 
     // 2. Crear Usuario Administrador de prueba
     const adminId = uuidv4();
-    const adminPasswordHash = await argon2.hash("admin123");
+    const password = adminPassword();
+    const adminPasswordHash = await argon2.hash(password);
     
     await UserModel.create({
       _id: adminId,
@@ -40,7 +56,7 @@ async function seed() {
       role: "ADMIN",
       createdAt: new Date(),
     });
-    console.log("Usuario administrador creado: admin@stickerheaven.com / admin123");
+    console.log(`Usuario administrador creado: admin@stickerheaven.com / ${password}`);
 
     // 3. Crear Stickers de ejemplo
     const baseStickers = [
