@@ -149,6 +149,9 @@ export class SalesController {
     try {
       const userId = c.get("userId") as string;
       const orderId = c.req.param("id");
+      if (!orderId) {
+        return c.json({ error: "Falta el id" }, HttpStatus.BAD_REQUEST);
+      }
 
       if (!userId) {
         return c.json({ error: "No autorizado" }, HttpStatus.UNAUTHORIZED);
@@ -179,6 +182,9 @@ export class SalesController {
   async cancel(c: Context): Promise<Response> {
     try {
       const orderId = c.req.param("id");
+      if (!orderId) {
+        return c.json({ error: "Falta el id" }, HttpStatus.BAD_REQUEST);
+      }
       const userId = c.get("userId") as string;
       const body = await c.req.json().catch(() => ({})) as { reason?: string };
 

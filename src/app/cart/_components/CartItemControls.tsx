@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Trash2, Minus, Plus } from "lucide-react";
 import { Spinner } from "@/components/ui/Spinner";
 
@@ -18,10 +18,13 @@ export function CartItemControls({
   onRemove: () => void;
 }) {
   const [draftQuantity, setDraftQuantity] = useState<string>(String(quantity));
+  const [syncedQuantity, setSyncedQuantity] = useState(quantity);
 
-  useEffect(() => {
+  // Reset the draft when the server quantity changes.
+  if (quantity !== syncedQuantity) {
+    setSyncedQuantity(quantity);
     setDraftQuantity(String(quantity));
-  }, [quantity]);
+  }
 
   const commitDraft = (nextRaw: string) => {
     const trimmed = nextRaw.trim();

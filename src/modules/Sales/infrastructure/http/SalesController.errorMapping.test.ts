@@ -84,7 +84,7 @@ describe("SalesController error mapping", () => {
       c.set("userId", "u1");
       await next();
     });
-    app.get("/orders/o1", (c) => controller.getById(c));
+    app.get("/orders/:id", (c) => controller.getById(c));
 
     const res = await app.request("/orders/o1", { method: "GET" });
     expect(res.status).toBe(403);

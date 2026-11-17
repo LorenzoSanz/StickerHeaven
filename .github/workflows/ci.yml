@@ -61,3 +61,6 @@ jobs:
         run: bun run build
         env:
           API_URL: http://localhost:3001
+          # Public values are inlined at build time; placeholders are enough to compile.
+          NEXT_PUBLIC_APP_URL: http://localhost:3000
+          NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY: pk_test_placeholder

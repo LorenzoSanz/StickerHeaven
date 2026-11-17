@@ -16,8 +16,16 @@ export function UserMenu({ name, email }: { name: string; email: string }) {
   const [shouldRender, setShouldRender] = useState(false);
   const [entered, setEntered] = useState(false);
   const [isLoggingOut, setIsLoggingOut] = useState(false);
-  const [pendingRefreshPathname, setPendingRefreshPathname] = useState<string | null>(null);
+  const [prevOpen, setPrevOpen] = useState(open);
+  const refreshOnPathnameRef = useRef<string | null>(null);
   const rootRef = useRef<HTMLDivElement | null>(null);
+
+  // Mount the menu as soon as it opens; the exit animation resets `entered`.
+  if (open !== prevOpen) {
+    setPrevOpen(open);
+    setEntered(false);
+    if (open) setShouldRender(true);
+  }
 
   const initial = useMemo(() => {
     const source = (name || email || "").trim();
@@ -26,13 +34,7 @@ export function UserMenu({ name, email }: { name: string; email: string }) {
   }, [email, name]);
 
   useEffect(() => {
-    if (open) {
-      setShouldRender(true);
-      setEntered(false);
-      return;
-    }
-    if (!shouldRender) return;
-    setEntered(false);
+    if (open || !shouldRender) return;
     const t = window.setTimeout(() => {
       setShouldRender(false);
     }, 170);
@@ -68,12 +70,12 @@ export function UserMenu({ name, email }: { name: string; email: string }) {
     };
   }, [open]);
 
+  // After logout, refresh server components once the navigation to "/" lands.
   useEffect(() => {
-    if (!pendingRefreshPathname) return;
-    if (pathname !== pendingRefreshPathname) return;
+    if (refreshOnPathnameRef.current !== pathname) return;
+    refreshOnPathnameRef.current = null;
     router.refresh();
-    setPendingRefreshPathname(null);
-  }, [pathname, pendingRefreshPathname, router]);
+  }, [pathname, router]);
 
   return (
     <div ref={rootRef} className="relative">
@@ -197,8 +199,12 @@ export function UserMenu({ name, email }: { name: string; email: string }) {
                       }
                       flashNotify({ variant: "info", title: "Sesión cerrada", message: "Has salido correctamente." });
                       setOpen(false);
-                      setPendingRefreshPathname("/");
-                      router.push("/");
+                      if (pathname === "/") {
+                        router.refresh();
+                      } else {
+                        refreshOnPathnameRef.current = "/";
+                        router.push("/");
+                      }
                     } finally {
                       setIsLoggingOut(false);
                     }
